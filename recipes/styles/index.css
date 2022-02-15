@@ -3,11 +3,17 @@
 }
 
 h1 {
-    color: indigo;
+    color: skyblue;
+    background-color: black;
 }
 
 a {
     font-size: 28px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: blueviolet;
+    
+}
+
+li {
+    margin: 10px;
 }

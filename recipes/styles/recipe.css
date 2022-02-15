@@ -19,13 +19,13 @@ ul {
     font-size: 20px;
 }
 
-
 a {
     color: blueviolet;
 }
 
 h1 {
-    color: blue;
+    color: skyblue;
+    background-color: black;
 }
 
 h2 {
