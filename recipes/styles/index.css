@@ -1,0 +1,13 @@
+* {
+    text-align: center;
+}
+
+h1 {
+    color: indigo;
+}
+
+a {
+    font-size: 28px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: blueviolet;
+}

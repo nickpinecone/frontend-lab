@@ -1,0 +1,42 @@
+#return-link {
+    font-size: 18px;
+    color: indigo;
+}
+
+.center-aligned {
+    text-align: center;
+}
+
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p,
+ol,
+ul {
+    font-size: 20px;
+}
+
+
+a {
+    color: blueviolet;
+}
+
+h1 {
+    color: blue;
+}
+
+h2 {
+    color: cadetblue;
+}
+
+img {
+    height: auto;
+    width: 500px;
+}
+
+strong {
+    color: darkorange;
+}
