@@ -1,5 +1,10 @@
-body {
+body,
+div,
+img {
     width: 700px;
+}
+
+body {
     margin: 0 auto;
     background-color: aliceblue;
 }
@@ -7,10 +12,6 @@ body {
 div {
     padding: 0px 20px 100px;
     background-color: skyblue;
-}
-
-img {
-    width: 660px;
 }
 
 h1 {
