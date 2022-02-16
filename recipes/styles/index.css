@@ -1,10 +1,23 @@
-* {
-    text-align: center;
+body {
+    width: 700px;
+    margin: 0 auto;
+    background-color: aliceblue;
+}
+
+div {
+    padding: 0px 20px 100px;
+    background-color: skyblue;
+}
+
+img {
+    width: 660px;
 }
 
 h1 {
     color: skyblue;
     background-color: black;
+    text-align: center;
+    margin-top: 0;
 }
 
 a {
@@ -15,5 +28,5 @@ a {
 }
 
 li {
-    margin: 10px;
+    margin: 10px 0;
 }
