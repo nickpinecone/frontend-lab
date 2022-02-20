@@ -19,7 +19,7 @@ a {
     gap: 32px;
     background-color: darkslateblue;
     flex: 1;
-    padding: 8px 64px 0px
+    padding: 8px 64px 16px;
 }
 
 .top-side {
@@ -47,6 +47,8 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 8px 64px 0px;
+    margin-bottom: 16px;
 }
 
 .information-content {
@@ -81,4 +83,61 @@ a {
     width: 100px;
     height: 100px;
     border: 1px solid blue;
+}
+
+.good-review {
+    flex: 1;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 64px 0px;
+    margin-bottom: 16px;
+}
+
+.review-content {
+    width: 400px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.author {
+    align-self: flex-end;
+}
+
+.promotion {
+    flex: 1;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 64px 0px
+}
+
+.promotion-content {
+    background-color: blue;
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.text {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+.text p {
+    margin: 0px;
+}
+
+.footer {
+    background-color: darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 64px 0px
 }
