@@ -1,12 +1,84 @@
 body {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
+    margin: 0px;
+}
+
+a {
+    color: white;
 }
 
 .main-container {
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+.header {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 32px;
+    background-color: darkslateblue;
+    flex: 1;
+    padding: 8px 64px 0px
+}
+
+.top-side {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-side {
+    display: flex;
+    justify-content: space-between;
+}
+
+.description {
+    width: 250px;
+}
+
+.placeholder-image {
+    width: 250px;
+    background-color: gray;
+}
+
+.information-block {
+    background-color: white;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.information-content {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 32px;
+}
+
+.information-content span {
+    text-align: center;
+}
+
+.item-container {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 32px;
+}
+
+.item {
+    height: 200px;
+    width: 100px;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    justify-content: space-between;
+}
+
+.item span {
+    text-align: center;
+}
+
+.rounded-box {
+    width: 100px;
+    height: 100px;
+    border: 1px solid blue;
 }
