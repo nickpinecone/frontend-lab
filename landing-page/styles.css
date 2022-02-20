@@ -24,8 +24,13 @@ button {
 }
 
 .small-text {
-    font-size: 14px;
+    font-size: 16px;
     color: #e5e7eb;
+}
+
+.smaller-title {
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .main-container {
@@ -95,7 +100,6 @@ button {
 .information-content span {
     text-align: center;
     color: #1F2937;
-    font-weight: bold;
 }
 
 .item-container {
