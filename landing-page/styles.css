@@ -1,9 +1,30 @@
 body {
     margin: 0px;
+    font-size: 28px;
+}
+
+p,
+span {
+    color: white;
 }
 
 a {
+    color: #e5e7eb;
+    font-size: 16px;
+}
+
+button {
+    background-color: #3882f6;
     color: white;
+    font-size: 14px;
+    width: 100px;
+    height: 20px;
+    border: 1px solid white;
+}
+
+.small-text {
+    font-size: 14px;
+    color: #e5e7eb;
 }
 
 .main-container {
@@ -17,9 +38,11 @@ a {
     display: flex;
     flex-flow: column nowrap;
     gap: 32px;
-    background-color: darkslateblue;
+    background-color: #1F2937;
+    justify-content: center;
     flex: 1;
-    padding: 8px 64px 16px;
+    padding: 8px 128px 32px;
+    margin-bottom: 64px;
 }
 
 .top-side {
@@ -34,10 +57,15 @@ a {
 
 .description {
     width: 250px;
+    margin: 0px;
+}
+
+.description p {
+    margin: 0px;
 }
 
 .placeholder-image {
-    width: 250px;
+    width: 300px;
     background-color: gray;
 }
 
@@ -48,7 +76,7 @@ a {
     justify-content: center;
     align-items: center;
     padding: 8px 64px 0px;
-    margin-bottom: 16px;
+    margin-bottom: 64px;
 }
 
 .information-content {
@@ -59,6 +87,7 @@ a {
 
 .information-content span {
     text-align: center;
+    color: #1F2937;
 }
 
 .item-container {
@@ -76,7 +105,9 @@ a {
 }
 
 .item span {
+    margin-top: 8px;
     text-align: center;
+    color: gray;
 }
 
 .rounded-box {
@@ -87,12 +118,12 @@ a {
 
 .good-review {
     flex: 1;
-    background-color: lightgray;
+    background-color: #e5e7eb;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 8px 64px 0px;
-    margin-bottom: 16px;
+    padding: 8px 64px 8px;
+    margin-bottom: 64px;
 }
 
 .review-content {
@@ -101,8 +132,15 @@ a {
     flex-flow: column nowrap;
 }
 
+.review-content p {
+    color: #1F2937;
+    margin-bottom: 8px;
+}
+
 .author {
     align-self: flex-end;
+    color: black;
+    margin-top: 8px;
 }
 
 .promotion {
@@ -111,11 +149,12 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 8px 64px 0px
+    padding: 8px 64px 0px;
+    margin-bottom: 64px;
 }
 
 .promotion-content {
-    background-color: blue;
+    background-color: #3882f6;
     display: flex;
     width: 500px;
     justify-content: space-between;
@@ -135,7 +174,7 @@ a {
 }
 
 .footer {
-    background-color: darkgray;
+    background-color: #1F2937;
     display: flex;
     justify-content: center;
     align-items: center;
