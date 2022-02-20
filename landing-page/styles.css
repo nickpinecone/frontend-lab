@@ -1,0 +1,12 @@
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
