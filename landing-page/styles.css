@@ -20,6 +20,7 @@ button {
     width: 100px;
     height: 20px;
     border: 1px solid white;
+    border-radius: 4px;
 }
 
 .small-text {
@@ -39,25 +40,31 @@ button {
     flex-flow: column nowrap;
     gap: 32px;
     background-color: #1F2937;
-    justify-content: center;
+    justify-content: space-between;
     flex: 1;
-    padding: 8px 128px 32px;
+    padding: 8px 0 32px;
     margin-bottom: 64px;
 }
 
 .top-side {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
+
 
 .bottom-side {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .description {
-    width: 250px;
+    width: 300px;
     margin: 0px;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: bolder;
 }
 
 .description p {
@@ -88,11 +95,12 @@ button {
 .information-content span {
     text-align: center;
     color: #1F2937;
+    font-weight: bold;
 }
 
 .item-container {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     gap: 32px;
 }
 
@@ -113,7 +121,8 @@ button {
 .rounded-box {
     width: 100px;
     height: 100px;
-    border: 1px solid blue;
+    border: 3px solid blue;
+    border-radius: 16px;
 }
 
 .good-review {
@@ -161,6 +170,7 @@ button {
     align-items: center;
     padding: 16px;
     margin-bottom: 16px;
+    border-radius: 8px;
 }
 
 .text {
@@ -178,5 +188,6 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 8px 64px 0px
+    padding: 8px 64px 0px;
+    font-size: 16px;
 }
