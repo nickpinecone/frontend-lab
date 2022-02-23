@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
 </head>
 <body>
-    <div id="player-score">Your score: 0</div>
-    <div id="computer-score">Computer score: 0</div>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
-    <div id="output"></div>
+    <div id="container">
+        <div class="item">
+            <div id="player-score">Your score: 0</div>
+            <img src="imgs/scissors.jpg" alt="image" class="player">
+        </div>
+    
+        <div>Versus</div>
+    
+        <div class="item">
+            <div id="computer-score">Computer score: 0</div>
+            <img src="imgs/scissors.jpg" alt="image" class="computer">
+        </div>
+    </div>
+
+    <div id="buttons">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    
+        <div id="output">Result</div>
+    </div>
 </body>
 </html>
