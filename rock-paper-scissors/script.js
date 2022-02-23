@@ -1,3 +1,15 @@
+let buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+    button.addEventListener("click", () => playRound(button.id));
+});
+
+let output = document.querySelector("#output");
+let playerOutput = document.querySelector("#player-score");
+let computerOutput = document.querySelector("#computer-score");
+
+let playerScore = 0;
+let computerScore = 0; 
+
 const numOfChoices = 3;
 const choices = ["rock", "paper", "scissors"];
 
@@ -6,18 +18,11 @@ function computerPlay() {
     return choices[randomChoice];
 }
 
-function playerPlay() {
-    let input = "";
-    while (!choices.includes(input)) {
-        input = prompt("Enter your choice (rock, paper, scissors): ");
-        input = input.toLowerCase();
-    }
-    return input;
-}
+function playRound(playerSelection) {
+    let computerSelection = computerPlay();
 
-function playRound(playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
-        return "Tie! " + playerSelection + " vs " + computerSelection;
+        output.textContent = ("Tie! " + playerSelection + " vs " + computerSelection);
     }
 
     else if(
@@ -25,24 +30,14 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection == "paper" && computerSelection == "rock") ||
         (playerSelection == "scissors" && computerSelection == "paper")
     ) {
-        return "You win! " + playerSelection + " beats " + computerSelection;
+        playerScore += 1;
+        output.textContent = ("You win! " + playerSelection + " beats " + computerSelection);
+        playerOutput.textContent = "Your score: " + playerScore.toString();
     }
 
     else {
-        return "You lose! " + computerSelection + " beats " + playerSelection;
+        computerScore += 1;
+        output.textContent = ("You lose! " + computerSelection + " beats " + playerSelection);
+        computerOutput.textContent = "Computer score: " + computerScore.toString();
     }
 }
-
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        let playerChoice = playerPlay();
-        let computerChoice = computerPlay();
-
-        console.log("Your choice: " + playerChoice);
-        console.log("Computer choice: " + computerChoice);
-
-        console.log(playRound(playerChoice, computerChoice));
-    }
-}
-
-playGame();
