@@ -1,14 +1,13 @@
 let buttons = document.querySelectorAll("button");
-buttons.forEach((button) => {
-    button.addEventListener("click", () => playRound(button.id));
-});
-
 let output = document.querySelector("#output");
 let playerOutput = document.querySelector("#player-score");
 let computerOutput = document.querySelector("#computer-score");
+let restartButton = document.querySelector("#restart-button");
 
 let playerImage = document.querySelector("img.player");
 let computerImage = document.querySelector("img.computer");
+
+connectButtons();
 
 let playerScore = 0;
 let computerScore = 0; 
@@ -21,12 +20,61 @@ function changeImages(playerChoice, computerChoice) {
     playerImage.src = "imgs/" + playerChoice + ".jpg";
 }
 
+function updateUI() {
+    playerOutput.textContent = "Your score: " + playerScore.toString();
+    computerOutput.textContent = "Computer score: " + computerScore.toString();
+}
+
+function connectButtons() {
+    buttons.forEach((button) => {
+        if(button.id != "restart-button") {
+            button.addEventListener("click", playRound);
+        }
+        else {
+            button.addEventListener("click", restartGame);
+        }
+    });
+}
+
+function disconnectButtons() {
+    buttons.forEach((button) => {
+        if(button.id != "restart-button") {
+            button.removeEventListener("click", playRound);
+        }
+    });
+}
+
+function endGame() {
+    restartButton.style.visibility = "visible";
+    disconnectButtons();
+
+    if(computerScore >= playerScore) {
+        output.textContent = "You lose. The computer is smarter!";
+    }
+    else {
+        output.textContent = "You win. Not half bad.";
+    }
+}
+
+function restartGame() {
+    computerScore = 0;
+    playerScore = 0;
+
+    updateUI();
+    changeImages("scissors", "scissors");
+    connectButtons();
+
+    restartButton.style.visibility = "hidden";
+    output.textContent = "";
+}
+
 function computerPlay() {
     let randomChoice = Math.floor(Math.random() * numOfChoices)
     return choices[randomChoice];
 }
 
-function playRound(playerSelection) {
+function playRound(event) {
+    let playerSelection = event.target.id;
     let computerSelection = computerPlay();
     changeImages(playerSelection, computerSelection);
 
@@ -41,12 +89,15 @@ function playRound(playerSelection) {
     ) {
         playerScore += 1;
         output.textContent = ("You win! " + playerSelection + " beats " + computerSelection);
-        playerOutput.textContent = "Your score: " + playerScore.toString();
     }
 
     else {
         computerScore += 1;
         output.textContent = ("You lose! " + computerSelection + " beats " + playerSelection);
-        computerOutput.textContent = "Computer score: " + computerScore.toString();
+    }
+
+    updateUI();
+    if(computerScore >= 5 || playerScore >= 5) {
+        endGame();
     }
 }

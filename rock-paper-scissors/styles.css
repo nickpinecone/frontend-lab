@@ -35,7 +35,12 @@ button {
 
 #output {
     margin-top: 16px;
+    margin-bottom: 32px;
     color: blue;
+}
+
+#restart-button {
+    visibility: hidden;
 }
 
 img {
