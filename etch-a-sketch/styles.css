@@ -5,12 +5,31 @@ body {
     align-items: center;
 }
 
+.container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 32px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.clear,
+.new {
+    font-size: 32px;
+    background-color: black;
+    color: white;
+    border: 0px;
+    border-radius: 4px;
+}
+
 .canvas {
     width: 480px;
     height: 480px;
     border: 2px solid black;
 
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
+    user-select: none;
 }
