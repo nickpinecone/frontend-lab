@@ -3,6 +3,21 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 16px;
+}
+
+button {
+    font-size: 32px;
+    background-color: black;
+    color: white;
+    border: 0px;
+    border-radius: 4px;
+}
+
+.side-panel {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
 }
 
 .container {
@@ -16,14 +31,6 @@ body {
     justify-content: space-between;
 }
 
-.clear,
-.new {
-    font-size: 32px;
-    background-color: black;
-    color: white;
-    border: 0px;
-    border-radius: 4px;
-}
 
 .canvas {
     width: 480px;
