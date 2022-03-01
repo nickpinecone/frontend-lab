@@ -113,15 +113,20 @@ function shadePixel(pixel, shade) {
 }
 
 function paintPixel(pixel) {
-    if(paintMode == PaintModes.NORMAL) {
-        pixel.style.backgroundColor = "black";
-    }
-    else if(paintMode == PaintModes.RAINBOW) {
-        pixel.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
-    }
-    else if(paintMode == PaintModes.SHADING) {
-        let style = window.getComputedStyle(pixel);
-        let shade = style.getPropertyValue("background-color");
-        shadePixel(pixel, shade);
+    switch(paintMode)
+    {
+        case PaintModes.NORMAL:
+            pixel.style.backgroundColor = "black";
+            break;
+        
+        case PaintModes.RAINBOW:
+            pixel.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
+            break;
+
+        case PaintModes.SHADING:
+            let style = window.getComputedStyle(pixel);
+            let shade = style.getPropertyValue("background-color");
+            shadePixel(pixel, shade);
+            break;
     }
 }
