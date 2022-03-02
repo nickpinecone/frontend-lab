@@ -2,7 +2,38 @@ const operators = ["+", "-", "*", "/"];
 
 // parses full expression (e.g. 12 + 30 / 5 - 1)
 function parseExpression(expression) {
+    while(true) {
+        let containsOperator = expression.split("").some((value) =>
+            operators.includes(value)
+        );
+        if(!containsOperator) {
+            break;
+        }
 
+        let isSecondOperator = false;
+        for (let i = 0; i < expression.length; i++) {
+            let element = expression[i];
+
+            // Check if its the second operator then pull out the expression before that
+            if(operators.includes(element)) {
+                if(isSecondOperator) {
+                    let singleExpression = expression.slice(0, i);
+                    let result = operate(singleExpression);
+                    expression = expression.replace(singleExpression, result);
+                    break;
+                }
+                isSecondOperator = true;
+            }
+
+            // It its the end, theres no second operator
+            else if(i == expression.length-1) {
+                let result = operate(expression);
+                expression = result.toString();
+            }
+        }
+
+        console.log(expression);
+    }
 }
 
 // evaluates individual expressions (e.g. 12 + 30)
@@ -11,6 +42,7 @@ function operate(expression) {
     let first = 0;
     let second = 0;
 
+    // Split elements at operator
     for (let i = 0; i < expression.length; i++) {
         let element = expression[i];
 
@@ -23,6 +55,7 @@ function operate(expression) {
         }
     }
 
+    // Evaluate the expression
     let result = 0;
     switch(operator) {
         case "+":
@@ -41,9 +74,7 @@ function operate(expression) {
             break;
     }
 
-    console.log(result);
+    return result;
 }
 
-operate("12+30");
-operate("1/0");
-operate("12.5*10.5");
+parseExpression("12/2+3*2/2/3");
