@@ -1,6 +1,9 @@
 const operators = ["+", "-", "*", "/"];
 
 // parses full expression (e.g. 12 + 30 / 5 - 1)
+
+// RIGHT NOW evaluates in consequence, no precedence
+
 function parseExpression(expression) {
     while(true) {
         let containsOperator = expression.split("").some((value) =>
