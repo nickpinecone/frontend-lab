@@ -1,4 +1,6 @@
-const operators = ["+", "-", "*", "/"];
+// underscore is used instead of the minus operator
+// because negative numbers break the code, might have to figure that out
+const operators = ["+", "_", "*", "/"];
 
 // parses full expression (e.g. 12 + 30 / 5 - 1)
 function pullExpression(expression) {
@@ -89,7 +91,7 @@ function operate(expression) {
         case "+":
             result = first + second;
             break;
-        case "-":
+        case "_":
             result = first - second;
             break;
         case "*":
@@ -124,4 +126,4 @@ function parseExpression(expression) {
     }
 }
 
-parseExpression("30-15/3*5");
+parseExpression("10_20+30");
