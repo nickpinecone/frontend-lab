@@ -82,7 +82,7 @@ function parseExpression(expression) {
 
         let singleExpression = pullExpression(expression);
         let result = operate(singleExpression);
-        expression.replace(singleExpression, result.toString());
+        expression = expression.replace(singleExpression, result.toString());
 
         console.log(expression);
     }
