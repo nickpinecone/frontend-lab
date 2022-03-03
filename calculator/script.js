@@ -3,40 +3,31 @@ const operators = ["+", "-", "*", "/"];
 // parses full expression (e.g. 12 + 30 / 5 - 1)
 
 // RIGHT NOW evaluates in consequence, no precedence
+// TODO add precedence
 
-function parseExpression(expression) {
-    while(true) {
-        let containsOperator = expression.split("").some((value) =>
-            operators.includes(value)
-        );
-        if(!containsOperator) {
-            break;
+function pullExpression(expression) {
+    let isSecondOperator = false;
+    let singleExpression = "";
+
+    for (let i = 0; i < expression.length; i++) {
+        let element = expression[i];
+
+        // Check if its the second operator then pull out the expression before that
+        if(operators.includes(element)) {
+            if(isSecondOperator) {
+                singleExpression = expression.slice(0, i);
+                break;
+            }
+            isSecondOperator = true;
         }
 
-        let isSecondOperator = false;
-        for (let i = 0; i < expression.length; i++) {
-            let element = expression[i];
-
-            // Check if its the second operator then pull out the expression before that
-            if(operators.includes(element)) {
-                if(isSecondOperator) {
-                    let singleExpression = expression.slice(0, i);
-                    let result = operate(singleExpression);
-                    expression = expression.replace(singleExpression, result);
-                    break;
-                }
-                isSecondOperator = true;
-            }
-
-            // It its the end, theres no second operator
-            else if(i == expression.length-1) {
-                let result = operate(expression);
-                expression = result.toString();
-            }
+        // It its the end, theres no second operator
+        else if(i == expression.length-1) {
+            singleExpression = expression;
         }
-
-        console.log(expression);
     }
+
+    return singleExpression;
 }
 
 // evaluates individual expressions (e.g. 12 + 30)
@@ -78,6 +69,23 @@ function operate(expression) {
     }
 
     return result;
+}
+
+function parseExpression(expression) {
+    while(true) {
+        let containsOperator = expression.split("").some((value) =>
+            operators.includes(value)
+        );
+        if(!containsOperator) {
+            break;
+        }
+
+        let singleExpression = pullExpression(expression);
+        let result = operate(singleExpression);
+        expression.replace(singleExpression, result.toString());
+
+        console.log(expression);
+    }
 }
 
 parseExpression("12/2+3*2/2/3");
