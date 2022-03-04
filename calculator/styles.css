@@ -1,0 +1,23 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button,
+#output {
+    font-size: 64px;
+    padding: 8px;
+}
+
+.container {
+    border: 3px solid black;
+}
+
+.container.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 0px;
+    border-top: 3px solid black;
+}
