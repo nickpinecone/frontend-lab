@@ -11,6 +11,14 @@ button,
     padding: 8px;
 }
 
+#output {
+    min-height: 96px;
+    width: 446px;
+    overflow-wrap: break-word;
+    letter-spacing: 3px;
+    font-size: 48px;
+}
+
 .container {
     border: 3px solid black;
 }
@@ -20,4 +28,6 @@ button,
     grid-template-columns: repeat(4, 1fr);
     border: 0px;
     border-top: 3px solid black;
+    padding: 8px;
+    grid-gap: 8px;
 }

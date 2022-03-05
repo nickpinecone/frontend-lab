@@ -106,10 +106,18 @@ function operate(expression) {
     return result;
 }
 
+let numOfOperators = 0;
+
 export default function parseExpression(expression) {
     console.log(expression);
 
-    while(true) {
+    expression.split("").forEach((char) => {
+        if(operators.includes(char)) {
+            numOfOperators += 1;
+        }
+    });
+
+    for (let i = 0; i < numOfOperators; i++) {
         let containsOperator = expression.split("").some((value) =>
             operators.includes(value)
         );
@@ -121,4 +129,6 @@ export default function parseExpression(expression) {
         let result = operate(singleExpression);
         expression = expression.replace(singleExpression, result.toString());
     }
+
+    return "";
 }
