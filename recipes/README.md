@@ -1,4 +1,4 @@
-# OdinRecipes
+# odin-recipes
 The best recipe site in the world
 
 ## Links
