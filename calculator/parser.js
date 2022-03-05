@@ -1,5 +1,5 @@
 // tilde is used instead of the minus operator
-// because negative numbers break the code, might have to figure that out
+// because negative numbers break the code
 const operators = ["+", "~", "*", "/"];
 
 // parses full expression (e.g. 12 + 30 / 5 - 1)
@@ -110,6 +110,7 @@ function operate(expression) {
 export default function parseExpression(expression) {
     console.log(expression);
 
+    // Needs to run al least once
     let numOfOperators = 1;
     expression.split("").forEach((char) => {
         if(operators.includes(char)) {

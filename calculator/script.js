@@ -8,7 +8,7 @@ let output = document.querySelector("#output");
 let enteredExpression = "";
 let shownExpression = "";
 
-// Simple implementaion no checking for errors
+// Simple implementaion no checking for entering errors
 // Just append the character but with special rules for  -, AC, =
 buttons.forEach((button) => {
     if(button.textContent == '-') {
@@ -40,6 +40,17 @@ buttons.forEach((button) => {
         button.addEventListener("click", () => {
             enteredExpression = "";
             shownExpression = "";
+            updateOutput();
+        });
+    }
+    else if(button.textContent == "C") {
+        button.addEventListener("click", () => {
+            enteredExpression = enteredExpression.substring(0, enteredExpression.length-1);
+            shownExpression = shownExpression.substring(0, shownExpression.length-1);
+
+            if(shownExpression[shownExpression.length-1] == " ") {
+                shownExpression = shownExpression.substring(0, shownExpression.length-1);
+            }
             updateOutput();
         });
     }
