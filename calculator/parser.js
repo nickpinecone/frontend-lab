@@ -103,14 +103,14 @@ function operate(expression) {
             break;
     }
 
+    result = Math.round( result * 1000 + Number.EPSILON ) / 1000
     return result;
 }
-
-let numOfOperators = 0;
 
 export default function parseExpression(expression) {
     console.log(expression);
 
+    let numOfOperators = 1;
     expression.split("").forEach((char) => {
         if(operators.includes(char)) {
             numOfOperators += 1;
@@ -130,5 +130,5 @@ export default function parseExpression(expression) {
         expression = expression.replace(singleExpression, result.toString());
     }
 
-    return "";
+    return "NaN";
 }

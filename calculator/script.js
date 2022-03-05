@@ -22,7 +22,7 @@ buttons.forEach((button) => {
             else {
                 enteredExpression += '~';
             }
-            shownExpression += '-';
+            shownExpression += ' - ';
             updateOutput();
         });
     }
@@ -30,13 +30,8 @@ buttons.forEach((button) => {
         button.addEventListener("click", () => {
             let result = parseExpression(enteredExpression);
 
-            if(result == "") {
-                shownExpression = "Malformed expression";
-                enteredExpression = "";
-            }
-            else {
-                shownExpression += "=" + result.toString();
-            }
+            shownExpression += " = " + result;
+            enteredExpression = result;
 
             updateOutput();
         });
@@ -51,7 +46,17 @@ buttons.forEach((button) => {
     else {
         button.addEventListener("click", () => {
             enteredExpression += button.textContent;
+
+            let isOperator = operators.includes(button.textContent);
+
+            if(isOperator) {
+                shownExpression += " "
+            }
             shownExpression += button.textContent;
+            if(isOperator) {
+                shownExpression += " "
+            }
+
             updateOutput();
         });
         updateOutput();
