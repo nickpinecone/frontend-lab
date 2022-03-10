@@ -8,8 +8,12 @@ inputTask.addEventListener("keydown", (event) => {
         addTask();
     }
 });
+inputTask.addEventListener("mousedown", () => {
+    inputTask.style.backgroundColor = "white";
+});
 function addTask() {
     if (inputTask.value == "") {
+        inputTask.style.backgroundColor = "orangered";
         return;
     }
     const listItem = document.createElement("li");
