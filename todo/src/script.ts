@@ -1,0 +1,35 @@
+const addButton: HTMLButtonElement = document.querySelector(".add")!;
+const inputTask: HTMLInputElement = document.querySelector("#entered-task")!;
+const tasksList: HTMLUListElement = document.querySelector(".tasks")!;
+
+addButton.addEventListener("click", addTask);
+inputTask.addEventListener("keydown", (event) => {
+    if(event.key == "Enter") {
+        addTask();
+    }
+});
+
+function addTask() {
+    if(inputTask.value == "") {
+        return;
+    }
+
+    const listItem = document.createElement("li");
+
+    const taskName = inputTask.value;
+    inputTask.value = "";
+    const listName = document.createElement("span");
+    listName.textContent = taskName;
+    listItem.appendChild(listName);
+
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "x";
+    removeButton.classList.add("remove");
+    listItem.appendChild(removeButton);
+
+    removeButton.addEventListener("click", () => {
+        tasksList.removeChild(listItem);
+    });
+
+    tasksList.appendChild(listItem);
+}
