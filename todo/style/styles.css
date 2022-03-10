@@ -1,4 +1,74 @@
-.add-button {
-    color: red;
-    font-size: 32px;
+* {
+    font-family: monospace;
+    font-size: 28px;
+}
+
+button {
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: 28px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+h3 {
+    text-align: center;
+}
+
+.container {
+    height: inherit;
+    width: 40%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.add-area {
+    display: flex;
+    justify-content: space-between;
+}
+
+input {
+    font-size: 24px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 4px;
+    margin-bottom: 16px;
+
+    border: 0px;
+    border-bottom: 2px;
+    border-color: lightgray;
+    border-style: solid;
+}
+
+.remove {
+    align-self: flex-start;
+    text-align: center;
+    background-color: orangered;
+    color: white;
+    border: white 1px solid;
+    border-radius: 50%;
+}
+
+.add {
+    text-align: center;
+    background-color: limegreen;
+    color: white;
+    border: 0px;
+}
+
+#entered-task {
+    flex: 1;
+    margin-right: 8px;
 }
