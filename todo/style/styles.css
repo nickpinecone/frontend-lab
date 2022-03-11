@@ -10,11 +10,11 @@ button {
 }
 
 button:hover {
-    filter: brightness(80%);
+    filter: brightness(60%);
 }
 
 button:active {
-    filter: brightness(95%);
+    filter: brightness(90%);
 }
 
 body {
@@ -32,6 +32,7 @@ h3 {
     width: 40%;
     display: flex;
     flex-flow: column nowrap;
+    justify-content: space-between;
 }
 
 .add-area {
@@ -63,22 +64,40 @@ li {
     border-style: groove;
 }
 
+li span {
+    color: rebeccapurple;
+    word-wrap: break-word;
+    max-width: 90%;
+}
+
 .remove {
     align-self: flex-start;
     text-align: center;
     background-color: transparent;
-    color: orangered;
+    color: red;
     border: 0px;
 }
 
 .add {
     text-align: center;
     background-color: transparent;
-    color: limegreen;
+    color: blue;
     border: 0px;
 }
 
 #entered-task {
     flex: 1;
     margin-right: 8px;
+}
+
+.button-list {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.numeration {
+    font-size: 24px;
+    background-color: transparent;
+    color: darkorange;
+    border: 0px;
 }

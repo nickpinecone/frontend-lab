@@ -1,6 +1,13 @@
 const addButton: HTMLButtonElement = document.querySelector(".add")!;
 const inputTask: HTMLInputElement = document.querySelector("#entered-task")!;
-const tasksList: HTMLUListElement = document.querySelector(".tasks")!;
+const tasksContainer: HTMLDivElement = document.querySelector(".tasks-container")!;
+const buttonPanel: HTMLDivElement = document.querySelector(".button-list")!;
+
+let curTasksList: HTMLUListElement = document.querySelector(".tasks")!;
+let tasksArray: HTMLUListElement[]  = [];
+tasksArray.push(curTasksList);
+
+const maxNumOfTasks = 11;
 
 addButton.addEventListener("click", addTask);
 inputTask.addEventListener("keydown", (event) => {
@@ -8,16 +15,58 @@ inputTask.addEventListener("keydown", (event) => {
         addTask();
     }
 });
-
 inputTask.addEventListener("mousedown", () => {
     inputTask.style.backgroundColor = "white";
 });
 
+function addButtonToPanel() {
+    let buttonNumber = Number(buttonPanel.lastElementChild?.textContent) + 1;
+    let newButton = document.createElement("button");
+    newButton.classList.add("numeration");
+    newButton.textContent = String(buttonNumber);
+    buttonPanel.appendChild(newButton);
+
+    newButton.addEventListener("click", () => {
+        curTasksList.style.display = "none";
+        curTasksList = tasksArray[buttonNumber-1];
+        curTasksList.style.display = "block";
+
+    });
+}
+
+function checkOverflow() {
+    const lastUiChild = (tasksContainer.lastElementChild as HTMLUListElement);
+    const lastUlChildCount = lastUiChild.childElementCount;
+
+    if(lastUiChild !== curTasksList) {
+        curTasksList.style.display = "none";
+        curTasksList = lastUiChild;
+        curTasksList.style.display = "block";
+    }
+
+    if(lastUlChildCount == 0) {
+        addButtonToPanel();
+    }
+
+    if(lastUlChildCount >= maxNumOfTasks) {
+        let newList = document.createElement("ul");
+        newList.classList.add("tasks");
+        tasksContainer.appendChild(newList);
+        tasksArray.push(newList);
+        curTasksList.style.display = "none";
+        curTasksList = newList;
+
+        addButtonToPanel();
+    }
+}
+
 function addTask() {
     if(inputTask.value == "") {
-        inputTask.style.backgroundColor = "orangered";
+        inputTask.style.backgroundColor = "red";
         return;
     }
+
+    checkOverflow();
 
     const listItem = document.createElement("li");
 
@@ -33,8 +82,8 @@ function addTask() {
     listItem.appendChild(removeButton);
 
     removeButton.addEventListener("click", () => {
-        tasksList.removeChild(listItem);
+        curTasksList.removeChild(listItem);
     });
 
-    tasksList.appendChild(listItem);
+    curTasksList.appendChild(listItem);
 }
