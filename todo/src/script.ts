@@ -17,7 +17,15 @@ inputTask.addEventListener("keydown", (event) => {
 });
 
 function showList(index: number) {
+    if(buttonPanel.childElementCount != 0) {
+        if(curPage < buttonPanel.childElementCount) {
+            Array.from(buttonPanel.children)[curPage].classList.remove("selected");
+        }
+        Array.from(buttonPanel.children)[index].classList.add("selected");
+    }
+
     curPage = index;
+
     tasksContainer.removeChild(tasksContainer.lastElementChild!);
     tasksContainer.appendChild(tasksPagesArray[index]);
 }
@@ -31,6 +39,11 @@ function updatePage(listItem: HTMLLIElement) {
     let newButton = document.createElement("button");
     let buttonNumber = Number(buttonPanel.lastElementChild?.textContent ?? 0) + 1;
     newButton.textContent = buttonNumber.toString();
+
+    if(buttonNumber == 1) {
+        newButton.classList.add("selected");
+    }
+
     newButton.classList.add("numeration");
     newButton.addEventListener("click", () => {
         showList(buttonNumber-1);
@@ -46,9 +59,13 @@ function groupTasks(listItem: HTMLLIElement) {
 
     else if(tasksPagesArray[tasksPagesArray.length-1].childElementCount >= maxNumOfTasks) {
         updatePage(listItem);
+        showList(curPage+1);
     }
     else {
         tasksPagesArray[tasksPagesArray.length-1].appendChild(listItem);
+        if(curPage != tasksPagesArray.length-1) {
+            showList(tasksPagesArray.length-1);
+        }
     }
 }
 
@@ -79,6 +96,18 @@ function createTaskElement() {
     groupTasks(listItem);
 }
 
+function rearrangeButtonPanel() {
+    let lastChild = buttonPanel.lastElementChild!;
+    let index = Number(lastChild.textContent);
+    if(tasksPagesArray.length < index) {
+        buttonPanel.removeChild(lastChild);
+    }
+
+    if(curPage != 0 && curPage >= buttonPanel.childElementCount) {
+        showList(curPage-1);
+    }
+}
+
 function rearrangeTasks() {
     tasksPagesArray.length = 0;
 
@@ -106,15 +135,7 @@ function rearrangeTasks() {
         tasksPagesArray.push(taskList);
     }
 
-    let lastChild = buttonPanel.lastElementChild!;
-    let index = Number(lastChild.textContent);
-    if(tasksPagesArray.length < index) {
-        buttonPanel.removeChild(lastChild);
-    }
-
-    if(curPage != 0 && curPage >= buttonPanel.childElementCount) {
-        showList(curPage-1);
-    }
+    rearrangeButtonPanel();
 }
 
 function addTask() {
