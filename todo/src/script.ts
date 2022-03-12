@@ -3,11 +3,11 @@ const inputTask: HTMLInputElement = document.querySelector("#entered-task")!;
 const tasksContainer: HTMLDivElement = document.querySelector(".tasks-container")!;
 const buttonPanel: HTMLDivElement = document.querySelector(".button-list")!;
 
-const tasksArray: HTMLLIElement[] = [];
-const tasksPagesArray: HTMLUListElement[] = [];
-
 const maxNumOfTasks = 11;
 let curPage = 0;
+
+let tasksArray: HTMLLIElement[] = [];
+let tasksPagesArray: HTMLUListElement[] = [];
 
 addButton.addEventListener("click", addTask);
 inputTask.addEventListener("keydown", (event) => {
@@ -15,6 +15,24 @@ inputTask.addEventListener("keydown", (event) => {
         addTask();
     }
 });
+
+accessLocalStorage();
+
+function accessLocalStorage() {
+    if(localStorage.tasks) {
+        let tasksNames = (localStorage.tasks as string).slice(0, localStorage.tasks.length-1).split("~");
+
+        for (let i = 0; i < tasksNames.length; i++) {
+            const taskName = tasksNames[i];
+            createTaskElement(taskName);
+        }
+
+        showList(0);
+    }
+    else {
+        localStorage.tasks = "";
+    }
+}
 
 function showList(index: number) {
     if(buttonPanel.childElementCount != 0) {
@@ -69,11 +87,19 @@ function groupTasks(listItem: HTMLLIElement) {
     }
 }
 
-function createTaskElement() {
+function createTaskElement(name: string = "") {
     const listItem = document.createElement("li");
 
-    const taskName = inputTask.value;
-    inputTask.value = "";
+    let taskName = "";
+    if(name) {
+        taskName = name;
+    }
+    else {
+        taskName = inputTask.value;
+        inputTask.value = "";
+        localStorage.tasks += taskName + "~";
+    }
+
     const listName = document.createElement("span");
     listName.textContent = taskName;
     listItem.appendChild(listName);
@@ -85,6 +111,11 @@ function createTaskElement() {
     removeButton.addEventListener("click", () => {
         let index = tasksArray.indexOf(listItem);
         tasksArray.splice(index, 1);
+
+        let localTasks: string[] = localStorage.tasks.split("~");
+        localTasks.splice(index, 1);
+        localStorage.tasks = localTasks.join("~");
+
         rearrangeTasks();
 
         showList(curPage);

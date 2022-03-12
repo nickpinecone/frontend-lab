@@ -3,16 +3,30 @@ const addButton = document.querySelector(".add");
 const inputTask = document.querySelector("#entered-task");
 const tasksContainer = document.querySelector(".tasks-container");
 const buttonPanel = document.querySelector(".button-list");
-const tasksArray = [];
-const tasksPagesArray = [];
 const maxNumOfTasks = 11;
 let curPage = 0;
+let tasksArray = [];
+let tasksPagesArray = [];
 addButton.addEventListener("click", addTask);
 inputTask.addEventListener("keydown", (event) => {
     if (event.key == "Enter") {
         addTask();
     }
 });
+accessLocalStorage();
+function accessLocalStorage() {
+    if (localStorage.tasks) {
+        let tasksNames = localStorage.tasks.slice(0, localStorage.tasks.length - 1).split("~");
+        for (let i = 0; i < tasksNames.length; i++) {
+            const taskName = tasksNames[i];
+            createTaskElement(taskName);
+        }
+        showList(0);
+    }
+    else {
+        localStorage.tasks = "";
+    }
+}
 function showList(index) {
     if (buttonPanel.childElementCount != 0) {
         if (curPage < buttonPanel.childElementCount) {
@@ -58,10 +72,17 @@ function groupTasks(listItem) {
         }
     }
 }
-function createTaskElement() {
+function createTaskElement(name = "") {
     const listItem = document.createElement("li");
-    const taskName = inputTask.value;
-    inputTask.value = "";
+    let taskName = "";
+    if (name) {
+        taskName = name;
+    }
+    else {
+        taskName = inputTask.value;
+        inputTask.value = "";
+        localStorage.tasks += taskName + "~";
+    }
     const listName = document.createElement("span");
     listName.textContent = taskName;
     listItem.appendChild(listName);
@@ -71,6 +92,9 @@ function createTaskElement() {
     removeButton.addEventListener("click", () => {
         let index = tasksArray.indexOf(listItem);
         tasksArray.splice(index, 1);
+        let localTasks = localStorage.tasks.split("~");
+        localTasks.splice(index, 1);
+        localStorage.tasks = localTasks.join("~");
         rearrangeTasks();
         showList(curPage);
     });
