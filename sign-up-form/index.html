@@ -13,29 +13,30 @@
     </div>
     <div class="content">
         <div class="wrapper">
-            <div class="warning">This is not a real online service! Please, do not input sensitive or important information ;)</div>
-            <div class="sign-up-statement">Sign up now!</div>
-            <form action="" method="post">
+            <div class="warning"><strong>This is not a real online service!</strong> Please, do not input sensitive or important information ;)</div>
+            <div class="sign-up-statement">Sign up <span>now!</span></div>
+            <form action="" method="get" id="form">
                 <div>
-                    <label for="first-name">First name: </label>
-                    <input type="text" name="first-name" id="first-name">
+                    <label for="first-name">*First name: </label>
+                    <input type="text" name="first-name" id="first-name" required>
                     <label for="last-name">Last name: </label>
                     <input type="text" name="last-name" id="last-name">
                 </div>
                 <div>
-                    <label for="email">Email: </label>
-                    <input type="email" name="email" id="email">
+                    <label for="email">*Email: </label>
+                    <input type="email" name="email" id="email" required>
                     <label for="phone">Phone number: </label>
                     <input type="tel" name="phone" id="phone">
                 </div>
                 <div>
-                    <label for="password">Password: </label>
-                    <input type="password" name="password" id="password">
-                    <label for="confirm">Confirm password: </label>
-                    <input type="password" name="confirm" id="confirm">
+                    <label for="password">*Password: </label>
+                    <input type="password" name="password" id="password" required>
+                    <label for="confirm">*Confirm password: </label>
+                    <input type="password" name="confirm" id="confirm" required>
                 </div>
             </form>
-            <div class="sign-in-statement">Already got an account? <span class="sign-in">Sign in</span></div>
+            <button type="submit" form="form">Create account</button>
+            <div class="sign-in-statement">Already got an account? <button class="sign-in">Sign in</button></div>
         </div>
     </div>
 </body>
