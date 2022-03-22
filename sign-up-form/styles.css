@@ -1,6 +1,8 @@
 :root {
     --main-color: #e7a234;
     --error-color: orangered;
+    --background-color: #130f0eef;
+
     font-size: 26px;
     letter-spacing: 1px;
 }
@@ -83,7 +85,7 @@ img {
 }
 
 form {
-    background-color: #130f0eef;
+    background-color: var(--background-color);
     border-radius: 8px;
     padding: 16px;
     display: flex;
@@ -101,7 +103,7 @@ form > div {
 button {
     font-size: 1.1rem;
     padding: 12px;
-    border: 1px black solid;
+    border: 0px black solid;
     border-radius: 4px;
     background-color: var(--main-color);
     font-weight: bold;
@@ -115,9 +117,10 @@ button {
 }
 
 button:hover {
-    filter: brightness(80%);
+    color: var(--main-color);
+    background-color: var(--background-color);
 }
 
 button:active {
-    filter: brightness(90%);
+    filter: brightness(50%);
 }
