@@ -1,0 +1,19 @@
+:root {
+    font-size: 24px;
+}
+
+input {
+    font-size: 0.8rem;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+
+.content {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 32px;
+}
