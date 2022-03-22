@@ -3,14 +3,21 @@
     --error-color: orangered;
     --background-color: #130f0eef;
 
-    font-size: 26px;
+    font-size: 22px;
     letter-spacing: 1px;
 }
 
 input {
+    outline-style: none;
     border: 1px black solid;
     border-radius: 4px;
     font-size: 1rem;
+}
+
+input:focus,
+input:invalid {
+    outline-style: solid;
+    outline-width: 3px;
 }
 
 input:focus {
