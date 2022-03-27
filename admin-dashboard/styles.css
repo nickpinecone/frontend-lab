@@ -81,8 +81,8 @@
     padding: 32px;
     display: grid;
     grid-template-columns: 4fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 64px 32px;
+    grid-template-rows: 0.8fr 0.8fr;
+    gap: 48px 32px;
 }
 
 .projects {
@@ -98,6 +98,10 @@
     border-radius: 8px;
 }
 
+.card > p {
+    font-size: 0.9rem;
+}
+
 .announcements,
 .trending {
     display: flex;
@@ -107,9 +111,21 @@
     background-color: white;
     padding: 32px;
     border-radius: 8px;
+    min-width: 250px;
 }
 
-.announce,
-user {
-    word-wrap: break-word;
+.delimiter {
+    border-bottom: 1px groove lightgray;
+}
+
+.announce > p,
+.user > p  {
+    font-size: 0.8rem;
+}
+
+.user,
+.announce {
+    display: flex;
+    flex-flow: column nowrap;
+    row-gap: 8px;
 }
