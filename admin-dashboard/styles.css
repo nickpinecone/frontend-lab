@@ -1,5 +1,7 @@
 :root {
-    --main-color: rgb(74, 74, 253);
+    --main-color: rgb(122, 53, 250);
+    --second-color: rgb(29, 158, 190);
+    --gray-color: rgba(214, 214, 214, 0.835);
 
     font-size: 20px;
 }
@@ -31,13 +33,21 @@
 }
 
 .sidebar li {
+    padding: 4px;
+    border-radius: 4px;
     margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+.sidebar li:hover {
+    background-color: white;
+    color: var(--main-color);
+    cursor: pointer;
 }
 
 .content {
     display: flex;
     flex-flow: column nowrap;
-    /* gap: 16px; */
 }
 
 .search-bar,
@@ -47,14 +57,39 @@
     padding: 16px 32px;
 }
 
-.search-bar > input {
-    width: 40%;
+.search-bar input {
+    background-color: var(--gray-color);
+    font-size: 1.1rem;
+    border: 0px;
+    border-radius: 8px;
+    padding: 4px;
+    outline: none;
 }
 
-.search-bar > span,
-.nav-bar > .greeting > span {
+.search-bar input:focus {
+    outline: 3px solid var(--second-color);
+}
+
+.search-bar > div > span,
+.nav-bar > .greeting > .big {
     font-weight: bold;
     font-size: 1.1rem;
+}
+
+.notifs {
+    display: flex;
+    gap: 32px;
+}
+
+.greeting {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 4px;
+}
+
+.greeting .small {
+    font-weight: bold;
+    font-size: 0.8rem;
 }
 
 .nav-buttons button {
@@ -64,7 +99,12 @@
     border: 0px;
     background-color: var(--main-color);
     color: white;
+}
 
+.nav-buttons button:hover {
+    background-color: white;
+    color: var(--main-color);
+    outline: 3px solid var(--main-color);
 }
 
 .nav-buttons {
@@ -73,11 +113,11 @@
 }
 
 .nav-bar {
-    border-bottom: 3px groove lightgray;
+    border-bottom: 3px groove var(--gray-colors);
 }
 
 .main-area {
-    background-color: lightgray;
+    background-color: var(--gray-color);
     padding: 32px;
     display: grid;
     grid-template-columns: 4fr 1fr;
@@ -93,13 +133,23 @@
 }
 
 .card {
+    position: relative;
     background-color: white;
-    padding: 16px;
+    padding: 16px 32px 32px 16px;
     border-radius: 8px;
+    border-left: 5px solid var(--second-color);
 }
 
 .card > p {
     font-size: 0.9rem;
+}
+
+.card::after {
+    content: "⭐ 👁 🔌";
+    letter-spacing: 0.2rem;
+    position: absolute;
+    bottom: 5%;
+    right: 3%;
 }
 
 .announcements,
@@ -128,4 +178,8 @@
     display: flex;
     flex-flow: column nowrap;
     row-gap: 8px;
+}
+
+.tag {
+    color: var(--second-color);
 }
