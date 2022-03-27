@@ -119,13 +119,25 @@
 .main-area {
     background-color: var(--gray-color);
     padding: 32px;
+    padding-top: 64px;
     display: grid;
     grid-template-columns: 4fr 1fr;
     grid-template-rows: 0.8fr 0.8fr;
-    gap: 48px 32px;
+    gap: 64px 32px;
+}
+
+.title {
+    position: absolute;
+    top: -40px;
+}
+
+.announcements > .title,
+.trending > .title {
+    left: 0%;
 }
 
 .projects {
+    position: relative;
     grid-row: span 2;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -154,6 +166,7 @@
 
 .announcements,
 .trending {
+    position: relative;
     display: flex;
     flex-flow: column wrap;
     gap: 16px;
