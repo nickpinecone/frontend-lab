@@ -1,0 +1,115 @@
+:root {
+    --main-color: rgb(74, 74, 253);
+
+    font-size: 20px;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.wrapper {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.sidebar {
+    background-color: var(--main-color);
+    color: white;
+    padding: 32px;
+    padding-left: 48px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 8px;
+}
+
+.content {
+    display: flex;
+    flex-flow: column nowrap;
+    /* gap: 16px; */
+}
+
+.search-bar,
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 32px;
+}
+
+.search-bar > input {
+    width: 40%;
+}
+
+.search-bar > span,
+.nav-bar > .greeting > span {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.nav-buttons button {
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 4px;
+    border: 0px;
+    background-color: var(--main-color);
+    color: white;
+
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-bar {
+    border-bottom: 3px groove lightgray;
+}
+
+.main-area {
+    background-color: lightgray;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 64px 32px;
+}
+
+.projects {
+    grid-row: span 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 32px;
+}
+
+.card {
+    background-color: white;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.announcements,
+.trending {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 16px;
+    justify-content: space-between;
+    background-color: white;
+    padding: 32px;
+    border-radius: 8px;
+}
+
+.announce,
+user {
+    word-wrap: break-word;
+}
