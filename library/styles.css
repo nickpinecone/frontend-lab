@@ -1,0 +1,141 @@
+:root {
+    --main-color: rgb(155, 155, 155);
+
+    font-size: 20px;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    height: 100vh;
+}
+
+.header {
+    padding: 32px;
+    align-self: stretch;
+    background-color: var(--main-color);
+    text-align: center;
+    color: white;
+}
+
+.wrapper {
+    position: relative;
+    padding: 32px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 32px;
+}
+
+button.add {
+    align-self: center;
+    font-size: 1.2rem;
+    background-color: var(--main-color);
+    border: 0px;
+    border-radius: 4px;
+    padding: 8px;
+    color: white;
+}
+
+button.add:hover,
+.remove:hover {
+    background-color: white;
+    color: var(--main-color);
+    outline: 3px solid var(--main-color);
+}
+
+.container {
+    width: 80vw;
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.book {
+    width: fit-content;
+    background-color: white;
+    color: black;
+    font-size: 1.1rem;
+    border: 3px solid var(--main-color);
+    border-radius: 8px;
+    padding: 32px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 12px;
+}
+
+.status.not-read,
+.status.read,
+.remove,
+button[type="submit"] {
+    font-size: 1.1rem;
+    padding: 4px;
+    border: 0px;
+    border-radius: 4px;
+    color: white;
+}
+
+.status.not-read {
+    background-color: rgba(207, 0, 0, 0.726);
+}
+.status.not-read::after {
+    content: " no";
+}
+
+.status.read {
+    background-color: rgba(55, 195, 0, 0.753);
+}
+.status.read::after {
+    content: " yes";
+}
+
+.remove {
+    background-color: var(--main-color);
+}
+
+.delimiter {
+    border-bottom: 1px groove var(--main-color);
+}
+
+form {
+    position: fixed;
+    top: 30%;
+    right: calc(50% - 453px / 2);
+
+    background-color: var(--main-color);
+    display: flex;
+    flex-flow: column nowrap;
+    width: fit-content;
+    padding: 16px;
+    border: 3px solid var(--main-color);
+    border-radius: 8px;
+    gap: 16px;
+}
+
+form > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+form label {
+    font-size: 1.2rem;
+}
+
+form input {
+    font-size: 1.1rem;
+}
+
+input[type="checkbox"] {
+    height: 1.3rem;
+    width: 1.3rem;
+}
+
+button[type="submit"] {
+    background-color: var(--main-color);
+}
