@@ -1,4 +1,9 @@
 const form = document.querySelector("form");
+const container = document.querySelector(".container");
+
+const addButton = document.querySelector(".add");
+const doneButton = document.querySelector(".done");
+const closeButton = document.querySelector(".close");
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -7,16 +12,7 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-const container = document.querySelector(".container");
-const addButton = document.querySelector(".add");
 addButton.addEventListener("click", triggerFormVisibility);
-
-function triggerFormVisibility() {
-    form.style.visibility = (form.style.visibility == "visible") ? "hidden" : "visible";
-}
-
-const doneButton = document.querySelector(".done");
-const closeButton = document.querySelector(".close");
 
 doneButton.addEventListener("click", () => {
     if(form.checkValidity()) {
@@ -35,6 +31,10 @@ closeButton.addEventListener("click", () => {
     triggerFormVisibility();
 });
 
+function triggerFormVisibility() {
+    form.style.visibility = (form.style.visibility == "visible") ? "hidden" : "visible";
+}
+
 function addBook() {
     const data = Object.fromEntries(new FormData(form).entries());
     let bookObject = new Book(data.title, data.author, data.pages, (data.status == "on") ? true : false);
@@ -44,6 +44,23 @@ function addBook() {
 
     for (const key in bookObject) {
         if(key == "read") {
+            const button = document.createElement("button");
+            button.textContent = "Read: ";
+            button.classList.add("status");
+            button.classList.add(bookObject[key] ? "read" : "not-read");
+
+            button.addEventListener("click", () => {
+                if(button.classList.contains("read")) {
+                    button.classList.remove("read");
+                    button.classList.add("not-read");
+                }
+                else {
+                    button.classList.remove("not-read");
+                    button.classList.add("read");
+                }
+            });
+
+            book.appendChild(button);
             break;
         }
         
@@ -55,6 +72,14 @@ function addBook() {
         delimiter.classList.add("delimiter");
         book.appendChild(delimiter);
     }
+
+    const button = document.createElement("button");
+    button.classList.add("remove");
+    button.textContent = "Remove";
+    button.addEventListener("click", () => {
+        container.removeChild(book);
+    });
+    book.appendChild(button);
 
     container.appendChild(book);
 }
