@@ -48,6 +48,9 @@ function accessLocalStorage() {
             const bookObject = JSON.parse(book);
             addBook(bookObject);
         });
+
+        const bookObject = JSON.parse(booksArray[booksArray.length-1]);
+        numOfBooks = bookObject.number + 1;
     }
     else {
         localStorage.books = "";
@@ -80,7 +83,24 @@ function addBook(bookObject) {
                     button.classList.remove("not-read");
                     button.classList.add("read");
                 }
-            });
+
+                const books = localStorage.books.slice(0, localStorage.books.length-1);
+                const booksArray = books.split("~");
+
+                let i = 0;
+                booksArray.forEach((bookObjectEl) => {
+                    const bookObject = JSON.parse(bookObjectEl);
+                    bookObject.read = !bookObject.read;
+
+                    if(bookObject.number == book.getAttribute("number")) {
+                        const newArray = booksArray.slice(0);
+
+                        newArray.splice(i, 1, JSON.stringify(bookObject));
+                        localStorage.books = (newArray.length > 0) ? newArray.join("~") + "~" : "";
+                    }
+                    i++;
+                });
+                });
 
             book.appendChild(button);
             break;
@@ -120,4 +140,5 @@ function addBook(bookObject) {
 
     container.appendChild(book);
     numOfBooks++;
+    console.log(book);
 }
