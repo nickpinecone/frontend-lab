@@ -16,7 +16,10 @@ addButton.addEventListener("click", triggerFormVisibility);
 
 doneButton.addEventListener("click", () => {
     if(form.checkValidity()) {
-        addBook();
+        const data = Object.fromEntries(new FormData(form).entries());
+        let bookObject = new Book(data.title, data.author, data.pages, (data.status == "on") ? true : false);
+        localStorage.books += JSON.stringify(bookObject) + "~";
+        addBook(bookObject);
 
         form.reset();
         triggerFormVisibility();
@@ -31,14 +34,27 @@ closeButton.addEventListener("click", () => {
     triggerFormVisibility();
 });
 
+accessLocalStorage();
+
+function accessLocalStorage() {
+    if(localStorage.books) {
+        const books = localStorage.books.slice(0, localStorage.books.length-1);
+        const booksArray = books.split("~");
+        booksArray.forEach((book) => {
+            const bookObject = JSON.parse(book);
+            addBook(bookObject);
+        });
+    }
+    else {
+        localStorage.books = "";
+    }
+}
+
 function triggerFormVisibility() {
     form.style.visibility = (form.style.visibility == "visible") ? "hidden" : "visible";
 }
 
-function addBook() {
-    const data = Object.fromEntries(new FormData(form).entries());
-    let bookObject = new Book(data.title, data.author, data.pages, (data.status == "on") ? true : false);
-
+function addBook(bookObject) {
     const book = document.createElement("div");
     book.classList.add("book");
 
