@@ -5,19 +5,21 @@ const addButton = document.querySelector(".add");
 const doneButton = document.querySelector(".done");
 const closeButton = document.querySelector(".close");
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, number) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.number = number;
 }
+let numOfBooks = 0;
 
 addButton.addEventListener("click", triggerFormVisibility);
 
 doneButton.addEventListener("click", () => {
     if(form.checkValidity()) {
         const data = Object.fromEntries(new FormData(form).entries());
-        let bookObject = new Book(data.title, data.author, data.pages, (data.status == "on") ? true : false);
+        let bookObject = new Book(data.title, data.author, data.pages, (data.status == "on") ? true : false, numOfBooks);
         localStorage.books += JSON.stringify(bookObject) + "~";
         addBook(bookObject);
 
@@ -38,6 +40,8 @@ accessLocalStorage();
 
 function accessLocalStorage() {
     if(localStorage.books) {
+        // localStorage.books = "";
+
         const books = localStorage.books.slice(0, localStorage.books.length-1);
         const booksArray = books.split("~");
         booksArray.forEach((book) => {
@@ -57,6 +61,7 @@ function triggerFormVisibility() {
 function addBook(bookObject) {
     const book = document.createElement("div");
     book.classList.add("book");
+    book.setAttribute("number", bookObject.number);
 
     for (const key in bookObject) {
         if(key == "read") {
@@ -66,6 +71,7 @@ function addBook(bookObject) {
             button.classList.add(bookObject[key] ? "read" : "not-read");
 
             button.addEventListener("click", () => {
+
                 if(button.classList.contains("read")) {
                     button.classList.remove("read");
                     button.classList.add("not-read");
@@ -93,9 +99,25 @@ function addBook(bookObject) {
     button.classList.add("remove");
     button.textContent = "Remove";
     button.addEventListener("click", () => {
+
+        const books = localStorage.books.slice(0, localStorage.books.length-1);
+        const booksArray = books.split("~");
+
+        let i = 0;
+        booksArray.forEach((bookObjectEl) => {
+            const bookObject = JSON.parse(bookObjectEl);
+            if(bookObject.number == book.getAttribute("number")) {
+                const newArray = booksArray.slice(0);
+                newArray.splice(i, 1);
+                localStorage.books = (newArray.length > 0) ? newArray.join("~") + "~" : "";
+            }
+            i++;
+        });
+
         container.removeChild(book);
     });
     book.appendChild(button);
 
     container.appendChild(book);
+    numOfBooks++;
 }
