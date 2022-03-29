@@ -1,90 +1,60 @@
-// const button = document.querySelector(".status");
-
-const addButton = document.querySelector(".add");
 const form = document.querySelector("form");
-const container = document.querySelector(".container");
 
-form.style.visibility = "hidden";
-addButton.addEventListener("click", addBook);
-
-function addBook() {
-    form.style.visibility = "visible";
-    const submitButton = document.querySelector(".done");
-    const closeButton = document.querySelector(".close");
-
-    closeButton.addEventListener("click", () => {
-        form.reset();
-        form.style.visibility = "hidden";
-    });
-
-    submitButton.addEventListener("click", () => {
-        if(form.checkValidity()) {
-            createBookEntry();
-            form.reset();
-            form.style.visibility = "hidden";
-        }
-        else {
-            form.reportValidity();
-        }
-    });
+function Book(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
 }
 
-function createBookEntry() {
+const container = document.querySelector(".container");
+const addButton = document.querySelector(".add");
+addButton.addEventListener("click", triggerFormVisibility);
+
+function triggerFormVisibility() {
+    form.style.visibility = (form.style.visibility == "visible") ? "hidden" : "visible";
+}
+
+const doneButton = document.querySelector(".done");
+const closeButton = document.querySelector(".close");
+
+doneButton.addEventListener("click", () => {
+    if(form.checkValidity()) {
+        addBook();
+
+        form.reset();
+        triggerFormVisibility();
+    }
+    else {
+        form.reportValidity();
+    }
+});
+
+closeButton.addEventListener("click", () => {
+    form.reset();
+    triggerFormVisibility();
+});
+
+function addBook() {
+    const data = Object.fromEntries(new FormData(form).entries());
+    let bookObject = new Book(data.title, data.author, data.pages, (data.status == "on") ? true : false);
+
     const book = document.createElement("div");
     book.classList.add("book");
 
-    const titleInput = document.querySelector("#title");
-    const title = document.createElement("div");
-    title.textContent = "Title: " + titleInput.value;
-    book.appendChild(title);
-
-    let delimiter = document.createElement("div");
-    delimiter.classList.add("delimiter");
-    book.appendChild(delimiter);
-
-    const authorInput = document.querySelector("#author");
-    const author = document.createElement("div");
-    author.textContent = "Author: " + authorInput.value;
-    book.appendChild(author);
-
-    delimiter = document.createElement("div");
-    delimiter.classList.add("delimiter");
-    book.appendChild(delimiter);
-
-    const pagesInput = document.querySelector("#pages");
-    const pages = document.createElement("div");
-    pages.textContent = "Pages: " + pagesInput.value;
-    book.appendChild(pages);
-
-    delimiter = document.createElement("div");
-    delimiter.classList.add("delimiter");
-    book.appendChild(delimiter);
-
-    const statusInput = document.querySelector("#status");
-    const status = document.createElement("button");
-    status.classList.add("status");
-    status.textContent = "Read: ";
-    statusInput.value ? status.classList.add("read") : status.classList.add("not-read");
-
-    status.addEventListener("click", () => {
-        if(status.classList.contains("not-read")) {
-            status.classList.remove("not-read");
-            status.classList.add("read");
+    for (const key in bookObject) {
+        if(key == "read") {
+            break;
         }
-        else {
-            status.classList.remove("read");
-            status.classList.add("not-read");
-        }
-    });
-    book.appendChild(status);
+        
+        const div = document.createElement("div");
+        div.textContent = key[0].toUpperCase() + key.slice(1) + ": " + bookObject[key];
+        book.appendChild(div);
 
-    const remove = document.createElement("button");
-    remove.classList.add("remove");
-    remove.textContent = "Remove";
-    remove.addEventListener("click", () => {
-        container.removeChild(book);
-    });
-    book.appendChild(remove);
+        const delimiter = document.createElement("div");
+        delimiter.classList.add("delimiter");
+        book.appendChild(delimiter);
+    }
 
     container.appendChild(book);
 }
