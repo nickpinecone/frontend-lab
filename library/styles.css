@@ -159,3 +159,24 @@ button[type="button"]:hover {
     display: flex;
     justify-content: space-around;
 }
+
+.book label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book input {
+    width: 100%;
+    margin-left: 4px;
+    padding: 2px;
+    font-size: 1.1rem;
+    border: 0px;
+    outline: 1px solid black;
+    border-radius: 4px;
+}
+
+.book input:disabled {
+    color: black;
+    outline: 0px;
+}

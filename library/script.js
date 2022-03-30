@@ -66,59 +66,116 @@ function addBook(bookObject) {
     book.classList.add("book");
     book.setAttribute("number", bookObject.number);
 
+    createBookData(book, bookObject);
+
+    container.appendChild(book);
+    numOfBooks++;
+    console.log(book);
+}
+
+function createBookData(book, bookObject) {
     for (const key in bookObject) {
         if(key == "read") {
-            const button = document.createElement("button");
-            button.textContent = "Read: ";
-            button.classList.add("status");
-            button.classList.add(bookObject[key] ? "read" : "not-read");
+            const statusButton = document.createElement("button");
+            statusButton.textContent = "Read: ";
+            statusButton.classList.add("status");
+            statusButton.classList.add(bookObject[key] ? "read" : "not-read");
 
-            button.addEventListener("click", () => {
+            statusButton.addEventListener("click", () => changeStatus(statusButton, book));
 
-                if(button.classList.contains("read")) {
-                    button.classList.remove("read");
-                    button.classList.add("not-read");
-                }
-                else {
-                    button.classList.remove("not-read");
-                    button.classList.add("read");
-                }
-
-                const books = localStorage.books.slice(0, localStorage.books.length-1);
-                const booksArray = books.split("~");
-
-                let i = 0;
-                booksArray.forEach((bookObjectEl) => {
-                    const bookObject = JSON.parse(bookObjectEl);
-                    bookObject.read = !bookObject.read;
-
-                    if(bookObject.number == book.getAttribute("number")) {
-                        const newArray = booksArray.slice(0);
-
-                        newArray.splice(i, 1, JSON.stringify(bookObject));
-                        localStorage.books = (newArray.length > 0) ? newArray.join("~") + "~" : "";
-                    }
-                    i++;
-                });
-                });
-
-            book.appendChild(button);
+            book.appendChild(statusButton);
             break;
         }
         
-        const div = document.createElement("div");
-        div.textContent = key[0].toUpperCase() + key.slice(1) + ": " + bookObject[key];
-        book.appendChild(div);
+        const label = document.createElement("label");
+        label.textContent = key[0].toUpperCase() + key.slice(1) + ": ";
+        const div = document.createElement("input");
+        div.classList.add(key);
+        label.appendChild(div);
+
+        div.value = bookObject[key];
+        book.appendChild(label);
+        div.disabled = true;
 
         const delimiter = document.createElement("div");
         delimiter.classList.add("delimiter");
         book.appendChild(delimiter);
     }
 
-    const button = document.createElement("button");
-    button.classList.add("remove");
-    button.textContent = "Remove";
-    button.addEventListener("click", () => {
+    const editButton = document.createElement("button");
+    editButton.classList.add("remove");
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", () => editBook(editButton, book));
+    book.appendChild(editButton);
+
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("remove");
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", () => removeBook(book));
+    book.appendChild(removeButton);
+
+}
+
+function changeStatus(button, book) {
+    if(button.classList.contains("read")) {
+        button.classList.remove("read");
+        button.classList.add("not-read");
+    }
+    else {
+        button.classList.remove("not-read");
+        button.classList.add("read");
+    }
+
+    const books = localStorage.books.slice(0, localStorage.books.length-1);
+    const booksArray = books.split("~");
+
+    let i = 0;
+    booksArray.forEach((bookObjectEl) => {
+        const bookObject = JSON.parse(bookObjectEl);
+        bookObject.read = !bookObject.read;
+
+        if(bookObject.number == book.getAttribute("number")) {
+            const newArray = booksArray.slice(0);
+
+            newArray.splice(i, 1, JSON.stringify(bookObject));
+            localStorage.books = (newArray.length > 0) ? newArray.join("~") + "~" : "";
+        }
+        i++;
+    });
+}
+
+function removeBook(book) {
+    const books = localStorage.books.slice(0, localStorage.books.length-1);
+    const booksArray = books.split("~");
+
+    let i = 0;
+    booksArray.forEach((bookObjectEl) => {
+        const bookObject = JSON.parse(bookObjectEl);
+        if(bookObject.number == book.getAttribute("number")) {
+            const newArray = booksArray.slice(0);
+            newArray.splice(i, 1);
+            localStorage.books = (newArray.length > 0) ? newArray.join("~") + "~" : "";
+        }
+        i++;
+    });
+
+    container.removeChild(book);
+}
+
+function editBook(editButton, book) {
+    const inputs = book.querySelectorAll("input");
+
+    if(editButton.textContent == "Edit") {
+        editButton.textContent = "Done";
+        inputs.forEach((el) => {
+            el.disabled = false;
+        });
+    }
+    else {
+        editButton.textContent = "Edit";
+        inputs.forEach((el) => {
+            el.disabled = true;
+        });
 
         const books = localStorage.books.slice(0, localStorage.books.length-1);
         const booksArray = books.split("~");
@@ -127,18 +184,18 @@ function addBook(bookObject) {
         booksArray.forEach((bookObjectEl) => {
             const bookObject = JSON.parse(bookObjectEl);
             if(bookObject.number == book.getAttribute("number")) {
-                const newArray = booksArray.slice(0);
-                newArray.splice(i, 1);
-                localStorage.books = (newArray.length > 0) ? newArray.join("~") + "~" : "";
+                const newBookObject = new Book(
+                    book.querySelector("input[class=\"title\"]").value, 
+                    book.querySelector("input[class=\"author\"]").value, 
+                    book.querySelector("input[class=\"pages\"]").value, 
+                    book.querySelector(".status").classList.contains("read") ? true : false, 
+                    Number(book.getAttribute("number"))
+                );
+
+                booksArray.splice(i, 1, JSON.stringify(newBookObject));
+                localStorage.books = booksArray.join("~") + "~";
             }
             i++;
         });
-
-        container.removeChild(book);
-    });
-    book.appendChild(button);
-
-    container.appendChild(book);
-    numOfBooks++;
-    console.log(book);
+    }
 }
