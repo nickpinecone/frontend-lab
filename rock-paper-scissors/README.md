@@ -1,5 +1,6 @@
 # rock-paper-scissors
 A cool and original game
 
-## Links
-[Odin Project](https://www.theodinproject.com)
+[Live Demo](https://threedotsellipsis.github.io/rock-paper-scissors/)
+
+Made for the [Odin Project](https://www.theodinproject.com)
