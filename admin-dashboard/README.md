@@ -1,5 +1,6 @@
 # admin-dashboard
 A place to easily manage your daily activities and monitor useful statistics
 
-## Links
-[Odin Project](https://www.theodinproject.com)
+[Live Demo](https://threedotsellipsis.github.io/admin-dashboard/)
+
+Made for the [Odin Project](https://www.theodinproject.com)
