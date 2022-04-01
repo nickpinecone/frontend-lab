@@ -1,5 +1,6 @@
 # landing-page
 Yet again, impressing you with a beautiful landing page
 
-## Links
-[Odin Project](https://www.theodinproject.com)
+[Live Demo](https://threedotsellipsis.github.io/landing-page/)
+
+Made for the [Odin Project](https://www.theodinproject.com)
