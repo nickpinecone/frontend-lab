@@ -1,6 +1,6 @@
 # library
 Your personal library, throw those physical books in the trash, manage them online
 
+[Live Demo](https://threedotsellipsis.github.io/library/)
 
-## Links
-[Odin Project](https://www.theodinproject.com)
+Made for the [Odin Project](https://www.theodinproject.com)
