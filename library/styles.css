@@ -53,11 +53,12 @@ button.add:hover,
     width: 80vw;
     display: grid;
     gap: 32px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 }
 
 .book {
-    min-width: 250px;
+    box-sizing: border-box;
+    width: 400px;
     background-color: white;
     color: black;
     font-size: 1.1rem;
@@ -117,9 +118,9 @@ form {
     flex-flow: column nowrap;
     width: fit-content;
     padding: 16px;
-    border: 3px solid var(--main-color);
     border-radius: 8px;
     gap: 16px;
+    border: 3px solid gray;
 }
 
 form > div {
@@ -166,7 +167,7 @@ button[type="button"]:hover {
     align-items: center;
 }
 
-.book input {
+.book textarea {
     width: 100%;
     margin-left: 4px;
     padding: 2px;
@@ -174,9 +175,12 @@ button[type="button"]:hover {
     border: 0px;
     outline: 1px solid black;
     border-radius: 4px;
+
+    height: 1.2rem;
+    resize: none;
 }
 
-.book input:disabled {
+.book textarea:disabled {
     color: black;
     outline: 0px;
 }

@@ -69,6 +69,12 @@ function addBook(bookObject) {
     createBookData(book, bookObject);
 
     container.appendChild(book);
+
+    const inputs = book.querySelectorAll("textarea");
+    inputs.forEach((el) => {
+        el.style.height = el.scrollHeight + "px";
+    });
+
     numOfBooks++;
     console.log(book);
 }
@@ -89,7 +95,13 @@ function createBookData(book, bookObject) {
         
         const label = document.createElement("label");
         label.textContent = key[0].toUpperCase() + key.slice(1) + ": ";
-        const div = document.createElement("input");
+        const div = document.createElement("textarea");
+
+        div.addEventListener("input", () => {
+            div.style.height = "1.2rem";
+            div.style.height = div.scrollHeight + "px";
+        });
+
         div.classList.add(key);
         label.appendChild(div);
 
@@ -163,7 +175,7 @@ function removeBook(book) {
 }
 
 function editBook(editButton, book) {
-    const inputs = book.querySelectorAll("input");
+    const inputs = book.querySelectorAll("textarea");
 
     if(editButton.textContent == "Edit") {
         editButton.textContent = "Done";
@@ -185,9 +197,9 @@ function editBook(editButton, book) {
             const bookObject = JSON.parse(bookObjectEl);
             if(bookObject.number == book.getAttribute("number")) {
                 const newBookObject = new Book(
-                    book.querySelector("input[class=\"title\"]").value, 
-                    book.querySelector("input[class=\"author\"]").value, 
-                    book.querySelector("input[class=\"pages\"]").value, 
+                    book.querySelector("textarea[class=\"title\"]").value, 
+                    book.querySelector("textarea[class=\"author\"]").value, 
+                    book.querySelector("textarea[class=\"pages\"]").value, 
                     book.querySelector(".status").classList.contains("read") ? true : false, 
                     Number(book.getAttribute("number"))
                 );
