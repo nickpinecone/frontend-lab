@@ -1,9 +1,9 @@
 :root {
-    font-size: 64px;
+    font-size: 48px;
 }
 
 button {
-    font-size: 0.4rem;
+    font-size: 0.6rem;
     padding: 4px;
     background-color: white;
     border: 0px;
@@ -14,12 +14,16 @@ button.chosen {
     text-decoration: underline;
 }
 
-button:hover {
+button:disabled {
+    color: black;
+}
+
+button:enabled:hover {
     background-color: black;
     color: white;
 }
 
-button:active {
+button:enabled:active {
     outline-color: white;
 }
 
@@ -62,10 +66,17 @@ body {
 }
 
 .cell {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border: 3px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    gap: 16px;
 }
