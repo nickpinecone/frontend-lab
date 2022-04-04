@@ -1,0 +1,71 @@
+:root {
+    font-size: 64px;
+}
+
+button {
+    font-size: 0.4rem;
+    padding: 4px;
+    background-color: white;
+    border: 0px;
+    outline: 3px solid black;
+}
+
+button.chosen {
+    text-decoration: underline;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+button:active {
+    outline-color: white;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 32px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pvp,
+.pve {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.choice {
+    display: flex;
+    gap: 16px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.cell {
+    width: 200px;
+    height: 200px;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
