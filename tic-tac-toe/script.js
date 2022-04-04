@@ -12,7 +12,20 @@ let state = {
 
     type: Mode.PVP,
 
+    bindEvents: function() {
+        this.pvpButton.addEventListener("click", () => {
+            if(this.type != Mode.PVP) {
+                this.changeMode(Mode.PVP);
+            }
+        });
+        this.pveButton.addEventListener("click", () => {
+            if(this.type != Mode.PVE) {
+                this.changeMode(Mode.PVE);
+            }
+        });
+    },
     changeMode: function(type) {
+        this.type = type;
         this.changeBottomBar(type);
         this.changeTopBar(type);
     },
@@ -27,15 +40,11 @@ let state = {
         }
     },
     changeTopBar(type) {
-        const currentSymbol = document.querySelector(".choice > .chosen");
-        currentSymbol.classList.remove("chosen");
+        this.removeCurrentChosen();
 
         if(type == Mode.PVP) {
             this.pveButton.classList.remove("chosen");
             this.pvpButton.classList.add("chosen");
-
-            const newSymbol = document.querySelector(".pvp > .choice > button:first-child");
-            newSymbol.classList.add("chosen");
         }
         else {
             this.pvpButton.classList.remove("chosen");
@@ -46,17 +55,27 @@ let state = {
                 el.addEventListener("click", (event) => this.chooseSymbol(event));
             });
         }
+
+        const newSymbol = document.querySelector(
+            "." + ((type == Mode.PVP) ? "pvp" : "pve") + " > .choice > button:first-child"
+        );
+        newSymbol.classList.add("chosen");
     },
     chooseSymbol(event) {
+        this.removeCurrentChosen();
+
         event.target.classList.add("chosen");
         this.pveSymbols.forEach((el) => {
             el.disabled = true;
             el.removeEventListener("click", () => {});
         });
     },
+    removeCurrentChosen() {
+        const currentSymbol = document.querySelector(".choice > .chosen");
+        currentSymbol.classList.remove("chosen");
+    },
     getMode: function() {
         return this.type;
     }
 }
-
-state.changeMode(Mode.PVE);
+state.bindEvents();
