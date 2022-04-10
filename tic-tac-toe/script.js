@@ -3,56 +3,43 @@ const Mode = {
     PVE: 1
 }
 
-let state = {
-    player1: document.querySelector(".player1-score"),
-    player2: document.querySelector(".player2-score"),
-    pvpButton: document.querySelector(".pvp > .mode"),
-    pveButton: document.querySelector(".pve > .mode"),
-    pveSymbols: document.querySelectorAll(".pve > .choice > button"),
+let display = (function() {
+    let player1 = document.querySelector(".player1-score");
+    let player2 = document.querySelector(".player2-score");
+    let pvpButton = document.querySelector(".pvp > .mode");
+    let pveButton = document.querySelector(".pve > .mode");
+    let pveSymbols = document.querySelectorAll(".pve > .choice > button");
 
-    type: Mode.PVP,
+     function changeMode(type) {
+        changeBottomBar(type);
+        changeTopBar(type);
+    }
 
-    bindEvents: function() {
-        this.pvpButton.addEventListener("click", () => {
-            if(this.type != Mode.PVP) {
-                this.changeMode(Mode.PVP);
-            }
-        });
-        this.pveButton.addEventListener("click", () => {
-            if(this.type != Mode.PVE) {
-                this.changeMode(Mode.PVE);
-            }
-        });
-    },
-    changeMode: function(type) {
-        this.type = type;
-        this.changeBottomBar(type);
-        this.changeTopBar(type);
-    },
-    changeBottomBar(type) {
+    function changeBottomBar(type) {
         if(type == Mode.PVP) {
-            this.player1.textContent = "Player1: 0";
-            this.player2.textContent = "Player2: 0";
+            player1.textContent = "Player1: 0";
+            player2.textContent = "Player2: 0";
         }
         else {
-            this.player1.textContent = "Player: 0";
-            this.player2.textContent = "Computer: 0";
+            player1.textContent = "Player: 0";
+            player2.textContent = "Computer: 0";
         }
-    },
-    changeTopBar(type) {
-        this.removeCurrentChosen();
+    }
+
+    function changeTopBar(type) {
+        removeCurrentChosen();
 
         if(type == Mode.PVP) {
-            this.pveButton.classList.remove("chosen");
-            this.pvpButton.classList.add("chosen");
+            pveButton.classList.remove("chosen");
+            pvpButton.classList.add("chosen");
         }
         else {
-            this.pvpButton.classList.remove("chosen");
-            this.pveButton.classList.add("chosen");
+            pvpButton.classList.remove("chosen");
+            pveButton.classList.add("chosen");
 
-            this.pveSymbols.forEach((el) => {
+            pveSymbols.forEach((el) => {
                 el.disabled = false;
-                el.addEventListener("click", (event) => this.chooseSymbol(event));
+                el.addEventListener("click", (event) => chooseSymbol(event));
             });
         }
 
@@ -60,22 +47,54 @@ let state = {
             "." + ((type == Mode.PVP) ? "pvp" : "pve") + " > .choice > button:first-child"
         );
         newSymbol.classList.add("chosen");
-    },
-    chooseSymbol(event) {
-        this.removeCurrentChosen();
+    }
+    
+    function chooseSymbol(event) {
+        removeCurrentChosen();
 
         event.target.classList.add("chosen");
-        this.pveSymbols.forEach((el) => {
+        pveSymbols.forEach((el) => {
             el.disabled = true;
             el.removeEventListener("click", () => {});
         });
-    },
-    removeCurrentChosen() {
+    }
+
+    function removeCurrentChosen() {
         const currentSymbol = document.querySelector(".choice > .chosen");
         currentSymbol.classList.remove("chosen");
-    },
-    getMode: function() {
-        return this.type;
     }
-}
+
+    return {changeMode};
+})();
+
+let state = (function() {
+    let pvpButton = document.querySelector(".pvp > .mode");
+    let pveButton = document.querySelector(".pve > .mode");
+
+    let type = Mode.PVP;
+
+    function bindEvents() {
+        pvpButton.addEventListener("click", () => {
+            if(type != Mode.PVP) {
+                changeMode(Mode.PVP);
+            }
+        });
+        pveButton.addEventListener("click", () => {
+            if(type != Mode.PVE) {
+                changeMode(Mode.PVE);
+            }
+        });
+    }
+
+    function changeMode(changeType) {
+        type = changeType;
+        display.changeMode(changeType);
+    }
+
+    function getMode() {
+        return type;
+    }
+
+    return {getMode, changeMode, bindEvents};
+})();
 state.bindEvents();
