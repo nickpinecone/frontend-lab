@@ -132,6 +132,17 @@ let board = (function() {
     let container = document.querySelector(".board");
     let cells = document.querySelectorAll(".cell");
 
+    let board = [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+    ]
+
+    // Caculate the 2d array spot
+    // get number attribute
+    // let row = number // 3
+    // let column = number % 3
+
     function hoverAnimation() {
         cells.forEach((cell) => {
             cell.addEventListener("mouseenter", () => {
