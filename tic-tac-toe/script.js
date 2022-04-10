@@ -3,6 +3,11 @@ const Mode = {
     PVE: 1
 }
 
+const Symbol = {
+    X: 0,
+    O: 1
+}
+
 let display = (function() {
     let player1 = document.querySelector(".player1-score");
     let player2 = document.querySelector(".player2-score");
@@ -38,8 +43,10 @@ let display = (function() {
             pveButton.classList.add("chosen");
 
             pveSymbols.forEach((el) => {
-                el.disabled = false;
-                el.addEventListener("click", (event) => chooseSymbol(event));
+                if(el.textContent == "O"){
+                    el.disabled = false;
+                    el.addEventListener("click", (event) => chooseSymbol(event));
+                }
             });
         }
 
@@ -51,12 +58,12 @@ let display = (function() {
     
     function chooseSymbol(event) {
         removeCurrentChosen();
+        state.changeSymbol(Symbol.O);
 
         event.target.classList.add("chosen");
-        pveSymbols.forEach((el) => {
-            el.disabled = true;
-            el.removeEventListener("click", () => {});
-        });
+        event.target.disabled = true;
+        event.target.removeEventListener("click", () => {});
+
     }
 
     function removeCurrentChosen() {
@@ -72,29 +79,41 @@ let state = (function() {
     let pveButton = document.querySelector(".pve > .mode");
 
     let type = Mode.PVP;
+    let symbol = Symbol.X;
 
     function bindEvents() {
         pvpButton.addEventListener("click", () => {
             if(type != Mode.PVP) {
                 changeMode(Mode.PVP);
+                symbol = Symbol.X;
             }
         });
         pveButton.addEventListener("click", () => {
             if(type != Mode.PVE) {
                 changeMode(Mode.PVE);
+                symbol = Symbol.X;
             }
         });
     }
 
-    function changeMode(changeType) {
-        type = changeType;
-        display.changeMode(changeType);
+    function changeMode(newType) {
+        type = newType;
+        display.changeMode(newType);
+    }
+
+    function changeSymbol(newSymbol) {
+        symbol = newSymbol;
     }
 
     function getMode() {
         return type;
     }
 
-    return {getMode, changeMode, bindEvents};
+    function getSymbol() {
+        return symbol;
+    }
+
+    bindEvents();
+
+    return {getMode, changeMode, getSymbol, changeSymbol, bindEvents};
 })();
-state.bindEvents();
