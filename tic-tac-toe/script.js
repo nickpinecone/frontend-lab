@@ -4,8 +4,8 @@ const Mode = {
 }
 
 const Symbol = {
-    X: 0,
-    O: 1
+    X: "X",
+    O: "O"
 }
 
 let display = (function() {
@@ -37,6 +37,7 @@ let display = (function() {
         if(type == Mode.PVP) {
             pveButton.classList.remove("chosen");
             pvpButton.classList.add("chosen");
+            disableChoosing();
         }
         else {
             pvpButton.classList.remove("chosen");
@@ -66,12 +67,21 @@ let display = (function() {
 
     }
 
+    function disableChoosing() {
+        pveSymbols.forEach((el) => {
+            if(el.textContent == "O"){
+                el.disabled = true;
+                el.removeEventListener("click", () => {});
+            }
+        });
+    }
+
     function removeCurrentChosen() {
         const currentSymbol = document.querySelector(".choice > .chosen");
         currentSymbol.classList.remove("chosen");
     }
 
-    return {changeMode};
+    return {changeMode, disableChoosing};
 })();
 
 let state = (function() {
@@ -115,5 +125,31 @@ let state = (function() {
 
     bindEvents();
 
-    return {getMode, changeMode, getSymbol, changeSymbol, bindEvents};
+    return {getMode, changeMode, getSymbol, changeSymbol};
+})();
+
+let board = (function() {
+    let container = document.querySelector(".board");
+    let cells = document.querySelectorAll(".cell");
+
+    function hoverAnimation() {
+        cells.forEach((cell) => {
+            cell.addEventListener("mouseenter", () => {
+                cell.textContent = state.getSymbol();
+                cell.style.color = "gray";
+            });
+            cell.addEventListener("mouseleave", () => {
+                cell.textContent = "";
+                cell.style.color = "black";
+            });
+            cell.addEventListener("click", () => {
+                cell.textContent = state.getSymbol();
+                cell.style.color = "black";
+                cell.removeEventListener("mouseleave", () => {});
+                display.disableChoosing();
+            });
+        });
+    }
+
+    hoverAnimation();
 })();

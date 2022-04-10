@@ -80,3 +80,7 @@ body {
     font-size: 0.6rem;
     gap: 16px;
 }
+
+#result {
+    font-weight: bold;
+}
