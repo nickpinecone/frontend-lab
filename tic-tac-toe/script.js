@@ -24,12 +24,12 @@ let display = (function() {
 
     function changeBottomBar(type) {
         if(type == Mode.PVP) {
-            player1.textContent = "Player1: 0";
-            player2.textContent = "Player2: 0";
+            player1.textContent = "Player-X: 0";
+            player2.textContent = "Player-O: 0";
         }
         else {
-            player1.textContent = "Player: 0";
-            player2.textContent = "Computer: 0";
+            player1.textContent = "Player-X: 0";
+            player2.textContent = "Computer-O: 0";
         }
     }
 
@@ -67,15 +67,14 @@ let display = (function() {
 
     function resultButtonClicked() {
         board.clearBoard();
-        resultButton.hidden = true;
-        resultButton.textContent = "";
-        resultButton.removeEventListener("click", resultButtonClicked);
-
+        hideResultMessage();
         (state.getSymbol() == Symbol.X) ? state.changeSymbol(Symbol.O) : state.changeSymbol(Symbol.X);
     }
 
     function hideResultMessage() {
-        resultButton.click();
+        resultButton.hidden = true;
+        resultButton.textContent = "";
+        resultButton.removeEventListener("click", resultButtonClicked);
     }
 
     function highlightSymbol(symbol) {
@@ -90,7 +89,6 @@ let display = (function() {
     }
 
     function chooseSymbol(event) {
-        removeCurrentChosen();
         state.changeSymbol(Symbol.O);
 
         event.target.classList.add("chosen");
@@ -147,6 +145,19 @@ let board = (function() {
 
     function bindEvents() {
         cells.forEach((cell) => {
+            cell.addEventListener("mouseenter", () => {
+                if(!(cell.classList.contains("occupied"))) {
+                    cell.textContent = state.getSymbol();
+                    cell.style.color = "gray";
+                }
+            });
+
+            cell.addEventListener("mouseleave", () => {
+                if(!(cell.classList.contains("occupied"))) {
+                    cell.textContent = "";
+                }
+            });
+
             cell.addEventListener("click", () => {
                 if(!(cell.classList.contains("occupied"))) {
                     let number = Number(cell.getAttribute("number"));
@@ -154,6 +165,7 @@ let board = (function() {
                     let column = number % 3;
                     board[row][column] = state.getSymbol();
     
+                    cell.style.color = "black";
                     cell.textContent = state.getSymbol();
                     cell.classList.add("occupied");
                     display.disableChoosing();
@@ -283,7 +295,7 @@ let state = (function() {
 
     function changeMode(newType) {
         type = newType;
-        changeSymbol(Symbol.X);
+        symbol = Symbol.X;
         resetScore();
         board.clearBoard();
         display.changeMode(newType);
