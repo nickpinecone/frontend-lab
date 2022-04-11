@@ -15,6 +15,7 @@ let display = (function() {
     let pveButton = document.querySelector(".pve > .mode");
     let pveSymbols = document.querySelectorAll(".pve > .choice > button");
     let pvpSymbols = document.querySelectorAll(".pvp > .choice > button");
+    let resultButton = document.querySelector("#result");
 
      function changeMode(type) {
         changeBottomBar(type);
@@ -58,6 +59,17 @@ let display = (function() {
         newSymbol.classList.add("chosen");
     }
     
+    function showDrawMessage() {
+        resultButton.hidden = false;
+        resultButton.textContent = "Draw";
+        resultButton.addEventListener("click", () => {
+            board.clearBoard();
+            resultButton.hidden = true;
+            resultButton.textContent = "";
+            resultButton.removeEventListener("clikc", arguments.callee);
+        });
+    }
+
     function highlightSymbol(symbol) {
         let currentMode = (state.getMode() == Mode.PVE) ? pveSymbols : pvpSymbols;
 
@@ -108,7 +120,11 @@ let display = (function() {
         updateSecondScore(0);
     }
 
-    return {changeMode, disableChoosing, resetScore, updateFirstScore, updateSecondScore, highlightSymbol};
+    return {
+        changeMode, disableChoosing, resetScore, 
+        updateFirstScore, updateSecondScore, highlightSymbol,
+        showDrawMessage,
+    };
 })();
 
 let board = (function() {
@@ -121,25 +137,53 @@ let board = (function() {
         ["", "", ""]
     ]
 
-    // Caculate the 2d array spot
-    // get number attribute
-    // let row = number // 3
-    // let column = number % 3
-
-    function hoverAnimation() {
+    function bindEvents() {
         cells.forEach((cell) => {
             cell.addEventListener("click", () => {
-                cell.textContent = state.getSymbol();
-                cell.style.color = "black";
-                cell.removeEventListener("mouseleave", () => {});
-                display.disableChoosing();
-
-                state.nextTurn();
+                if(!(cell.classList.contains("occupied"))) {
+                    let number = Number(cell.getAttribute("number"));
+                    let row = Math.floor(number / 3);
+                    let column = number % 3;
+                    board[row][column] = state.getSymbol();
+    
+                    cell.textContent = state.getSymbol();
+                    cell.classList.add("occupied");
+                    display.disableChoosing();
+                    state.nextTurn();
+                }
             });
         });
     }
 
-    hoverAnimation();
+    function checkForDraw() {
+        let isDraw = true;
+
+        board.forEach((row) => {
+            row.forEach((column) => {
+                if(column == "") {
+                    isDraw = false;
+                }
+            });
+        });
+
+        return isDraw;
+    }
+
+    function clearBoard() {
+        cells.forEach((cell) => {
+            cell.textContent = "";
+            cell.classList.remove("occupied");
+        });
+        board = [
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""]
+        ]
+    }
+
+    bindEvents();
+
+    return {clearBoard, checkForDraw};
 })();
 
 let state = (function() {
@@ -155,15 +199,11 @@ let state = (function() {
         pvpButton.addEventListener("click", () => {
             if(type != Mode.PVP) {
                 changeMode(Mode.PVP);
-                symbol = Symbol.X;
-                resetScore();
             }
         });
         pveButton.addEventListener("click", () => {
             if(type != Mode.PVE) {
                 changeMode(Mode.PVE);
-                symbol = Symbol.X;
-                resetScore();
             }
         });
     }
@@ -190,6 +230,11 @@ let state = (function() {
     }
 
     function nextTurn() {
+        if(board.checkForDraw()) {
+            display.showDrawMessage();
+            return;
+        }
+
         if(checkForWin()) {
 
         }
@@ -200,6 +245,9 @@ let state = (function() {
 
     function changeMode(newType) {
         type = newType;
+        symbol = Symbol.X;
+        resetScore();
+        board.clearBoard();
         display.changeMode(newType);
     }
 
