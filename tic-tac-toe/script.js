@@ -62,12 +62,20 @@ let display = (function() {
     function showDrawMessage() {
         resultButton.hidden = false;
         resultButton.textContent = "Draw";
-        resultButton.addEventListener("click", () => {
-            board.clearBoard();
-            resultButton.hidden = true;
-            resultButton.textContent = "";
-            resultButton.removeEventListener("clikc", arguments.callee);
-        });
+        resultButton.addEventListener("click", resultButtonClicked);
+    }
+
+    function resultButtonClicked() {
+        board.clearBoard();
+        resultButton.hidden = true;
+        resultButton.textContent = "";
+        resultButton.removeEventListener("click", resultButtonClicked);
+
+        (state.getSymbol() == Symbol.X) ? state.changeSymbol(Symbol.O) : state.changeSymbol(Symbol.X);
+    }
+
+    function hideResultMessage() {
+        resultButton.click();
     }
 
     function highlightSymbol(symbol) {
@@ -123,7 +131,7 @@ let display = (function() {
     return {
         changeMode, disableChoosing, resetScore, 
         updateFirstScore, updateSecondScore, highlightSymbol,
-        showDrawMessage,
+        showDrawMessage, hideResultMessage, 
     };
 })();
 
@@ -169,6 +177,33 @@ let board = (function() {
         return isDraw;
     }
 
+    function checkForWin() {
+        for(let i = 0; i < 3; i++) {
+            if(board[i][0] != "" && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+                return true;
+            }
+        }
+        for(let i = 0; i < 3; i++) {
+            if(board[0][i] != "" && board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
+                return true;
+            }
+        }
+        if(board[0][0] != "" && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+            return true;
+        }
+        else if(board[0][2] != "" && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+            return true;
+        }
+
+        return false;
+    }
+
+    function setAllOccupied() {
+        cells.forEach((cell) => {
+            cell.classList.add("occupied");
+        });
+    }
+
     function clearBoard() {
         cells.forEach((cell) => {
             cell.textContent = "";
@@ -183,7 +218,7 @@ let board = (function() {
 
     bindEvents();
 
-    return {clearBoard, checkForDraw};
+    return {clearBoard, checkForDraw, checkForWin, setAllOccupied};
 })();
 
 let state = (function() {
@@ -225,34 +260,39 @@ let state = (function() {
 
     }
 
-    function checkForWin() {
-        return false;
-    }
-
     function nextTurn() {
-        if(board.checkForDraw()) {
+        if(board.checkForWin()) {
+            if(symbol == Symbol.X) {
+                increaseFirstScore();
+            }
+            else {
+                increaseSecondScore();
+            }
+            display.showDrawMessage();
+            board.setAllOccupied();
+            return;
+        }
+
+        else if(board.checkForDraw()) {
             display.showDrawMessage();
             return;
         }
 
-        if(checkForWin()) {
-
-        }
-        
-        symbol = (symbol == Symbol.X) ? Symbol.O : Symbol.X;
-        display.highlightSymbol(symbol);
+        changeSymbol((symbol == Symbol.X) ? Symbol.O : Symbol.X);
     }
 
     function changeMode(newType) {
         type = newType;
-        symbol = Symbol.X;
+        changeSymbol(Symbol.X);
         resetScore();
         board.clearBoard();
         display.changeMode(newType);
+        display.hideResultMessage();
     }
 
     function changeSymbol(newSymbol) {
         symbol = newSymbol;
+        display.highlightSymbol(symbol);
     }
 
     function getMode() {
