@@ -48,7 +48,7 @@ let display = (function() {
             pveSymbols.forEach((el) => {
                 if(el.textContent == "O"){
                     el.disabled = false;
-                    el.addEventListener("click", (event) => chooseSymbol(event));
+                    el.addEventListener("click", chooseSymbol);
                 }
             });
         }
@@ -59,16 +59,25 @@ let display = (function() {
         newSymbol.classList.add("chosen");
     }
     
-    function showDrawMessage() {
+    function showResultMessage(message) {
         resultButton.hidden = false;
-        resultButton.textContent = "Draw";
+        resultButton.textContent = message;
         resultButton.addEventListener("click", resultButtonClicked);
     }
 
     function resultButtonClicked() {
         board.clearBoard();
         hideResultMessage();
-        (state.getSymbol() == Symbol.X) ? state.changeSymbol(Symbol.O) : state.changeSymbol(Symbol.X);
+        if(state.getSymbol() != Symbol.X && state.getMode() == Mode.PVP) {
+            state.changeSymbol(Symbol.X);
+        }
+        else if(state.getMode() == Mode.PVE && state.getComputerSymbol() == Symbol.O) {
+            state.changeSymbol(Symbol.X);
+        }
+        else if(state.getMode() == Mode.PVE && state.getComputerSymbol() == Symbol.X) {
+            state.changeSymbol(Symbol.O);
+            state.changeComputerSymbol();
+        }
     }
 
     function hideResultMessage() {
@@ -90,10 +99,11 @@ let display = (function() {
 
     function chooseSymbol(event) {
         state.changeSymbol(Symbol.O);
+        state.changeComputerSymbol();
 
         event.target.classList.add("chosen");
         event.target.disabled = true;
-        event.target.removeEventListener("click", () => {});
+        event.target.removeEventListener("click", chooseSymbol);
 
     }
 
@@ -101,7 +111,7 @@ let display = (function() {
         pveSymbols.forEach((el) => {
             if(el.textContent == "O"){
                 el.disabled = true;
-                el.removeEventListener("click", () => {});
+                el.removeEventListener("click", chooseSymbol);
             }
         });
     }
@@ -129,7 +139,7 @@ let display = (function() {
     return {
         changeMode, disableChoosing, resetScore, 
         updateFirstScore, updateSecondScore, highlightSymbol,
-        showDrawMessage, hideResultMessage, 
+        showResultMessage, hideResultMessage, 
     };
 })();
 
@@ -158,21 +168,26 @@ let board = (function() {
                 }
             });
 
-            cell.addEventListener("click", () => {
-                if(!(cell.classList.contains("occupied"))) {
-                    let number = Number(cell.getAttribute("number"));
-                    let row = Math.floor(number / 3);
-                    let column = number % 3;
-                    board[row][column] = state.getSymbol();
-    
-                    cell.style.color = "black";
-                    cell.textContent = state.getSymbol();
-                    cell.classList.add("occupied");
-                    display.disableChoosing();
-                    state.nextTurn();
-                }
-            });
+            cell.addEventListener("click", placeSymbol);
         });
+    }
+
+    function placeSymbol(event) {
+        let cell = event.target;
+
+        if(!(cell.classList.contains("occupied"))) {
+            let number = Number(cell.getAttribute("number"));
+            let row = Math.floor(number / 3);
+            let column = number % 3;
+            board[row][column] = state.getSymbol();
+    
+            cell.style.color = "black";
+            cell.textContent = state.getSymbol();
+            cell.classList.add("occupied");
+            display.disableChoosing();
+
+            state.nextTurn();
+        }
     }
 
     function checkForDraw() {
@@ -228,9 +243,24 @@ let board = (function() {
         ]
     }
 
+    function placeRandom() {
+        let number = Math.floor(Math.random() * 9);
+        let row = Math.floor(number / 3);
+        let column = number % 3;
+
+        while(board[row][column] != "") {
+            number = Math.floor(Math.random() * 9);
+            row = Math.floor(number / 3);
+            column = number % 3;
+        }
+
+        let cell = document.querySelector(`div[number="${number}"]`);
+        cell.click();
+    }
+
     bindEvents();
 
-    return {clearBoard, checkForDraw, checkForWin, setAllOccupied};
+    return {clearBoard, checkForDraw, checkForWin, setAllOccupied, placeRandom};
 })();
 
 let state = (function() {
@@ -241,6 +271,7 @@ let state = (function() {
     let symbol = Symbol.X;
     let score1 = 0;
     let score2 = 0;
+    let computerSymbol = Symbol.O;
 
     function bindEvents() {
         pvpButton.addEventListener("click", () => {
@@ -280,17 +311,26 @@ let state = (function() {
             else {
                 increaseSecondScore();
             }
-            display.showDrawMessage();
+            display.showResultMessage(symbol + " Won");
             board.setAllOccupied();
             return;
         }
 
         else if(board.checkForDraw()) {
-            display.showDrawMessage();
+            display.showResultMessage("Draw");
             return;
         }
 
         changeSymbol((symbol == Symbol.X) ? Symbol.O : Symbol.X);
+
+        if(type == Mode.PVE && symbol == computerSymbol) {
+            board.placeRandom();
+        }
+    }
+
+    function changeComputerSymbol() {
+        computerSymbol = Symbol.X;
+        state.nextTurn();
     }
 
     function changeMode(newType) {
@@ -315,7 +355,11 @@ let state = (function() {
         return symbol;
     }
 
+    function getComputerSymbol() {
+        return computerSymbol;
+    }
+
     bindEvents();
 
-    return {getMode, changeMode, getSymbol, changeSymbol, nextTurn};
+    return {getMode, changeMode, getSymbol, changeSymbol, nextTurn, changeComputerSymbol, getComputerSymbol};
 })();
