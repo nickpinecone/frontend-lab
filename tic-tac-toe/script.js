@@ -101,6 +101,9 @@ let display = (function() {
         state.changeSymbol(Symbol.O);
         state.changeComputerSymbol();
 
+        player1.textContent = "Computer-X: 0";
+        player2.textContent = "Player-O: 0";
+
         event.target.classList.add("chosen");
         event.target.disabled = true;
         event.target.removeEventListener("click", chooseSymbol);
