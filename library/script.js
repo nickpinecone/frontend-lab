@@ -5,13 +5,16 @@ const addButton = document.querySelector(".add");
 const doneButton = document.querySelector(".done");
 const closeButton = document.querySelector(".close");
 
-function Book(title, author, pages, read, number) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.number = number;
+class Book {
+    constructor(title, author, pages, read, number) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.number = number;
+    }
 }
+
 let numOfBooks = 0;
 
 addButton.addEventListener("click", triggerFormVisibility);
