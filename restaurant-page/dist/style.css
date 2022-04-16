@@ -1,0 +1,54 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+:root {
+    --main-color: wheat;
+    --background-color: gray;
+
+    font-size: 24px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+#content {
+    height: inherit;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#content > div {
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    padding: 16px;
+    background-color: var(--background-color);
+    color: var(--main-color);
+}
+
+.image {
+    padding: 16px;
+    background-color: var(--main-color);
+}
+
+.description {
+    background-color: var(--main-color);
+    padding: 16px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.attribution {
+    background-color: var(--background-color);
+}
+
+.attribution > a {
+    color: var(--main-color);
+}
