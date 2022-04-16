@@ -19,6 +19,7 @@ body {
     height: inherit;
     display: flex;
     flex-flow: column nowrap;
+    justify-content: space-between;
 }
 
 #content > div {
@@ -32,17 +33,14 @@ body {
     color: var(--main-color);
 }
 
-.image {
-    padding: 16px;
-    background-color: var(--main-color);
-}
-
 .description {
+    flex: 1;
     background-color: var(--main-color);
     padding: 16px;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    gap: 32px;
 }
 
 .attribution {
