@@ -7,7 +7,8 @@
     --main-color: wheat;
     --background-color: gray;
 
-    font-size: 24px;
+    font-size: 28px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 body {
@@ -44,6 +45,7 @@ body {
 }
 
 .attribution {
+    padding: 4px;
     background-color: var(--background-color);
 }
 
