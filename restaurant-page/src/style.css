@@ -44,6 +44,28 @@ body {
     gap: 32px;
 }
 
+.tabs {
+    background-color: var(--main-color);
+    border-bottom: 8px solid var(--main-color);
+    display: flex;
+    gap: 8px;
+}
+
+.tabs > button {
+    flex: 1;
+    background-color: var(--background-color);
+    border: 0px;
+    font-size: 1rem;
+    padding: 8px;
+    color: var(--main-color);
+}
+
+.tabs > button:hover {
+    color: black;
+    background-color: var(--main-color);
+    outline: 5px solid var(--background-color);
+}
+
 .attribution {
     padding: 4px;
     background-color: var(--background-color);
