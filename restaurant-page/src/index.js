@@ -1,8 +1,8 @@
 import "./style.css";
 
-import showHomePage from "./home";
-import showPiesPage from "./pies";
-import showContactPage from "./contact";
+import showHomePage from "./pages/home";
+import showPiesPage from "./pages/pies";
+import showContactPage from "./pages/contact";
 
 const content = document.querySelector("#content");
 

@@ -82,3 +82,9 @@ body {
 .attribution > a {
     color: var(--main-color);
 }
+
+.grid {
+    background-color: var(--main-color);
+    flex: 1;
+    display: grid;
+}
