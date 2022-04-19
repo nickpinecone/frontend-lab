@@ -66,6 +66,14 @@ body {
     outline: 5px solid var(--background-color);
 }
 
+.tabs > button.chosen::before {
+    content: "--> ";
+}
+
+.tabs > button.chosen::after {
+    content: " <--";
+}
+
 .attribution {
     padding: 4px;
     background-color: var(--background-color);

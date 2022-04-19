@@ -8,7 +8,7 @@ function addBottomBar() {
     {
         const homeButton = document.createElement("button");
         homeButton.textContent = "Home";
-        homeButton.addEventListener("click", showHomePage);
+        homeButton.classList.add("chosen");
         tabs.appendChild(homeButton);
 
         const foodButton = document.createElement("button");
