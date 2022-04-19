@@ -1,4 +1,3 @@
-import "./style.css";
 import Logo from "./restaurant.png";
 
 const content = document.querySelector("#content");

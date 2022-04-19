@@ -1,4 +1,8 @@
+import "./style.css";
+
 import showHomePage from "./home";
+import showPiesPage from "./pies";
+import showContactPage from "./contact";
 
 const content = document.querySelector("#content");
 
@@ -20,19 +24,27 @@ function addTabs() {
         const homeButton = document.createElement("button");
         homeButton.textContent = "Home";
         homeButton.classList.add("chosen");
+        tabs.appendChild(homeButton);
         homeButton.addEventListener("click", () => {
             clearPage();
             showHomePage();
         });
-        tabs.appendChild(homeButton);
 
         const foodButton = document.createElement("button");
         foodButton.textContent = "Pies";
         tabs.appendChild(foodButton);
+        foodButton.addEventListener("click", () => {
+            clearPage();
+            showPiesPage();
+        });
 
         const contactButton = document.createElement("button");
         contactButton.textContent = "Contact";
         tabs.appendChild(contactButton);
+        contactButton.addEventListener("click", () => {
+            clearPage();
+            showContactPage();
+        });
 
     }
     content.appendChild(tabs);
