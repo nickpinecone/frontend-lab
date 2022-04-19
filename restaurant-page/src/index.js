@@ -2,13 +2,28 @@ import showHomePage from "./home";
 
 const content = document.querySelector("#content");
 
-function addBottomBar() {
+function clearPage() {
+    Array.from(content.children).forEach((elem) => {
+        if(elem.classList.contains("tabs")) {
+            return;
+        }
+        else {
+            content.removeChild(elem);
+        }
+    });
+}
+
+function addTabs() {
     const tabs = document.createElement("div");
     tabs.classList.add("tabs");
     {
         const homeButton = document.createElement("button");
         homeButton.textContent = "Home";
         homeButton.classList.add("chosen");
+        homeButton.addEventListener("click", () => {
+            clearPage();
+            showHomePage();
+        });
         tabs.appendChild(homeButton);
 
         const foodButton = document.createElement("button");
@@ -21,18 +36,7 @@ function addBottomBar() {
 
     }
     content.appendChild(tabs);
-
-    const attribution = document.createElement("div");
-    attribution.classList.add("attribution");
-    {
-        const a = document.createElement("a");
-        a.href = "https://www.flaticon.com/free-icons/restaurant";
-        a.title = "restaurant icons";
-        a.textContent = "Restaurant icons created by Freepik";
-        attribution.appendChild(a);
-    }
-    content.appendChild(attribution);
 }
 
+addTabs();
 showHomePage();
-addBottomBar();

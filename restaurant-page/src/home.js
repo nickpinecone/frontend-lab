@@ -53,4 +53,15 @@ export default function populatePage() {
         description.appendChild(container);
     }
     content.appendChild(description);
+
+    const attribution = document.createElement("div");
+    attribution.classList.add("attribution");
+    {
+        const a = document.createElement("a");
+        a.href = "https://www.flaticon.com/free-icons/restaurant";
+        a.title = "restaurant icons";
+        a.textContent = "Restaurant icons created by Freepik";
+        attribution.appendChild(a);
+    }
+    content.appendChild(attribution);
 }
