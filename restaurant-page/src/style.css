@@ -12,23 +12,20 @@
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
 }
 
 #content {
-    height: inherit;
+    background-color: var(--main-color);
+    min-height: inherit;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
 }
 
-#content > div {
-    display: flex;
-    justify-content: center;
-}
-
 .title {
+    text-align: center;
     padding: 16px;
     background-color: var(--background-color);
     color: var(--main-color);
@@ -76,6 +73,7 @@ body {
 
 .attribution {
     padding: 4px;
+    text-align: center;
     background-color: var(--background-color);
 }
 
@@ -87,16 +85,20 @@ body {
     background-color: var(--main-color);
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-left: 64px;
+    padding: 32px;
+    row-gap: 64px;
+    column-gap: 96px;
 }
 
-.card {
-    width: 200px;
-    height: 200px;
-}
-
+.card,
 .card > img {
-    width: 200px;
+    width: 300px;
+    height: auto;
+}
+
+.card:hover {
+    scale: 1.1;
     height: auto;
 }
