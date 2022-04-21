@@ -1,12 +1,17 @@
 import CherryPie from "../pies/baked-fresh-cherry-pie.jpg";
+import ChocolatePie from "../pies/bevs-chocolate-pie.jpg";
+import LemonPie from "../pies/grandmas-lemon-meringue-pie.jpg";
+import LimePie from "../pies/key-lime-pie.jpg";
+import CreamPie from "../pies/cream-pie-with-banana.jpg";
+import UnrealPie from "../pies/out-of-this-world-pie.jpg";
 
 const piesNames = [
-    "baked-fresh-cherry-pie",
-    "bevs-chocolate-pie",
-    "cream-pie-with-banana",
-    "grandmas-lemon-meringue-pie",
-    "key-lime-pie",
-    "out-of-this-world-pie"
+    CherryPie,
+    ChocolatePie,
+    LemonPie,
+    LimePie,
+    CreamPie,
+    UnrealPie
 ]
 
 const content = document.querySelector("#content");
@@ -28,7 +33,7 @@ export default function showPiesPage() {
             const card = document.createElement("div");
             card.classList.add("card");
             const image = document.createElement("img");
-            image.src = CherryPie;
+            image.src = pie;
             card.appendChild(image);
             grid.appendChild(card);
         }
