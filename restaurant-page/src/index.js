@@ -5,8 +5,11 @@ import showPiesPage from "./pages/pies";
 import showContactPage from "./pages/contact";
 
 const content = document.querySelector("#content");
+let chosen = null;
 
 function clearPage() {
+    chosen.classList.remove("chosen");
+
     Array.from(content.children).forEach((elem) => {
         if(elem.classList.contains("tabs")) {
             return;
@@ -23,11 +26,17 @@ function addTabs() {
     {
         const homeButton = document.createElement("button");
         homeButton.textContent = "Home";
+
         homeButton.classList.add("chosen");
+        chosen = homeButton;
+
         tabs.appendChild(homeButton);
         homeButton.addEventListener("click", () => {
             clearPage();
             showHomePage();
+            
+            homeButton.classList.add("chosen");
+            chosen = homeButton;
         });
 
         const foodButton = document.createElement("button");
@@ -36,6 +45,9 @@ function addTabs() {
         foodButton.addEventListener("click", () => {
             clearPage();
             showPiesPage();
+
+            foodButton.classList.add("chosen");
+            chosen = foodButton;
         });
 
         const contactButton = document.createElement("button");
@@ -44,6 +56,9 @@ function addTabs() {
         contactButton.addEventListener("click", () => {
             clearPage();
             showContactPage();
+
+            contactButton.classList.add("chosen");
+            chosen = contactButton;
         });
 
     }
