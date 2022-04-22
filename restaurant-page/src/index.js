@@ -5,10 +5,16 @@ import showPiesPage from "./pages/pies";
 import showContactPage from "./pages/contact";
 
 const content = document.querySelector("#content");
-let chosen = null;
+let tabInfo = [
+    {name: "Home", show: showHomePage},
+    {name: "Pies", show: showPiesPage},
+    {name: "Contact", show: showContactPage}
+]
+let tabButtons = [];
+let currentPage;
 
 function clearPage() {
-    chosen.classList.remove("chosen");
+    currentPage.classList.remove("chosen");
 
     Array.from(content.children).forEach((elem) => {
         if(elem.classList.contains("tabs")) {
@@ -20,50 +26,33 @@ function clearPage() {
     });
 }
 
-function addTabs() {
+(function addTabs() {
     const tabs = document.createElement("div");
     tabs.classList.add("tabs");
-    {
-        const homeButton = document.createElement("button");
-        homeButton.textContent = "Home";
 
-        homeButton.classList.add("chosen");
-        chosen = homeButton;
+    for(let i = 0; i < 3; i++) {
+        const tab = document.createElement("button");
+        tab.textContent = tabInfo[i].name;
+        tabs.appendChild(tab);
+        tabButtons.push(tab);
 
-        tabs.appendChild(homeButton);
-        homeButton.addEventListener("click", () => {
-            clearPage();
-            showHomePage();
-            
-            homeButton.classList.add("chosen");
-            chosen = homeButton;
+        if(i == 0) {
+            tab.classList.add("chosen");
+            currentPage = tabButtons[i];
+        }
+
+        tab.addEventListener("click", () => {
+            if(currentPage != tab) {
+                clearPage();
+                tabInfo[i].show();
+
+                tab.classList.add("chosen");
+                currentPage = tab;
+            }
         });
-
-        const foodButton = document.createElement("button");
-        foodButton.textContent = "Pies";
-        tabs.appendChild(foodButton);
-        foodButton.addEventListener("click", () => {
-            clearPage();
-            showPiesPage();
-
-            foodButton.classList.add("chosen");
-            chosen = foodButton;
-        });
-
-        const contactButton = document.createElement("button");
-        contactButton.textContent = "Contact";
-        tabs.appendChild(contactButton);
-        contactButton.addEventListener("click", () => {
-            clearPage();
-            showContactPage();
-
-            contactButton.classList.add("chosen");
-            chosen = contactButton;
-        });
-
     }
-    content.appendChild(tabs);
-}
 
-addTabs();
+    content.appendChild(tabs);
+})();
+
 showHomePage();
