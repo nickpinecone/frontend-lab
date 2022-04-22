@@ -1,4 +1,4 @@
-import {addTitle, addAttribution} from "./home";
+import {addTitle, addAttribution} from "../utils";
 
 import CherryPie from "../pies/baked-fresh-cherry-pie.jpg";
 import ChocolatePie from "../pies/bevs-chocolate-pie.jpg";

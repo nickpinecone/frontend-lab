@@ -1,4 +1,4 @@
-import {createList, addTitle} from "./home";
+import {addTitle, createList} from "../utils";
 
 const content = document.querySelector("#content");
 
