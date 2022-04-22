@@ -5,22 +5,13 @@ import LimePie from "../pies/key-lime-pie.jpg";
 import CreamPie from "../pies/cream-pie-with-banana.jpg";
 import UnrealPie from "../pies/out-of-this-world-pie.jpg";
 
-const Pies = [
-    CherryPie,
-    ChocolatePie,
-    LemonPie,
-    LimePie,
-    CreamPie,
-    UnrealPie
-]
-
-const PiesNames = [
-    "Baked Fresh Cherry Pie",
-    "Bevs Chocolate Pie",
-    "Grandmas Lemon Meringue Pie",
-    "Key Lime Pie",
-    "Cream Pie With Banana",
-    "Out Of This World Pie"
+const pies = [
+    {name: "Baked Fresh Cherry Pie", path: CherryPie},
+    {name: "Bevs Chocolate Pie", path: ChocolatePie},
+    {name: "Grandmas Lemon Meringue Pie", path: LemonPie},
+    {name: "Key Lime Pie", path: LimePie},
+    {name: "Cream Pie With Banana", path: CreamPie},
+    {name: "Out Of This World Pie", path: UnrealPie}
 ]
 
 const content = document.querySelector("#content");
@@ -38,15 +29,15 @@ export default function showPiesPage() {
     const grid = document.createElement("div");
     grid.classList.add("grid");
     {
-        for(let i in Pies) {
+        for(let i in pies) {
             const card = document.createElement("div");
             card.classList.add("card");
             const image = document.createElement("img");
-            image.src = Pies[i];
+            image.src = pies[i].path;
             card.appendChild(image);
 
             const text = document.createElement("div");
-            text.textContent = PiesNames[i];
+            text.textContent = pies[i].name;
             card.appendChild(text);
 
             grid.appendChild(card);

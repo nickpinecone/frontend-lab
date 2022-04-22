@@ -26,11 +26,11 @@ function clearPage() {
     });
 }
 
-(function addTabs() {
+(function initHomePage() {
     const tabs = document.createElement("div");
     tabs.classList.add("tabs");
 
-    for(let i = 0; i < 3; i++) {
+    for(let i in tabInfo) {
         const tab = document.createElement("button");
         tab.textContent = tabInfo[i].name;
         tabs.appendChild(tab);
@@ -53,6 +53,5 @@ function clearPage() {
     }
 
     content.appendChild(tabs);
+    tabInfo[0].show();
 })();
-
-showHomePage();
