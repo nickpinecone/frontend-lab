@@ -1,16 +1,9 @@
-import {createList} from "./home";
+import {createList, addTitle} from "./home";
 
 const content = document.querySelector("#content");
 
 export default function showContactPage() {
-    const title = document.createElement("div");
-    title.classList.add("title");
-    {
-        const heading = document.createElement("h1");
-        heading.textContent = "Contact Us";
-        title.appendChild(heading);
-    }
-    content.appendChild(title);
+    addTitle(content, "Contact Us");
 
     const description = document.createElement("div");
     description.classList.add("description");

@@ -23,16 +23,32 @@ export function createList(description, title, data) {
     description.appendChild(container);
 }
 
-export default function populatePage() {
+export function addTitle(content, name) {
     const title = document.createElement("div");
     title.classList.add("title");
     {
         const heading = document.createElement("h1");
-        heading.textContent = "At Marcel's";
+        heading.textContent = name;
         title.appendChild(heading);
     }
     content.appendChild(title);
-    
+}
+
+export function addAttribution(content, url, text) {
+    const attribution = document.createElement("div");
+    attribution.classList.add("attribution");
+    {
+        const a = document.createElement("a");
+        a.href = url;
+        a.textContent = text;
+        attribution.appendChild(a);
+    }
+    content.appendChild(attribution);
+}
+
+export default function showHomePage() {
+    addTitle(content, "At Marcel's");
+
     const description = document.createElement("div");
     description.classList.add("description");
     {
@@ -48,14 +64,5 @@ export default function populatePage() {
     }
     content.appendChild(description);
 
-    const attribution = document.createElement("div");
-    attribution.classList.add("attribution");
-    {
-        const a = document.createElement("a");
-        a.href = "https://www.flaticon.com/free-icons/restaurant";
-        a.title = "restaurant icons";
-        a.textContent = "Restaurant icons created by Freepik";
-        attribution.appendChild(a);
-    }
-    content.appendChild(attribution);
+    addAttribution(content, "https://www.flaticon.com/free-icons/restaurant", "Restaurant icons created by Freepik");
 }

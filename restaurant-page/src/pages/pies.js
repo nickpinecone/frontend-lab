@@ -1,3 +1,5 @@
+import {addTitle, addAttribution} from "./home";
+
 import CherryPie from "../pies/baked-fresh-cherry-pie.jpg";
 import ChocolatePie from "../pies/bevs-chocolate-pie.jpg";
 import LemonPie from "../pies/grandmas-lemon-meringue-pie.jpg";
@@ -17,14 +19,7 @@ const pies = [
 const content = document.querySelector("#content");
 
 export default function showPiesPage() {
-    const title = document.createElement("div");
-    title.classList.add("title");
-    {
-        const heading = document.createElement("h1");
-        heading.textContent = "Our Delicious Pies";
-        title.appendChild(heading);
-    }
-    content.appendChild(title);
+    addTitle(content, "Our Pies");
 
     const grid = document.createElement("div");
     grid.classList.add("grid");
@@ -45,15 +40,5 @@ export default function showPiesPage() {
     }
     content.appendChild(grid);
 
-
-    const attribution = document.createElement("div");
-    attribution.classList.add("attribution");
-    {
-        const a = document.createElement("a");
-        a.href = "https://www.allrecipes.com/recipes/367/desserts/pies/"
-        a.title = "pies photos";
-        a.textContent = "Pies photos taken from AllRecipes";
-        attribution.appendChild(a);
-    }
-    content.appendChild(attribution);
+    addAttribution(content, "https://www.allrecipes.com/recipes/367/desserts/pies/", "Pies photos taken from AllRecipes");
 }
