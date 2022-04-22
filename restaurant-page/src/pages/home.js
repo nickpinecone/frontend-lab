@@ -2,6 +2,27 @@ import Logo from "../restaurant.png";
 
 const content = document.querySelector("#content");
 
+export function createList(description, title, data) {
+    const container = document.createElement("div");
+
+    const heading = document.createElement("h4");
+    heading.textContent = title;
+    container.appendChild(heading);
+
+    const items = document.createElement("div");
+    const list = document.createElement("ul");
+
+    for(let i in data) {
+        let li = document.createElement("li");
+        li.textContent = data[i];
+        list.appendChild(li);
+    }
+    items.appendChild(list);
+    container.appendChild(items);
+
+    description.appendChild(container);
+}
+
 export default function populatePage() {
     const title = document.createElement("div");
     title.classList.add("title");
@@ -22,34 +43,8 @@ export default function populatePage() {
         const heading = document.createElement("h3");
         heading.textContent = "Best Pies In The World";
         description.appendChild(heading);
-    
-        const container = document.createElement("div");
-        {
-            const heading = document.createElement("h4");
-            heading.textContent = "We Care About Our Customers";
-            container.appendChild(heading);
-    
-            const list = document.createElement("ul");
-            let li = document.createElement("li");
-            li.textContent = "Best Quality";
-            list.appendChild(li);
-            
-            li = document.createElement("li");
-            li.textContent = "Fair Prices";
-            list.appendChild(li);
-    
-            li = document.createElement("li");
-            li.textContent = "Huge Selection";
-            list.appendChild(li);
-    
-            li = document.createElement("li");
-            li.textContent = "Blazingly Fast Delivery";
-            list.appendChild(li);
-            
-    
-            container.appendChild(list);
-        }
-        description.appendChild(container);
+
+        createList(description, "We Care About Our Customers", ["Best Quality", "Fair Prices", "Huge Selection", "Blazingly Fast Delivery"]);
     }
     content.appendChild(description);
 
