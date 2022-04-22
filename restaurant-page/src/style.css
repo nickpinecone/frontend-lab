@@ -25,6 +25,7 @@ body {
 }
 
 .title {
+    border-top: 8px solid var(--main-color);
     text-align: center;
     padding: 16px;
     background-color: var(--background-color);
@@ -43,9 +44,11 @@ body {
 
 .tabs {
     background-color: var(--main-color);
-    border-bottom: 8px solid var(--main-color);
     display: flex;
     gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .tabs > button {
@@ -86,10 +89,10 @@ body {
     flex: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    margin-left: 64px;
     padding: 32px;
     row-gap: 64px;
     column-gap: 96px;
+    justify-items: center;
 }
 
 .card,
