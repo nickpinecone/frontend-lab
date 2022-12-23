@@ -1,0 +1,36 @@
+body {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+body > div {
+    flex: 1;
+}
+
+img {
+    width: 600px;
+    height: auto;
+}
+
+.links {
+    padding-left: 16px;
+}
+
+.links ul {
+    padding: 0px;
+    font-size: 24px;
+    list-style-type: none;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
+}
+
+.links a {
+    color: darkblue;
+}
+
+.content li {
+    margin-bottom: 4px;
+}
+
