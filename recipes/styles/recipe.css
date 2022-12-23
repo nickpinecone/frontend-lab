@@ -2,6 +2,7 @@ body {
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
+    gap: 32px;
 }
 
 body > div {
@@ -11,10 +12,6 @@ body > div {
 img {
     width: 600px;
     height: auto;
-}
-
-.links {
-    padding-left: 16px;
 }
 
 .links ul {
