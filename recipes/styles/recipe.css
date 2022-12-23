@@ -14,8 +14,12 @@ img {
     height: auto;
 }
 
+.links ul,
+.links h2 {
+    padding-left: 16px;
+}
+
 .links ul {
-    padding: 0px;
     font-size: 24px;
     list-style-type: none;
     display: flex;
