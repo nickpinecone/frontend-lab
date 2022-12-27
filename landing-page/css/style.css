@@ -9,6 +9,8 @@ body {
     flex-flow: column nowrap;
     align-items: center;
     background-color: blueviolet;
+    padding: 16px;
+    padding-bottom: 64px;
 }
 
 .alignment-container {
@@ -24,6 +26,7 @@ body {
 
 .links h3 {
     flex: 1;
+    margin: 0px;
 }
 
 
@@ -31,21 +34,29 @@ body {
     display: flex;
     list-style-type: none;
     gap: 16px;
+    margin: 0px;
 }
 
 .description {
     display: flex;
-    gap: 64px;
+    justify-content: space-between;
+    gap: 16px;
 }
 
 .left {
     display: flex;
     flex-flow: column nowrap;
     gap: 8px;
+    width: 40%;
 }
 
 .left h1 {
     margin: 0px;
+}
+
+.left button {
+    align-self: flex-start;
+    padding: 8px 16px;
 }
 
 .right {
@@ -53,4 +64,5 @@ body {
     justify-content: center;
     align-items: center;
     background-color: gray;
+    padding: 64px;
 }
