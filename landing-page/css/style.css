@@ -150,3 +150,15 @@ body {
 .sign-up button {
     padding: 8px 16px;
 }
+
+.footer {
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.footer div {
+    font-size: 14px;
+}
