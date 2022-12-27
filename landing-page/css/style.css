@@ -16,7 +16,7 @@ body {
 .alignment-container {
     display: flex;
     flex-flow: column nowrap;
-    gap: 32px;
+    gap: 64px;
 }
 
 .links {
@@ -65,4 +65,37 @@ body {
     align-items: center;
     background-color: gray;
     padding: 64px;
+}
+
+.info {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.info .container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 48px;
+}
+
+.container .card {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.card .box {
+    width: 96px;
+    height: 96px;
+    border: 3px solid blueviolet;
+    border-radius: 8px;
+}
+
+.card .text {
+    text-align: center;
+    width: 156px;
 }
