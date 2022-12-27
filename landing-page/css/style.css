@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0px;
+}
+
+.header {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background-color: blueviolet;
+}
+
+.alignment-container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 32px;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+}
+
+.links h3 {
+    flex: 1;
+}
+
+
+.links ul {
+    display: flex;
+    list-style-type: none;
+    gap: 16px;
+}
+
+.description {
+    display: flex;
+    gap: 64px;
+}
+
+.left {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 8px;
+}
+
+.left h1 {
+    margin: 0px;
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+}
