@@ -72,6 +72,7 @@ body {
     flex-flow: column nowrap;
     align-items: center;
     gap: 16px;
+    padding-bottom: 64px;
 }
 
 .info .container {
@@ -98,4 +99,30 @@ body {
 .card .text {
     text-align: center;
     width: 156px;
+}
+
+.quote {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background-color: lightgray;
+    padding: 64px 32px;
+}
+
+.quote .container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
+    max-width: 720px;
+}
+
+.quote .text {
+    font-size: 24px;
+
+}
+
+.quote .author {
+    align-self: flex-end;
+    font-size: 24px;
+    font-weight: bold;
 }
