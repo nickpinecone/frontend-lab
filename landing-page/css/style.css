@@ -103,7 +103,7 @@ body {
 
 .quote {
     display: flex;
-    flex-flow: column nowrap;
+    justify-content: center;
     align-items: center;
     background-color: lightgray;
     padding: 64px 32px;
@@ -113,7 +113,7 @@ body {
     display: flex;
     flex-flow: column nowrap;
     gap: 16px;
-    max-width: 720px;
+    flex: 0 1 720px;
 }
 
 .quote .text {
@@ -125,4 +125,28 @@ body {
     align-self: flex-end;
     font-size: 24px;
     font-weight: bold;
+}
+
+.sign-up {
+    display: flex;
+    padding: 64px 16px;
+    justify-content: center;
+}
+
+.sign-up .container {
+    display: flex;
+    justify-content: space-between;
+    flex: 0 1 930px;
+    gap: 32px;
+    padding: 32px 64px;
+    background-color: blueviolet;
+    border-radius: 8px;
+}
+
+.agitation .subtext {
+    font-size: 12px;
+}
+
+.sign-up button {
+    padding: 8px 16px;
 }
