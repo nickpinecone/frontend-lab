@@ -1,3 +1,8 @@
+let buttons = document.querySelectorAll("button")
+let displayHuman = document.querySelector(".display-human")
+let displayComputer = document.querySelector(".display-computer")
+let announce = document.querySelector(".announce")
+
 let choices = ["rock", "paper", "scissors"]
 
 function getComputerChoice() {
@@ -37,4 +42,16 @@ function game() {
     }
 }
 
-game()
+function buttonPressed(event) {
+    displayHuman.textContent = this.id;
+    displayComputer.textContent = getComputerChoice();
+
+    let result = playRound(displayHuman.textContent, displayComputer.textContent);
+
+    announce.textContent = result;
+}
+
+buttons.forEach((button) => {
+    button.addEventListener("click", buttonPressed);
+});
+

@@ -1,0 +1,31 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 32px;
+}
+
+.ui,
+.display {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    gap: 64px;
+}
+
+.display {
+    gap: 0px;
+}
+
+.announce {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
