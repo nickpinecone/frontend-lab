@@ -34,15 +34,25 @@ body {
     flex: 4;
 }
 
-.container > #vs-sign {
-    align-self: center;
+.container > #middle {
+    /* align-self: center; */
     flex: 1;
 }
 
-#vs-sign {
+#middle {
+    display: flex;
+    flex-flow: column nowrap;
     text-align: center;
     font-size: 24px;
 }
+
+#middle > div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .left,
 .right {
@@ -67,14 +77,14 @@ body {
     border-bottom: none;
 }
 
-.buttons > button {
+button {
     font-size: 24px;
     background-color: lightgray;
     border: 1px solid gray;
     border-radius: 4px;
 }
 
-.buttons > button:hover {
+button:hover {
     background-color: gray;
     color: white;
 }
