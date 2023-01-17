@@ -48,21 +48,34 @@ body {
 .right {
     display: flex;
     flex-flow: column nowrap;
-    gap: 32px;
     justify-content: space-between;
-    align-items: center;
     background-color: darkgray;
     border-radius: 8px;
-    padding: 16px;
     font-size: 24px;
 }
 
 .left > div,
 .right > div {
     flex: 1;
+    text-align: center;
+    padding: 32px;
+    border-bottom: 1px groove gray;
+}
+
+.left > div:last-child,
+.right > div:last-child {
+    border-bottom: none;
 }
 
 .buttons > button {
     font-size: 24px;
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.buttons > button:hover {
+    background-color: gray;
+    color: white;
 }
 
