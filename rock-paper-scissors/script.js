@@ -1,12 +1,16 @@
-let buttons = document.querySelectorAll("button")
-let displayHuman = document.querySelector(".display-human")
-let displayComputer = document.querySelector(".display-computer")
-let announce = document.querySelector(".announce")
+let buttons = document.querySelectorAll(".buttons > button");
+let displayHuman = document.querySelector(".display-human");
+let displayComputer = document.querySelector(".display-computer");
+let announce = document.querySelector(".announce");
+let humanScore = document.querySelector(".human-score");
+let computerScore = document.querySelector(".computer-score");
 
-let choices = ["rock", "paper", "scissors"]
+let choices = ["rock", "paper", "scissors"];
+let humanScoreCount = 0
+let computerScoreCount = 0
 
 function getComputerChoice() {
-    let randomChoice = Math.floor(Math.random() * 3)
+    let randomChoice = Math.floor(Math.random() * 3);
 
     return choices[randomChoice];
 }
@@ -20,25 +24,10 @@ function playRound(playerSelection, computerChoice) {
         (playerSelection == "paper" && computerChoice == "rock") ||
         (playerSelection == "scissors" && computerChoice == "paper")
     ) {
-        return "win"
+        return "win";
     }
     else {
-        return "lose"
-    }
-}
-
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = "";
-
-        while (!choices.find((value, index, obj) => value == playerSelection)) {
-            playerSelection = prompt("Choose your weapon (rock, paper, scissors): ");
-            continue
-        }
-
-        let computerChoice = getComputerChoice();
-
-        console.log(playRound(playerSelection, computerChoice));
+        return "lose";
     }
 }
 
@@ -49,6 +38,15 @@ function buttonPressed(event) {
     let result = playRound(displayHuman.textContent, displayComputer.textContent);
 
     announce.textContent = result;
+
+    if (result == "win") {
+        humanScoreCount += 1;
+        humanScore.textContent = "Your Score: " + humanScoreCount;
+    }
+    else if (result == "lose") {
+        computerScoreCount += 1;
+        computerScore.textContent = "Computer Score: " + computerScoreCount;
+    }
 }
 
 buttons.forEach((button) => {
