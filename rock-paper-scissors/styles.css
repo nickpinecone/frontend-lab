@@ -1,31 +1,68 @@
-
 body {
     display: flex;
+    flex-flow: column nowrap;
+    margin: 0px;
+    height: 100vh;
+}
+
+.title,
+.footer {
+    display: flex;
     justify-content: center;
-    align-content: center;
+    padding: 16px;
+    background-color: gray;
+    font-size: 32px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    background-color: lightgray;
+    height: 100%;
+    align-items: center;
 }
 
 .container {
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    flex: 1;
+    max-width: 1000px;
+}
+
+.container > div {
+    flex: 4;
+}
+
+.container > #vs-sign {
+    align-self: center;
+    flex: 1;
+}
+
+#vs-sign {
+    text-align: center;
+    font-size: 24px;
+}
+
+.left,
+.right {
     display: flex;
     flex-flow: column nowrap;
     gap: 32px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: darkgray;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 24px;
 }
 
-.ui,
-.display {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    gap: 64px;
+.left > div,
+.right > div {
+    flex: 1;
 }
 
-.display {
-    gap: 0px;
-}
-
-.announce {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
+.buttons > button {
+    font-size: 24px;
 }
 
