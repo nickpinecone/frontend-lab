@@ -4,6 +4,7 @@ let displayComputer = document.querySelector(".display-computer");
 let announce = document.querySelector(".announce");
 let humanScore = document.querySelector(".human-score");
 let computerScore = document.querySelector(".computer-score");
+let restartButton = document.querySelector(".restart-button")
 
 let choices = ["rock", "paper", "scissors"];
 let humanScoreCount = 0
@@ -31,6 +32,13 @@ function playRound(playerSelection, computerChoice) {
     }
 }
 
+function updateScore(newHumanScore, newComputerScore) {
+    humanScoreCount = newHumanScore;
+    computerScoreCount = newComputerScore;
+    humanScore.textContent = "Your Score: " + humanScoreCount;
+    computerScore.textContent = "Computer Score: " + computerScoreCount;
+}
+
 function buttonPressed(event) {
     displayHuman.textContent = this.id;
     displayComputer.textContent = getComputerChoice();
@@ -40,16 +48,23 @@ function buttonPressed(event) {
     announce.textContent = result;
 
     if (result == "win") {
-        humanScoreCount += 1;
-        humanScore.textContent = "Your Score: " + humanScoreCount;
+        updateScore(humanScoreCount + 1, computerScoreCount);
     }
     else if (result == "lose") {
-        computerScoreCount += 1;
-        computerScore.textContent = "Computer Score: " + computerScoreCount;
+        updateScore(humanScoreCount, computerScoreCount + 1);
     }
+}
+
+function resetGame() {
+    updateScore(0, 0);
+    displayHuman.textContent = "rock";
+    displayComputer.textContent = "rock";
+    announce.textContent = "draw";
 }
 
 buttons.forEach((button) => {
     button.addEventListener("click", buttonPressed);
 });
+
+restartButton.addEventListener("click", resetGame);
 
