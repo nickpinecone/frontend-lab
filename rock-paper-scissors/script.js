@@ -14,6 +14,18 @@ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function getEmoji(word) {
+    if (word == "rock") {
+        return "✊";
+    }
+    else if (word == "paper") {
+        return "✋";
+    }
+    else {
+        return "🖖";
+    }
+}
+
 function getComputerChoice() {
     let randomChoice = Math.floor(Math.random() * 3);
 
@@ -49,8 +61,8 @@ function buttonPressed(event) {
 
     let result = playRound(humanChoice, computerChoice);
 
-    displayHuman.textContent = capitalize(humanChoice);
-    displayComputer.textContent = capitalize(computerChoice);
+    displayHuman.textContent = getEmoji(humanChoice);
+    displayComputer.textContent = getEmoji(computerChoice);
 
     announce.textContent = capitalize(result);
 

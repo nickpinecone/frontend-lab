@@ -75,6 +75,11 @@ body {
     border-bottom: none;
 }
 
+.display-human,
+.display-computer {
+    font-size: 60px;
+}
+
 button {
     font-size: 24px;
     background-color: white;
