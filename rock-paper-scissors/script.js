@@ -10,6 +10,10 @@ let choices = ["rock", "paper", "scissors"];
 let humanScoreCount = 0
 let computerScoreCount = 0
 
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function getComputerChoice() {
     let randomChoice = Math.floor(Math.random() * 3);
 
@@ -40,12 +44,15 @@ function updateScore(newHumanScore, newComputerScore) {
 }
 
 function buttonPressed(event) {
-    displayHuman.textContent = this.id;
-    displayComputer.textContent = getComputerChoice();
+    let humanChoice = this.id;
+    let computerChoice = getComputerChoice();
 
-    let result = playRound(displayHuman.textContent, displayComputer.textContent);
+    let result = playRound(humanChoice, computerChoice);
 
-    announce.textContent = result;
+    displayHuman.textContent = capitalize(humanChoice);
+    displayComputer.textContent = capitalize(computerChoice);
+
+    announce.textContent = capitalize(result);
 
     if (result == "win") {
         updateScore(humanScoreCount + 1, computerScoreCount);
@@ -57,9 +64,9 @@ function buttonPressed(event) {
 
 function resetGame() {
     updateScore(0, 0);
-    displayHuman.textContent = "rock";
-    displayComputer.textContent = "rock";
-    announce.textContent = "draw";
+    displayHuman.textContent = "Rock";
+    displayComputer.textContent = "Rock";
+    announce.textContent = "Draw";
 }
 
 buttons.forEach((button) => {
