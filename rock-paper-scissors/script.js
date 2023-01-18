@@ -76,8 +76,8 @@ function buttonPressed(event) {
 
 function resetGame() {
     updateScore(0, 0);
-    displayHuman.textContent = "Rock";
-    displayComputer.textContent = "Rock";
+    displayHuman.textContent = getEmoji("rock");
+    displayComputer.textContent = getEmoji("rock");
     announce.textContent = "Draw";
 }
 
