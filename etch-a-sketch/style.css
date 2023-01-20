@@ -2,10 +2,22 @@ body {
     display: flex;
     flex-flow: column nowrap;
     height: 100vh;
+    margin: 0px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex: 1;
+}
+
+.title > h1 {
+    margin: 0px;
 }
 
 .content {
-    flex: 1;
+    flex: 4;
     display: flex;
     flex-flow: row nowrap;
 }
@@ -14,16 +26,43 @@ body {
     flex: 1;
 }
 
+.canvas-container {
+    display: flex;
+    align-items: center;
+}
+
 .canvas {
     width: 640px;
+    height: 640px;
+    border: 1px solid darkgray;
 }
 
 .side-panel {
     display: flex;
-    justify-content: flex-end;
+    flex-flow: column nowrap;
+    align-items: flex-end;
 }
 
 .button-container {
+    flex: 1;
     display: flex;
     flex-flow: column nowrap;
+    justify-content: space-evenly;
+}
+
+.color-buttons,
+.canvas-buttons {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 24px;
+    padding-right: 32px;
+    padding-left: 16px;
+}
+
+.side-panel button {
+    font-size: 28px;
+    padding: 4px;
+    background-color: whitesmoke;
+    border: 1px darkgray solid;
+    border-radius: 4px;
 }
