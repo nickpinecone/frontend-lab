@@ -38,12 +38,13 @@ body {
     border: 1px solid darkgray;
     display: grid;
 
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
+    /* grid-template-columns: repeat(16, 1fr); */
+    /* grid-template-rows: repeat(16, 1fr); */
 }
 
 .cell {
     border: 1px solid lightgray;
+    user-select: none;
 }
 
 .side-panel {
