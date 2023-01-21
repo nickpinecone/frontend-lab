@@ -1,10 +1,17 @@
 let canvas = document.querySelector(".canvas");
 let changeButton = document.querySelector(".change");
+let clearButton = document.querySelector(".clear");
 
 let mouseDown = false;
 
 createGrid(16);
 bindEvents();
+
+function clearCanvas() {
+    canvas.childNodes.forEach((cell) => {
+        cell.style.backgroundColor = "transparent";
+    });
+}
 
 function createGrid(size) {
     canvas.replaceChildren();
@@ -39,6 +46,8 @@ function bindEvents() {
         let size = prompt("Enter new canvas size: ");
         createGrid(size);
     });
+
+    clearButton.addEventListener("click", clearCanvas);
 }
 
 
