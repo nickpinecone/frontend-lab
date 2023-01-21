@@ -36,6 +36,14 @@ body {
     width: 640px;
     height: 640px;
     border: 1px solid darkgray;
+    display: grid;
+
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+}
+
+.cell {
+    border: 1px solid lightgray;
 }
 
 .side-panel {
@@ -72,3 +80,4 @@ body {
     background-color: darkgray;
     color: white;
 }
+
