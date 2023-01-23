@@ -74,6 +74,10 @@ body {
     border-radius: 4px;
 }
 
+.color-buttons button.active {
+    background-color: lightgray;
+}
+
 .side-panel button:hover {
     background-color: darkgray;
     color: white;
