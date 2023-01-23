@@ -1,11 +1,28 @@
 let canvas = document.querySelector(".canvas");
 let changeButton = document.querySelector(".change");
 let clearButton = document.querySelector(".clear");
+let modeButtons = document.querySelectorAll(".color-buttons > button");
 
 let mouseDown = false;
+let paintMode = "normal";
 
 createGrid(16);
 bindEvents();
+
+function paintCell(cell) {
+    if (paintMode == "normal") {
+
+    }
+    else if (paintMode == "rainbow") {
+
+    }
+    else if (paintMode == "shading") {
+
+    }
+    else if (paintMode == "eraser") {
+
+    }
+}
 
 function clearCanvas() {
     canvas.childNodes.forEach((cell) => {
@@ -21,12 +38,10 @@ function createGrid(size) {
             let cell = document.createElement("div");
             cell.classList.add("cell");
 
-            cell.addEventListener("mousedown", () => {
-                cell.style.backgroundColor = "black";
-            });
-            cell.addEventListener("mouseover", () => {
+            cell.addEventListener("mousedown", (event) => paintCell(event.target));
+            cell.addEventListener("mouseover", (event) => {
                 if (mouseDown) {
-                    cell.style.backgroundColor = "black";
+                    paintCell(event.target)
                 }
             });
 
@@ -43,11 +58,17 @@ function bindEvents() {
     window.addEventListener("mouseup", () => mouseDown = false);
 
     changeButton.addEventListener("click", () => {
-        let size = prompt("Enter new canvas size: ");
+        let size = prompt("Enter New Canvas Size: ");
         createGrid(size);
     });
 
     clearButton.addEventListener("click", clearCanvas);
+
+    modeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            paintMode = button.id;
+        });
+    });
 }
 
 
