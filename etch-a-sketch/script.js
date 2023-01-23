@@ -74,7 +74,12 @@ function bindEvents() {
     window.addEventListener("mouseup", () => mouseDown = false);
 
     changeButton.addEventListener("click", () => {
-        let size = prompt("Enter New Canvas Size: ");
+        let size = 65;
+
+        while (size > 64 || size <= 0) {
+            size = prompt("Enter New Canvas Size (1 - 64): ");
+        }
+
         createGrid(size);
     });
 
