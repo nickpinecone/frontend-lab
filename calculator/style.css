@@ -63,7 +63,8 @@ body {
     background-color: violet;
 }
 
-.buttons > .number {
+.buttons > .number,
+.buttons > .point {
     background-color: skyblue;
 }
 
