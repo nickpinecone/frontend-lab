@@ -65,5 +65,23 @@ buttons.forEach((button) => {
                 operatorNode.textContent = "";
             }
         }
+
+        else if (button.classList.contains("clear")) {
+            numberOne.textContent = "";
+            numberTwo.textContent = "";
+            operatorNode.textContent = "";
+        }
+
+        else if (button.classList.contains("delete")) {
+            if (numberTwo.textContent != "") {
+                numberTwo.textContent = numberTwo.textContent.slice(0, numberTwo.textContent.length - 1);
+            }
+            else if (operatorNode.textContent != "") {
+                operatorNode.textContent = "";
+            }
+            else if (numberOne.textContent != "") {
+                numberOne.textContent = numberOne.textContent.slice(0, numberOne.textContent.length - 1);
+            }
+        }
     });
 });
