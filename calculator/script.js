@@ -36,6 +36,14 @@ function isNumberEmpty(numberNode) {
     return numberNode.textContent == "" || numberNode.textContent == "-";
 }
 
+function containsPoint(numberNode) {
+    return numberNode.textContent.includes(".");
+}
+
+function endsInPoint(numberNode) {
+    return numberNode.textContent[numberNode.textContent.length - 1] == ".";
+}
+
 buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
         if (button.classList.contains("minus")) {
@@ -48,10 +56,10 @@ buttons.forEach((button) => {
         }
 
         if (button.classList.contains("operator")) {
-            if (operatorNode.textContent == "" && !isNumberEmpty(numberOne)) {
+            if (operatorNode.textContent == "" && !isNumberEmpty(numberOne) && !endsInPoint(numberOne)) {
                 operatorNode.textContent = button.textContent;
             }
-            else if (operatorNode.textContent != "" && !isNumberEmpty(numberTwo)) {
+            else if (operatorNode.textContent != "" && !isNumberEmpty(numberTwo) && !endsInPoint(numberTwo)) {
                 let result = calculate(numberOne.textContent, operatorNode.textContent, numberTwo.textContent);
 
                 numberOne.textContent = result;
@@ -69,9 +77,17 @@ buttons.forEach((button) => {
             }
         }
 
+        else if (button.classList.contains("point")) {
+            if (operatorNode.textContent == "" && !isNumberEmpty(numberOne) && !containsPoint(numberOne)) {
+                numberOne.textContent += ".";
+            }
+            else if (operatorNode.textContent != "" && !isNumberEmpty(numberTwo) && !containsPoint(numberTwo)) {
+                numberTwo.textContent += ".";
+            }
+        }
 
         else if (button.classList.contains("equals")) {
-            if (!isNumberEmpty(numberOne) && operatorNode.textContent && !isNumberEmpty(numberTwo)) {
+            if (!isNumberEmpty(numberOne) && operatorNode.textContent && !isNumberEmpty(numberTwo) && !endsInPoint(numberOne) && !endsInPoint(numberTwo)) {
                 let result = calculate(numberOne.textContent, operatorNode.textContent, numberTwo.textContent);
 
                 numberOne.textContent = result;
