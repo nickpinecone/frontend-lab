@@ -21,7 +21,8 @@ function calculate(num1, operator, num2) {
             result = num1 * num2;
             break;
         case "/":
-            result = num1 / num2;
+            if (num2 != 0)
+                result = num1 / num2;
             break;
         case "%":
             result = num1 % num2;
@@ -31,19 +32,31 @@ function calculate(num1, operator, num2) {
     return +result.toFixed(2);
 }
 
+function isNumberEmpty(numberNode) {
+    return numberNode.textContent == "" || numberNode.textContent == "-";
+}
+
 buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
+        if (button.classList.contains("minus")) {
+            if (operatorNode.textContent == "" && isNumberEmpty(numberOne)) {
+                numberOne.textContent = "-";
+            }
+            else if (operatorNode.textContent != "" && isNumberEmpty(numberTwo)) {
+                numberTwo.textContent = "-";
+            }
+        }
+
         if (button.classList.contains("operator")) {
-            if (operatorNode.textContent == "" && numberOne.textContent != "") {
+            if (operatorNode.textContent == "" && !isNumberEmpty(numberOne)) {
                 operatorNode.textContent = button.textContent;
             }
-            else if (operatorNode.textContent != "" && numberTwo.textContent != "") {
+            else if (operatorNode.textContent != "" && !isNumberEmpty(numberTwo)) {
                 let result = calculate(numberOne.textContent, operatorNode.textContent, numberTwo.textContent);
 
                 numberOne.textContent = result;
                 numberTwo.textContent = "";
                 operatorNode.textContent = button.textContent;
-
             }
         }
 
@@ -56,8 +69,9 @@ buttons.forEach((button) => {
             }
         }
 
+
         else if (button.classList.contains("equals")) {
-            if (numberOne.textContent && operatorNode.textContent && numberTwo.textContent) {
+            if (!isNumberEmpty(numberOne) && operatorNode.textContent && !isNumberEmpty(numberTwo)) {
                 let result = calculate(numberOne.textContent, operatorNode.textContent, numberTwo.textContent);
 
                 numberOne.textContent = result;
