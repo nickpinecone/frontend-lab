@@ -1,5 +1,5 @@
 # rock-paper-scissors
-A cool and original game
+An amazing original game
 
 [Live Demo](https://threedotsellipsis.github.io/rock-paper-scissors/)
 
