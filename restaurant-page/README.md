@@ -1,5 +1,5 @@
 # restaurant-page
-In this restaurant you can order the best pies in the entire universe
+This restaurant offers the best pies in the entire universe
 
 [Live Demo](https://threedotsellipsis.github.io/restaurant-page/)
 
