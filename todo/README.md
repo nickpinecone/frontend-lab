@@ -1,5 +1,5 @@
 # todo
-The thing that will make you your life easier, organize tasks with breeze
+The thing that will make your life easier, organize tasks with breeze
 
 [Live Demo](https://threedotsellipsis.github.io/todo/)
 
