@@ -1,5 +1,5 @@
 # sign-up-form
-Have you ever wanted to sign up to an imaginary service, well now you can
+Have you ever wanted to sign up for an imaginary service, well now you can
 
 [Live Demo](https://threedotsellipsis.github.io/sign-up-form/)
 
