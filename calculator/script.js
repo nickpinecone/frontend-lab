@@ -1,6 +1,7 @@
 let numberOne = document.querySelector(".number-one");
 let numberTwo = document.querySelector(".number-two");
 let operatorNode = document.querySelector(".operator");
+let secretOutput = document.querySelector(".secret-output");
 
 let buttons = document.querySelectorAll(".buttons > button");
 
@@ -63,6 +64,7 @@ buttons.forEach((button) => {
             else if (operatorNode.textContent != "" && !isNumberEmpty(numberTwo) && !endsInPoint(numberTwo)) {
                 let result = calculate(numberOne.textContent, operatorNode.textContent, numberTwo.textContent);
 
+                secretOutput.textContent = (result == 69) ? "Nice" : "";
                 numberOne.textContent = result;
                 numberTwo.textContent = "";
                 operatorNode.textContent = button.textContent;
@@ -91,6 +93,7 @@ buttons.forEach((button) => {
             if (!isNumberEmpty(numberOne) && operatorNode.textContent && !isNumberEmpty(numberTwo) && !endsInPoint(numberOne) && !endsInPoint(numberTwo)) {
                 let result = calculate(numberOne.textContent, operatorNode.textContent, numberTwo.textContent);
 
+                secretOutput.textContent = (result == 69) ? "Nice" : "";
                 numberOne.textContent = result;
                 numberTwo.textContent = "";
                 operatorNode.textContent = "";

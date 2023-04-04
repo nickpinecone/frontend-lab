@@ -24,14 +24,14 @@ body {
     overflow-y: hidden;
 }
 
-.display > div {
+.display>div {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 32px;
 }
 
-.display > div:not(:empty) {
+.display>div:not(:empty) {
     margin-left: 16px;
 }
 
@@ -46,30 +46,36 @@ body {
     grid-column: 1 / 3;
 }
 
-.buttons > button {
+.buttons>button {
     font-size: 48px;
     padding: 12px 28px;
     border: 0px;
     border-radius: 8px;
 }
 
-.buttons > button:hover {
+.buttons>button:hover {
     background-color: whitesmoke;
     color: black;
 }
 
-.buttons > .operator,
-.buttons > .equals {
+.buttons>.operator,
+.buttons>.equals {
     background-color: violet;
 }
 
-.buttons > .number,
-.buttons > .point {
+.buttons>.number,
+.buttons>.point {
     background-color: skyblue;
 }
 
-.buttons > .clear,
-.buttons > .delete {
+.buttons>.clear,
+.buttons>.delete {
     background-color: lightcoral;
 }
 
+.secret-output {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    font-size: 24px;
+}

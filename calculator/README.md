@@ -1,5 +1,5 @@
 # calculator
-The calculator you all have been waiting for, packed with new features and abilities
+The calculator you have been waiting for, packed with new features and abilities
 
 [Live Demo](https://threedotsellipsis.github.io/calculator/)
 
