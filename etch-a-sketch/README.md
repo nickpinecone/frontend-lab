@@ -1,5 +1,5 @@
 # etch-a-sketch
-A modern painting tool for professional artists
+A modern tool for professional artists
 
 [Live Demo](https://threedotsellipsis.github.io/etch-a-sketch/)
 
