@@ -56,11 +56,12 @@ body {
 .main-content {
     flex: 1;
     padding-top: 10%;
-    padding: 10% 3rem 0;
+    padding: 1% 3rem 1%;
     display: flex;
     flex-flow: column nowrap;
-    gap: 2rem;
+    gap: 1rem;
     font-size: 1.6rem;
+    justify-content: space-evenly;
 }
 
 .main-content p {
@@ -70,6 +71,25 @@ body {
 .main-content input,
 .main-content button {
     font-size: 1.6rem;
+}
+
+.main-content input {
+    padding: 4px;
+    border-radius: 4px;
+    border: 2px solid darkgray;
+}
+
+.main-content input:focus {
+    border-color: var(--main-color);
+    outline: 0;
+}
+
+.main-content input:invalid {
+    border-color: red;
+}
+
+.main-content input:valid {
+    border-color: green;
 }
 
 .main-content button {
@@ -90,12 +110,16 @@ body {
     display: flex;
     flex-flow: row wrap;
     gap: 1.4rem;
+    padding: 16px;
+    border: 1px solid black;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.5);
 }
 
 form label {
     flex: 1;
     display: flex;
     flex-flow: column nowrap;
+    gap: 4px;
 }
 
 .main-content #login {
