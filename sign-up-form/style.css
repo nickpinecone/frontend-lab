@@ -1,0 +1,57 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-size: 24px;
+}
+
+body {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+.sidebar {
+    height: 100%;
+    position: relative;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.sidebar img {
+    height: 100%;
+
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+.sidebar .attribution,
+.sidebar .logo {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 10%;
+    padding: 4px;
+    color: white;
+    background-color: #101010b0;
+
+    font-size: 1.6rem;
+}
+
+.sidebar .attribution {
+    top: initial;
+    bottom: 0;
+}
+
+.sidebar a {
+    color: lightgray;
+}
+
