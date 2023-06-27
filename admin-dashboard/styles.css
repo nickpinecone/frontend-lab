@@ -6,6 +6,12 @@ body {
     grid-template-rows: 250px 1fr;
 }
 
+:root {
+    --main-color: rgb(20, 133, 255);
+    --second-color: rgb(255, 74, 161);
+    --background-color: rgb(232, 232, 232);
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -19,7 +25,7 @@ body {
     flex-flow: column nowrap;
     gap: 48px;
     padding: 24px;
-    background-color: rgb(31, 139, 255);
+    background-color: var(--main-color);
     z-index: 2;
 }
 
@@ -36,8 +42,7 @@ body {
     font-weight: bold;
 }
 
-.sidebar .section>div:hover,
-.sidebar .logo:hover {
+.sidebar .section>div:hover {
     background-color: white;
     color: black;
     cursor: pointer;
@@ -50,9 +55,49 @@ body {
 .header {
     z-index: 1;
     box-shadow: 0 2px 6px gray;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 2fr;
+    align-items: center;
+}
+
+.header>div {
+    padding: 16px 48px;
+    font-size: 24px;
+}
+
+.avatar {
+    background-color: var(--second-color);
+    border-radius: 50%;
+    padding: 6px 8px;
+    margin-right: 8px;
+    font-size: 28px;
+}
+
+.header .search {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header input {
+    flex: 1;
+    margin-right: 48px;
+    border: 0px;
+    background-color: var(--background-color);
+    border-radius: 16px;
+    padding: 8px 0px;
+}
+
+.header .notification {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 32px;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 
 .main-container {
-    background-color: rgb(232, 232, 232);
+    background-color: var(--background-colork);
 }
