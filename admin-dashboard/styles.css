@@ -3,7 +3,7 @@ body {
     height: 100vh;
     display: grid;
     grid-template-columns: 350px 1fr;
-    grid-template-rows: 250px 1fr;
+    grid-template-rows: 200px 1fr;
 }
 
 :root {
@@ -69,9 +69,14 @@ body {
 .avatar {
     background-color: var(--second-color);
     border-radius: 50%;
-    padding: 6px 8px;
+    padding: 6px 9px;
     margin-right: 8px;
     font-size: 28px;
+}
+
+.header .profile {
+    white-space: nowrap;
+    font-weight: bold;
 }
 
 .header .search {
@@ -86,7 +91,8 @@ body {
     border: 0px;
     background-color: var(--background-color);
     border-radius: 16px;
-    padding: 8px 0px;
+    padding: 8px 12px;
+    font-size: 18px;
 }
 
 .header .notification {
@@ -97,7 +103,54 @@ body {
     align-items: center;
 }
 
+.header .greeting {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 16px;
+    align-items: center;
+}
+
+.header .greeting .text {
+    display: flex;
+    flex-flow: column nowrap;
+    font-weight: bold;
+    font-size: 28px;
+    white-space: nowrap;
+    gap: 6px;
+}
+
+.header .pre {
+    font-size: 18px;
+}
+
+.header .greeting .avatar {
+    font-size: 48px;
+    padding: 8px 14px;
+}
+
+.header .controls {
+    display: flex;
+    gap: 32px;
+    justify-content: flex-end;
+}
+
+.header button {
+    font-size: 20px;
+    padding: 8px;
+    flex: 1;
+    border: 0px;
+    border-radius: 24px;
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+}
+
+.header button:hover {
+    background-color: white;
+    color: var(--main-color);
+    outline: 1px solid black;
+}
 
 .main-container {
-    background-color: var(--background-colork);
+    background-color: var(--background-color);
 }
