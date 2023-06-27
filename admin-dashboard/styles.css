@@ -10,6 +10,7 @@ body {
     --main-color: rgb(20, 133, 255);
     --second-color: rgb(255, 74, 161);
     --background-color: rgb(232, 232, 232);
+    --text-color: rgb(77, 77, 77);
 }
 
 * {
@@ -103,10 +104,11 @@ body {
     align-items: center;
 }
 
-.header .greeting {
+.header .greeting,
+.trending .content>div {
     display: flex;
     flex-flow: row nowrap;
-    gap: 16px;
+    gap: 12px;
     align-items: center;
 }
 
@@ -119,7 +121,8 @@ body {
     gap: 6px;
 }
 
-.header .pre {
+.header .pre,
+.trending .content .project {
     font-size: 18px;
 }
 
@@ -171,7 +174,8 @@ body {
     margin-bottom: 8px;
 }
 
-.main-container .announcements .content {
+.main-container .announcements .content,
+.main-container .trending .content {
     background-color: white;
     display: flex;
     flex-flow: column nowrap;
@@ -197,6 +201,27 @@ body {
     font-size: 18px;
 }
 
-.main-container .announcements .content .text {
-    color: rgb(77, 77, 77);
+.main-container .announcements .content .text,
+.trending .content .project {
+    color: var(--text-color);
+}
+
+.main-container .trending .content .tag {
+    margin-bottom: 4px;
+}
+
+.main-container .trending .content .avatar {
+    font-size: 32px;
+}
+
+.avatar.tantan {
+    background-color: rgb(0, 201, 0);
+}
+
+.avatar.ben {
+    background-color: rgb(230, 230, 0);
+}
+
+.avatar.godette {
+    background-color: rgb(0, 190, 183);
 }
