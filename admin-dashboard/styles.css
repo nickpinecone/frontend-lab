@@ -37,10 +37,11 @@ body {
 
 .sidebar .section>div,
 .sidebar .logo {
-    padding: 12px;
+    padding: 12px 24px;
     font-size: 26px;
     color: white;
     font-weight: bold;
+    border-radius: 24px;
 }
 
 .sidebar .section>div:hover {
@@ -152,6 +153,7 @@ body {
     background-color: white;
     color: var(--main-color);
     outline: 1px solid black;
+    cursor: pointer;
 }
 
 .main-container {
@@ -175,7 +177,8 @@ body {
 }
 
 .main-container .announcements .content,
-.main-container .trending .content {
+.main-container .trending .content,
+.main-container .projects .card {
     background-color: white;
     display: flex;
     flex-flow: column nowrap;
@@ -195,14 +198,16 @@ body {
     border: 0;
 }
 
-.main-container .announcements .content .topic {
+.main-container .announcements .content .topic,
+.projects .name {
     font-weight: bold;
     margin-bottom: 4px;
     font-size: 18px;
 }
 
 .main-container .announcements .content .text,
-.trending .content .project {
+.trending .content .project,
+.projects .description {
     color: var(--text-color);
 }
 
@@ -224,4 +229,30 @@ body {
 
 .avatar.godette {
     background-color: rgb(0, 190, 183);
+}
+
+.main-container .projects {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.main-container .projects .content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 32px;
+    flex: 1;
+}
+
+.main-container .projects .card {
+    border-left: 12px solid var(--second-color);
+    gap: 8px;
+}
+
+.main-container .projects .description {
+    flex: 1;
+}
+
+.main-container .projects .actions {
+    align-self: flex-end;
+    font-size: 22px;
 }
