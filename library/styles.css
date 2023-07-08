@@ -30,7 +30,7 @@ body {
 }
 
 .library .add-button {
-    margin: 24px;
+    margin: 28px;
     align-self: center;
     border: 0px;
     padding: 16px;
@@ -47,11 +47,13 @@ body {
 
 .library .book-cards {
     padding: 64px;
+    padding-top: 0px;
     flex: 1;
     display: flex;
     align-items: flex-start;
     flex-flow: row wrap;
-    gap: 32px;
+    justify-content: center;
+    gap: 48px;
 }
 
 .library .book {
@@ -77,6 +79,14 @@ body {
     font-size: 1em;
     padding: 4px;
     font-weight: 500;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+.book>span textarea:focus {
+    outline: 2px solid rgb(85, 85, 255);
+    border-color: transparent;
 }
 
 .book button {
@@ -88,7 +98,11 @@ body {
     background-color: rgb(230, 230, 230);
 }
 
-.book #remove-book {
+.book #read-status.have-read {
+    background-color: rgb(111, 255, 111);
+}
+
+.book #read-status.not-read {
     background-color: rgb(255, 111, 111);
 }
 
@@ -100,5 +114,59 @@ body {
 .book>span textarea:disabled {
     border: 0;
     color: black;
-    resize: none;
+}
+
+.add-book-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border: 1px solid black;
+    border-radius: 12px;
+}
+
+.add-book-dialog form {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 28px;
+    background-color: white;
+    max-width: fit-content;
+    gap: 22px;
+    font-size: 28px;
+}
+
+.add-book-dialog input {
+    font-size: 1em;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+.add-book-dialog label[for="read"] {
+    text-align: center;
+}
+
+.add-book-dialog #read {
+    transform: scale(2);
+    translate: 0% -30%;
+    margin-left: 8px;
+}
+
+.add-book-dialog button {
+    border: 0px;
+    padding: 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+    border-radius: 8px;
+    background-color: rgb(230, 230, 230);
+}
+
+.add-book-dialog button[type="submit"] {
+    background-color: rgb(111, 255, 111);
+}
+
+
+.add-book-dialog button:hover {
+    filter: brightness(80%);
+    cursor: pointer;
 }

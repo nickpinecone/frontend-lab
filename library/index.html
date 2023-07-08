@@ -20,12 +20,23 @@
                 <span>Author: <textarea name="author" id="author" cols="16" rows="1"
                         disabled>Stephen King</textarea></span>
                 <span>Pages: <textarea name="pages" id="pages" cols="16" rows="1" disabled>310</textarea></span>
-                <button id="read-status">Have Read</button>
+                <button id="read-status" class="have-read">Have Read</button>
                 <button id="edit-book">Edit Book</button>
                 <button id="remove-book">Remove Book</button>
             </div>
         </div>
     </div>
+
+    <dialog class="add-book-dialog">
+        <form method="dialog">
+            <input type="text" name="title" id="title" placeholder="Title">
+            <input type="text" name="author" id="author" placeholder="Author">
+            <input type="number" name="pages" id="pages" placeholder="Pages">
+            <label for="read">Have You Read It? <input type="checkbox" name="read" id="read"></label>
+            <button type="submit">Submit</button>
+            <button type="button">Close</button>
+        </form>
+    </dialog>
 
 </body>
 

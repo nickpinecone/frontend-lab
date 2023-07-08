@@ -1,17 +1,29 @@
 
-let myLibrary = [];
+let addBookButton = document.querySelector(".add-button");
+let addBookDialog = document.querySelector(".add-book-dialog");
+let closeDialog = document.querySelector('.add-book-dialog button[type="button"]');
 
-function Book(title, author, pages, hasRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.hasRead = hasRead;
-}
+// let myLibrary = [];
 
-Book.prototype.info = function () {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.hasRead ? "have" : "not"} read`
-}
+// function Book(title, author, pages, hasRead) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.hasRead = hasRead;
+// }
 
-function addBookToLibrary() {
+// Book.prototype.info = function () {
+//     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.hasRead ? "have" : "not"} read`
+// }
 
-}
+// function addBookToLibrary() {
+
+// }
+
+addBookButton.addEventListener("click", () => {
+    addBookDialog.showModal();
+});
+
+closeDialog.addEventListener("click", () => {
+    addBookDialog.close();
+});
