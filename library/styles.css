@@ -1,186 +1,104 @@
-:root {
-    --main-color: rgb(155, 155, 155);
-
-    font-size: 20px;
-}
-
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 
 body {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-flow: column nowrap;
-    align-items: center;
-    height: 100vh;
 }
 
 .header {
-    padding: 32px;
-    align-self: stretch;
-    background-color: var(--main-color);
-    text-align: center;
-    color: white;
-}
-
-.wrapper {
+    font-weight: bold;
+    font-size: 36px;
+    box-shadow: 0px 0px 4px gray;
+    padding: 24px;
+    padding-left: 64px;
+    z-index: 1;
     position: relative;
-    padding: 32px;
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 32px;
 }
 
-button.add {
+.library {
+    background-color: rgb(240, 240, 240);
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.library .add-button {
+    margin: 24px;
     align-self: center;
-    font-size: 1.2rem;
-    background-color: var(--main-color);
     border: 0px;
-    border-radius: 4px;
-    padding: 8px;
-    color: white;
-}
-
-button.add:hover,
-.remove:hover {
-    background-color: white;
-    color: var(--main-color);
-    outline: 3px solid var(--main-color);
-}
-
-.container {
-    width: 80vw;
-    display: grid;
-    gap: 32px;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-}
-
-.book {
-    box-sizing: border-box;
-    width: 400px;
-    background-color: white;
-    color: black;
-    font-size: 1.1rem;
-    border: 3px solid var(--main-color);
-    border-radius: 8px;
-    padding: 32px;
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 12px;
-}
-
-.status.not-read,
-.status.read,
-.remove,
-button[type="button"] {
-    font-size: 1.1rem;
-    padding: 4px;
-    border: 0px;
-    border-radius: 4px;
-    color: white;
-}
-
-.status.not-read {
-    background-color: rgba(207, 0, 0, 0.726);
-}
-.status.not-read::after {
-    content: " no";
-}
-
-.status.read {
-    background-color: rgba(55, 195, 0, 0.753);
-}
-.status.read::after {
-    content: " yes";
-}
-
-.status:hover {
-    filter: brightness(80%);
-}
-
-.remove {
-    background-color: var(--main-color);
-}
-
-.delimiter {
-    border-bottom: 1px groove var(--main-color);
-}
-
-form {
-    position: fixed;
-    top: 30%;
-    right: calc(50% - 517px / 2);
-
-    color: white;
-    background-color: var(--main-color);
-    display: flex;
-    flex-flow: column nowrap;
-    width: fit-content;
     padding: 16px;
+    font-size: 22px;
+    font-weight: bold;
     border-radius: 8px;
-    gap: 16px;
-    border: 3px solid gray;
+    background-color: rgb(230, 230, 230);
 }
 
-form > div {
+.library .add-button:hover {
+    filter: brightness(80%);
+    cursor: pointer;
+}
+
+.library .book-cards {
+    padding: 64px;
+    flex: 1;
     display: flex;
-    justify-content: space-between;
+    align-items: flex-start;
+    flex-flow: row wrap;
+    gap: 32px;
+}
+
+.library .book {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 28px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 2px 2px 4px darkgray;
+    max-width: fit-content;
+    gap: 18px;
+    font-size: 24px;
+}
+
+.book>span {
+    display: flex;
+    align-items: center;
     gap: 8px;
 }
 
-form label {
-    font-size: 1.4rem;
+.book>span textarea {
+    flex: 1;
+    font-size: 1em;
+    padding: 4px;
+    font-weight: 500;
 }
 
-form input {
-    font-size: 1.2rem;
-}
-
-input[type="checkbox"] {
-    height: 1.5rem;
-    width: 1.5rem;
-}
-
-button[type="button"] {
-    background-color: white;
-    color: gray;
-    font-size: 1.2rem;
-    padding: 8px;
-}
-
-button[type="button"]:hover {
-    background-color: var(--main-color);
-    color: white;
-    outline: 3px solid white;
-}
-
-
-.buttons {
-    display: flex;
-    justify-content: space-around;
-}
-
-.book label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.book textarea {
-    width: 100%;
-    margin-left: 4px;
-    padding: 2px;
-    font-size: 1.1rem;
+.book button {
     border: 0px;
-    outline: 1px solid black;
-    border-radius: 4px;
-
-    height: 1.2rem;
-    resize: none;
+    padding: 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+    border-radius: 8px;
+    background-color: rgb(230, 230, 230);
 }
 
-.book textarea:disabled {
+.book #remove-book {
+    background-color: rgb(255, 111, 111);
+}
+
+.book button:hover {
+    filter: brightness(80%);
+    cursor: pointer;
+}
+
+.book>span textarea:disabled {
+    border: 0;
     color: black;
-    outline: 0px;
+    resize: none;
 }
