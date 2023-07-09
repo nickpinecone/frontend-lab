@@ -102,17 +102,17 @@ body {
     background-color: rgb(230, 230, 230);
 }
 
+.book #read-status {
+    background-color: rgb(255, 111, 111);
+}
+
 .book #read-status.have-read,
 .add-book-dialog button[type="submit"] {
     background-color: rgb(111, 255, 111);
 }
 
-.book #read-status.not-read {
-    background-color: rgb(255, 111, 111);
-}
-
 .book>span textarea:disabled {
-    border: 0;
+    border-color: transparent;
     color: black;
 }
 

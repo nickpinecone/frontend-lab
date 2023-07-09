@@ -1,23 +1,12 @@
 
 let myLibrary = [{ index: -1 }];
 
-function Book(title, author, pages, hasRead, index) {
+function Book(title, author, pages, read, index) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.hasRead = hasRead;
+    this.read = read;
     this.index = index;
-}
-
-function addBookToLibrary(data) {
-    let book = createBook(data);
-    let bookBackend = new Book(data.title, data.author, data.pages, data.read == "on" ? true : false, myLibrary[myLibrary.length - 1].index + 1);
-    myLibrary.push(bookBackend);
-    console.log(myLibrary);
-
-
-
-    document.querySelector(".book-cards").appendChild(book);
 }
 
 let addBookButton = document.querySelector(".add-button");
@@ -25,6 +14,7 @@ let addBookDialog = document.querySelector(".add-book-dialog");
 let closeDialog = document.querySelector('.add-book-dialog button[type="button"]');
 let submitDialog = document.querySelector('.add-book-dialog button[type="submit"]');
 let form = document.querySelector("form");
+let bookCards = document.querySelector(".book-cards");
 
 addBookButton.addEventListener("click", () => {
     addBookDialog.showModal();
@@ -35,91 +25,128 @@ closeDialog.addEventListener("click", () => {
 });
 
 submitDialog.addEventListener("click", (event) => {
-    event.preventDefault();
-    addBookDialog.close();
+    if (form.checkValidity()) {
+        event.preventDefault();
+        addBookDialog.close();
 
-    let data = Object.fromEntries(new FormData(form).entries());
-    addBookToLibrary(data);
+        let data = Object.fromEntries(new FormData(form).entries());
+        addBookToLibrary(data);
 
-    form.reset();
+        form.reset();
+    }
+
 });
+
+function addBookToLibrary(data) {
+    let bookBackend = new Book(data.title, data.author, data.pages, data.read == "on" ? true : false, myLibrary[myLibrary.length - 1].index + 1);
+    myLibrary.push(bookBackend);
+
+    let book = createBook(data);
+    bookCards.appendChild(book);
+}
+
+function createTextarea(prefix, name, data) {
+    let span = document.createElement("span");
+    span.textContent = prefix;
+    let element = document.createElement("textarea");
+    element.name = name;
+    element.id = name;
+    element.cols = 16;
+    element.rows = 1;
+    element.disabled = true;
+    element.value = data;
+    span.appendChild(element);
+
+    return [span, element];
+}
+
+function createButton(id, data) {
+    let button = document.createElement("button");
+    button.id = id;
+    button.textContent = data;
+
+    return button;
+}
+
+function findBookBackend(book) {
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (book.getAttribute("data-index") == myLibrary[i].index) {
+            let bookBackend = myLibrary[i];
+
+            return bookBackend;
+        }
+    }
+}
 
 function createBook(data) {
     let book = document.createElement("div");
     book.classList.add("book");
 
-    let titleSpan = document.createElement("span");
-    titleSpan.textContent = "Title: ";
-    let title = document.createElement("textarea");
-    title.name = "title";
-    title.id = "title";
-    title.cols = 16;
-    title.rows = 1;
-    title.disabled = true;
-    title.textContent = data.title;
-    titleSpan.appendChild(title);
+    let title = createTextarea("Title: ", "title", data.title);
+    book.appendChild(title[0]);
 
-    book.appendChild(titleSpan);
+    let author = createTextarea("Author: ", "author", data.author);
+    book.appendChild(author[0]);
 
-    let authorSpan = document.createElement("span");
-    authorSpan.textContent = "Author: ";
-    let author = document.createElement("textarea");
-    author.name = "author";
-    author.id = "author";
-    author.cols = 16;
-    author.rows = 1;
-    author.disabled = true;
-    author.textContent = data.author;
-    authorSpan.appendChild(author);
+    let pages = createTextarea("Pages: ", "pages", data.pages);
+    book.appendChild(pages[0]);
 
-    book.appendChild(authorSpan);
-
-    let pagesSpan = document.createElement("span");
-    pagesSpan.textContent = "Pages: ";
-    let pages = document.createElement("textarea");
-    pages.name = "pages";
-    pages.id = "pages";
-    pages.cols = 16;
-    pages.rows = 1;
-    pages.disabled = true;
-    pages.textContent = data.pages;
-    pagesSpan.appendChild(pages);
-
-    book.appendChild(pagesSpan);
-
-    let readButton = document.createElement("button");
-    readButton.id = "read-status";
-    readButton.classList.add(data.read == "on" ? "have-read" : "not-read");
+    let readButton = createButton("read-status", "")
+    if (data.read == "on") {
+        readButton.classList.add("have-read");
+    }
     readButton.textContent = data.read == "on" ? "Have Read" : "Not Read";
-
     book.appendChild(readButton);
 
-    let editButton = document.createElement("button");
-    editButton.id = "edit-book";
-    editButton.textContent = "Edit Book";
-
+    let editButton = createButton("edit-button", "Edit Book");
     book.appendChild(editButton);
 
-    let removeButton = document.createElement("button");
-    removeButton.id = "remove-book";
-    removeButton.textContent = "Remove Book";
-
-    book.setAttribute("data-index", myLibrary[myLibrary.length - 1].index + 1);
-
+    let removeButton = createButton("remove-button", "Remove Book");
     book.appendChild(removeButton);
+
+    book.setAttribute("data-index", myLibrary[myLibrary.length - 1].index);
+
+    // Bind Buttons
+
+    let bookBackend = findBookBackend(book);
 
     readButton.addEventListener("click", () => {
         if (readButton.classList.contains("have-read")) {
             readButton.classList.remove("have-read");
-            readButton.classList.add("not-read");
             readButton.textContent = "Not Read";
+
         }
         else {
-            readButton.classList.remove("not-read");
             readButton.classList.add("have-read");
             readButton.textContent = "Have Read";
         }
 
+        bookBackend.read = !bookBackend.read;
+    });
+
+    editButton.addEventListener("click", () => {
+        if (editButton.classList.contains("editing")) {
+            editButton.classList.remove("editing");
+            editButton.textContent = "Edit Book";
+        }
+        else {
+            editButton.classList.add("editing");
+            editButton.textContent = "Done Editing";
+
+        }
+
+        bookBackend.title = title[1].value;
+        bookBackend.author = author[1].value;
+        bookBackend.pages = pages[1].value;
+
+        title[1].disabled = !title[1].disabled;
+        author[1].disabled = !author[1].disabled;
+        pages[1].disabled = !pages[1].disabled;
+    });
+
+    removeButton.addEventListener("click", () => {
+        bookCards.removeChild(book);
+        myLibrary = myLibrary.filter((el) => el.index != bookBackend.index);
     });
 
     return book;
