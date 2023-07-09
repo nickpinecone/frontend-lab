@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-
 body {
     width: 100vw;
     height: 100vh;
@@ -40,7 +39,9 @@ body {
     background-color: rgb(230, 230, 230);
 }
 
-.library .add-button:hover {
+.library .add-button:hover,
+.book button:hover,
+.add-book-dialog button:hover {
     filter: brightness(80%);
     cursor: pointer;
 }
@@ -56,7 +57,9 @@ body {
     gap: 48px;
 }
 
-.library .book {
+
+.library .book,
+.add-book-dialog form {
     display: flex;
     flex-flow: column nowrap;
     padding: 28px;
@@ -89,7 +92,8 @@ body {
     border-color: transparent;
 }
 
-.book button {
+.book button,
+.add-book-dialog button {
     border: 0px;
     padding: 12px;
     font-size: 0.9em;
@@ -98,17 +102,13 @@ body {
     background-color: rgb(230, 230, 230);
 }
 
-.book #read-status.have-read {
+.book #read-status.have-read,
+.add-book-dialog button[type="submit"] {
     background-color: rgb(111, 255, 111);
 }
 
 .book #read-status.not-read {
     background-color: rgb(255, 111, 111);
-}
-
-.book button:hover {
-    filter: brightness(80%);
-    cursor: pointer;
 }
 
 .book>span textarea:disabled {
@@ -126,11 +126,7 @@ body {
 }
 
 .add-book-dialog form {
-    display: flex;
-    flex-flow: column nowrap;
     padding: 28px;
-    background-color: white;
-    max-width: fit-content;
     gap: 22px;
     font-size: 28px;
 }
@@ -152,21 +148,6 @@ body {
     margin-left: 8px;
 }
 
-.add-book-dialog button {
-    border: 0px;
-    padding: 12px;
-    font-size: 0.9em;
-    font-weight: 500;
-    border-radius: 8px;
-    background-color: rgb(230, 230, 230);
-}
-
-.add-book-dialog button[type="submit"] {
-    background-color: rgb(111, 255, 111);
-}
-
-
-.add-book-dialog button:hover {
-    filter: brightness(80%);
-    cursor: pointer;
+.add-book-dialog input:focus {
+    border-color: transparent;
 }
