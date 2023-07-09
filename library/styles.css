@@ -78,6 +78,7 @@ body {
 }
 
 .book>span textarea {
+    height: 1em;
     flex: 1;
     font-size: 1em;
     padding: 4px;

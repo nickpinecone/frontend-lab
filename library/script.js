@@ -43,6 +43,11 @@ function addBookToLibrary(data) {
 
     let book = createBook(data);
     bookCards.appendChild(book);
+
+    const inputs = book.querySelectorAll("textarea");
+    inputs.forEach((el) => {
+        el.style.height = (el.scrollHeight + 2) + "px";
+    });
 }
 
 function createTextarea(prefix, name, data) {
@@ -51,11 +56,13 @@ function createTextarea(prefix, name, data) {
     let element = document.createElement("textarea");
     element.name = name;
     element.id = name;
-    element.cols = 16;
-    element.rows = 1;
     element.disabled = true;
     element.value = data;
     span.appendChild(element);
+
+    element.addEventListener("input", () => {
+        element.style.height = (element.scrollHeight + 2) + "px";
+    });
 
     return [span, element];
 }
