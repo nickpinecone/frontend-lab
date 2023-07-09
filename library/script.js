@@ -1,26 +1,30 @@
 
+let myLibrary = [{ index: -1 }];
+
+function Book(title, author, pages, hasRead, index) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.hasRead = hasRead;
+    this.index = index;
+}
+
+function addBookToLibrary(data) {
+    let book = createBook(data);
+    let bookBackend = new Book(data.title, data.author, data.pages, data.read == "on" ? true : false, myLibrary[myLibrary.length - 1].index + 1);
+    myLibrary.push(bookBackend);
+    console.log(myLibrary);
+
+
+
+    document.querySelector(".book-cards").appendChild(book);
+}
+
 let addBookButton = document.querySelector(".add-button");
 let addBookDialog = document.querySelector(".add-book-dialog");
 let closeDialog = document.querySelector('.add-book-dialog button[type="button"]');
 let submitDialog = document.querySelector('.add-book-dialog button[type="submit"]');
 let form = document.querySelector("form");
-
-let myLibrary = [];
-
-function Book(title, author, pages, hasRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.hasRead = hasRead;
-}
-
-Book.prototype.info = function () {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.hasRead ? "have" : "not"} read`
-}
-
-function addBookToLibrary() {
-
-}
 
 addBookButton.addEventListener("click", () => {
     addBookDialog.showModal();
@@ -31,13 +35,11 @@ closeDialog.addEventListener("click", () => {
 });
 
 submitDialog.addEventListener("click", (event) => {
-    event.preventDefault(); // We don't want to submit this fake form
+    event.preventDefault();
     addBookDialog.close();
 
     let data = Object.fromEntries(new FormData(form).entries());
-    let book = createBook(data);
-
-    document.querySelector(".book-cards").appendChild(book);
+    addBookToLibrary(data);
 
     form.reset();
 });
@@ -102,7 +104,25 @@ function createBook(data) {
     removeButton.id = "remove-book";
     removeButton.textContent = "Remove Book";
 
+    book.setAttribute("data-index", myLibrary[myLibrary.length - 1].index + 1);
+
     book.appendChild(removeButton);
+
+    readButton.addEventListener("click", () => {
+        if (readButton.classList.contains("have-read")) {
+            readButton.classList.remove("have-read");
+            readButton.classList.add("not-read");
+            readButton.textContent = "Not Read";
+        }
+        else {
+            readButton.classList.remove("not-read");
+            readButton.classList.add("have-read");
+            readButton.textContent = "Have Read";
+        }
+
+    });
 
     return book;
 }
+
+addBookToLibrary({ title: "Gunslinger", author: "Stephen King", pages: 310, read: "on" });
