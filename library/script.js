@@ -61,6 +61,7 @@ function createTextarea(prefix, name, data) {
     span.appendChild(element);
 
     element.addEventListener("input", () => {
+        element.style.height = "1em";
         element.style.height = (element.scrollHeight + 2) + "px";
     });
 
