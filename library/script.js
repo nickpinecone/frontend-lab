@@ -37,6 +37,17 @@ submitDialog.addEventListener("click", (event) => {
 
 });
 
+addBookDialog.addEventListener("click", (event) => {
+    let dialogDimensions = addBookDialog.getBoundingClientRect();
+
+    if (event.clientX < dialogDimensions.left ||
+        event.clientX > dialogDimensions.right ||
+        event.clientY < dialogDimensions.top ||
+        event.clientY > dialogDimensions.bottom) {
+        addBookDialog.close();
+    }
+});
+
 function addBookToLibrary(data) {
     let bookBackend = new Book(data.title, data.author, data.pages, data.read == "on" ? true : false, myLibrary[myLibrary.length - 1].index + 1);
     myLibrary.push(bookBackend);

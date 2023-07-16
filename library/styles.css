@@ -126,6 +126,10 @@ body {
     border-radius: 12px;
 }
 
+.add-book-dialog::backdrop {
+    backdrop-filter: blur(3px);
+}
+
 .add-book-dialog form {
     padding: 28px;
     gap: 22px;
