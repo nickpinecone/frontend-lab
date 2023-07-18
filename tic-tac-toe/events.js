@@ -7,9 +7,7 @@ let events = (function () {
             events[eventName].push(func);
         }
         else {
-            let arr = [1, 2];
-            events[eventName] = [];
-            events[eventName].push(func);
+            events[eventName] = [func];
         }
     }
 
