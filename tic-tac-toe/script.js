@@ -12,6 +12,29 @@ var board = (function () {
         }
     }
 
+    function checkWin(cond1, cond2) {
+        let isWin = false;
+
+        for (let i = 0; i < 3; i++) {
+            if ([cond1, cond2].includes((_board[i][0] + _board[i][1] + _board[i][2]))) {
+                isWin = true;
+                break;
+            }
+            else if ([cond1, cond2].includes((_board[0][i] + _board[1][i] + _board[2][i]))) {
+                isWin = true;
+                break;
+            }
+        }
+        if ([cond1, cond2].includes((_board[0][0] + _board[1][1] + _board[2][2]))) {
+            isWin = true;
+        }
+        else if ([cond1, cond2].includes((_board[0][2] + _board[1][1] + _board[2][0]))) {
+            isWin = true;
+        }
+
+        return isWin;
+    }
+
     function hasEmpty() {
         let isEmpty = false;
 
@@ -37,7 +60,7 @@ var board = (function () {
         }
     }
 
-    return { checkIfEmpty, placeSign, resetBoard, displayBoard, hasEmpty };
+    return { checkIfEmpty, placeSign, resetBoard, displayBoard, hasEmpty, checkWin };
 
 })();
 
@@ -95,6 +118,12 @@ var game = (function () {
             board.placeSign(activePlayer.getSign(), x, y);
             board.displayBoard();
 
+            if (board.checkWin("xxx", "ooo")) {
+                console.log(activePlayer.getSign() + " Wins");
+                return;
+            }
+            console.log(board.checkWin("xxx", "ooo"));
+
             activePlayer = activePlayer == player1 ? player2 : player1;
             activePlayer.makeMove();
         }
@@ -103,4 +132,6 @@ var game = (function () {
     function start() {
         activePlayer.makeMove();
     }
+
+    return { playerMoved };
 })();
