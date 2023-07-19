@@ -86,7 +86,7 @@ var createPlayer = function (type, sign) {
 
     function makeMove() {
         if (_type == "computer" && board.hasEmpty()) {
-            events.emit("computerTurn");
+            events.emit("computerTurn", [true]);
 
             let x = pickRandom(0, 3);
             let y = pickRandom(0, 3);
@@ -99,8 +99,8 @@ var createPlayer = function (type, sign) {
             let thinkTime = pickRandom(500, 1500);
 
             setTimeout(function () {
+                events.emit("computerFinished", [false]);
                 events.emit("playerMoved", [x, y]);
-                events.emit("computerFinished");
             }, thinkTime);
         }
     }
@@ -152,9 +152,9 @@ var dom = (function () {
         }
     }
 
-    function toggleBoard() {
+    function toggleBoard(value) {
         boardCells.forEach(function (el) {
-            el.disabled = !el.disabled;
+            el.disabled = value;
         });
     }
 
@@ -188,25 +188,21 @@ var game = (function () {
     let activePlayer = player1;
 
     events.on("playerMoved", playerMoved);
-    events.on("restart", restartGame);
+    events.on("restart", start);
 
     start();
-
-    function restartGame() {
-        board.resetBoard();
-        dom.render();
-        activePlayer = player1;
-        start();
-    }
 
     function playerMoved(x, y) {
         if (board.checkIfEmpty(x, y)) {
             board.placeSign(activePlayer.getSign(), x, y);
             dom.render();
 
-            if (board.checkWin(player1.getSign().repeat(3), player2.getSign().repeat(3)) || !board.hasEmpty()) {
-                dom.showWinner(activePlayer.getSign() + " wins");
-                dom.toggleBoard();
+            let isWin = board.checkWin(player1.getSign().repeat(3), player2.getSign().repeat(3));
+
+            if (isWin || !board.hasEmpty()) {
+                dom.toggleBoard(true);
+                let text = isWin ? activePlayer.getSign() + " wins" : "it's a draw";
+                dom.showWinner(text);
                 return;
             }
 
@@ -218,6 +214,10 @@ var game = (function () {
     }
 
     function start() {
+        activePlayer = player1;
+        board.resetBoard();
+        dom.render();
+        dom.toggleBoard(false);
         dom.setSigns(player1, player2);
         activePlayer.makeMove();
     }
