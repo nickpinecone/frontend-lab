@@ -12,6 +12,10 @@ var board = (function () {
         }
     }
 
+    function getSign(x, y) {
+        return _board[x][y];
+    }
+
     function checkWin(cond1, cond2) {
         let isWin = false;
 
@@ -60,7 +64,7 @@ var board = (function () {
         }
     }
 
-    return { checkIfEmpty, placeSign, resetBoard, displayBoard, hasEmpty, checkWin };
+    return { checkIfEmpty, placeSign, resetBoard, displayBoard, hasEmpty, checkWin, getSign };
 
 })();
 
@@ -82,6 +86,8 @@ var createPlayer = function (type, sign) {
 
     function makeMove() {
         if (_type == "computer" && board.hasEmpty()) {
+            events.emit("computerTurn");
+
             let x = pickRandom(0, 3);
             let y = pickRandom(0, 3);
 
@@ -94,12 +100,66 @@ var createPlayer = function (type, sign) {
 
             setTimeout(function () {
                 events.emit("playerMoved", [x, y]);
+                events.emit("computerFinished");
             }, thinkTime);
         }
     }
 
     return { getSign, getType, makeMove };
 }
+
+var dom = (function () {
+    let boardCells = document.querySelectorAll(".board>button");
+    let showTurnPlayer1 = document.querySelector(".show-turn>.player1");
+    let showTurnPlayer2 = document.querySelector(".show-turn>.player2");
+
+    bindEvents();
+
+    events.on("computerTurn", toggleBoard);
+    events.on("computerFinished", toggleBoard);
+
+    function bindEvents() {
+        boardCells.forEach(function (el) {
+            el.addEventListener("click", function () {
+                events.emit("playerMoved", [el.getAttribute("data-x"), el.getAttribute("data-y")]);
+            });
+        });
+
+    }
+
+    function setSigns(sign1, sign2) {
+        showTurnPlayer1.textContent = sign1 + " turn";
+        showTurnPlayer2.textContent = sign2 + " turn";
+    }
+
+    function switchActivePlayer() {
+        if (showTurnPlayer1.classList.contains("active")) {
+            showTurnPlayer1.classList.remove("active");
+            showTurnPlayer2.classList.add("active");
+        }
+        else {
+            showTurnPlayer2.classList.remove("active");
+            showTurnPlayer1.classList.add("active");
+        }
+    }
+
+    function toggleBoard() {
+        boardCells.forEach(function (el) {
+            el.disabled = !el.disabled;
+        });
+    }
+
+    function render() {
+        boardCells.forEach(function (el) {
+            let x = el.getAttribute("data-x");
+            let y = el.getAttribute("data-y");
+
+            el.textContent = board.getSign(x, y);
+        });
+    }
+
+    return { render, toggleBoard, setSigns, switchActivePlayer };
+})();
 
 var game = (function () {
     let player1 = createPlayer("computer", "x");
@@ -111,18 +171,19 @@ var game = (function () {
 
     start();
 
-    console.log(board.hasEmpty());
-
     function playerMoved(x, y) {
         if (board.checkIfEmpty(x, y)) {
             board.placeSign(activePlayer.getSign(), x, y);
             board.displayBoard();
+            dom.render();
 
-            if (board.checkWin("xxx", "ooo")) {
-                console.log(activePlayer.getSign() + " Wins");
+            if (board.checkWin(player1.getSign().repeat(3), player2.getSign().repeat(3)) || !board.hasEmpty()) {
+                console.log(activePlayer.getSign() + " wins");
+                dom.toggleBoard();
                 return;
             }
-            console.log(board.checkWin("xxx", "ooo"));
+
+            dom.switchActivePlayer();
 
             activePlayer = activePlayer == player1 ? player2 : player1;
             activePlayer.makeMove();
@@ -130,6 +191,7 @@ var game = (function () {
     }
 
     function start() {
+        dom.setSigns(player1.getSign(), player2.getSign());
         activePlayer.makeMove();
     }
 
