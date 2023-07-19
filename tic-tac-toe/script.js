@@ -80,6 +80,10 @@ var createPlayer = function (type, sign) {
         return _type;
     }
 
+    function setType(type) {
+        _type = type;
+    }
+
     function pickRandom(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
@@ -96,7 +100,7 @@ var createPlayer = function (type, sign) {
                 y = pickRandom(0, 3);
             }
 
-            let thinkTime = pickRandom(500, 1500);
+            let thinkTime = pickRandom(500, 1000);
 
             setTimeout(function () {
                 events.emit("computerFinished", [false]);
@@ -105,15 +109,15 @@ var createPlayer = function (type, sign) {
         }
     }
 
-    return { getSign, getType, makeMove };
+    return { getSign, getType, makeMove, setType };
 }
 
 var dom = (function () {
     let boardCells = document.querySelectorAll(".board>button");
     let showTurnPlayer1 = document.querySelector(".show-turn>.player1");
     let showTurnPlayer2 = document.querySelector(".show-turn>.player2");
-    let showWinnerDialog = document.querySelector("dialog");
-    let restartButton = document.querySelector(".restart");
+    let showWinnerDialog = document.querySelector(".show-winner");
+    let restartButton = document.querySelector(".show-winner .restart");
 
     bindEvents();
 
@@ -127,12 +131,40 @@ var dom = (function () {
             });
         });
 
-        showWinnerDialog.addEventListener("click", function (el) {
-            showWinnerDialog.close();
+        showWinnerDialog.addEventListener("click", function (event) {
+            let dialogDimensions = showWinnerDialog.getBoundingClientRect();
+
+            if (event.clientX < dialogDimensions.left ||
+                event.clientX > dialogDimensions.right ||
+                event.clientY < dialogDimensions.top ||
+                event.clientY > dialogDimensions.bottom) {
+
+                let player1Type = showWinnerDialog.querySelector(".player1 .options input:checked").value;
+                let player2Type = showWinnerDialog.querySelector(".player2 .options input:checked").value;
+
+                showWinnerDialog.close();
+                events.emit("restart", [player1Type, player2Type]);
+            }
         });
 
         restartButton.addEventListener("click", function (ev) {
-            events.emit("restart");
+
+            let player1Type = showWinnerDialog.querySelector(".player1 .options input:checked").value;
+            let player2Type = showWinnerDialog.querySelector(".player2 .options input:checked").value;
+
+            showWinnerDialog.close();
+            events.emit("restart", [player1Type, player2Type]);
+            ev.stopPropagation();
+        });
+    }
+
+    function reset() {
+        showTurnPlayer1.classList.add("active");
+        showTurnPlayer2.classList.remove("active");
+
+        boardCells.forEach(function (el) {
+            let span = el.querySelector("span");
+            span.classList.remove("show");
         });
     }
 
@@ -159,7 +191,7 @@ var dom = (function () {
     }
 
     function showWinner(text) {
-        let div = showWinnerDialog.querySelector("div");
+        let div = showWinnerDialog.querySelector(".output-winner");
         div.textContent = text;
         showWinnerDialog.showModal();
     }
@@ -178,7 +210,7 @@ var dom = (function () {
         });
     }
 
-    return { render, toggleBoard, setSigns, switchActivePlayer, showWinner };
+    return { render, toggleBoard, setSigns, switchActivePlayer, showWinner, reset };
 })();
 
 var game = (function () {
@@ -190,7 +222,7 @@ var game = (function () {
     events.on("playerMoved", playerMoved);
     events.on("restart", start);
 
-    start();
+    dom.showWinner("");
 
     function playerMoved(x, y) {
         if (board.checkIfEmpty(x, y)) {
@@ -213,12 +245,19 @@ var game = (function () {
         }
     }
 
-    function start() {
+    function start(player1Type, player2Type) {
+        player1.setType(player1Type);
+        player2.setType(player2Type);
+
         activePlayer = player1;
+
         board.resetBoard();
+        dom.reset();
+
         dom.render();
         dom.toggleBoard(false);
         dom.setSigns(player1, player2);
+
         activePlayer.makeMove();
     }
 })();
