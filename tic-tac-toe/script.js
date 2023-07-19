@@ -112,6 +112,8 @@ var dom = (function () {
     let boardCells = document.querySelectorAll(".board>button");
     let showTurnPlayer1 = document.querySelector(".show-turn>.player1");
     let showTurnPlayer2 = document.querySelector(".show-turn>.player2");
+    let showWinnerDialog = document.querySelector("dialog");
+    let restartButton = document.querySelector(".restart");
 
     bindEvents();
 
@@ -125,11 +127,18 @@ var dom = (function () {
             });
         });
 
+        showWinnerDialog.addEventListener("click", function (el) {
+            showWinnerDialog.close();
+        });
+
+        restartButton.addEventListener("click", function (ev) {
+            events.emit("restart");
+        });
     }
 
-    function setSigns(sign1, sign2) {
-        showTurnPlayer1.textContent = sign1 + " turn";
-        showTurnPlayer2.textContent = sign2 + " turn";
+    function setSigns(player1, player2) {
+        showTurnPlayer1.textContent = player1.getType() + " " + player1.getSign() + " turn";
+        showTurnPlayer2.textContent = player2.getType() + " " + player2.getSign() + " turn";
     }
 
     function switchActivePlayer() {
@@ -149,16 +158,27 @@ var dom = (function () {
         });
     }
 
+    function showWinner(text) {
+        let div = showWinnerDialog.querySelector("div");
+        div.textContent = text;
+        showWinnerDialog.showModal();
+    }
+
     function render() {
         boardCells.forEach(function (el) {
             let x = el.getAttribute("data-x");
             let y = el.getAttribute("data-y");
+            let span = el.querySelector("span");
 
-            el.textContent = board.getSign(x, y);
+
+            span.textContent = board.getSign(x, y);
+            if (!board.checkIfEmpty(x, y)) {
+                span.classList.add("show");
+            }
         });
     }
 
-    return { render, toggleBoard, setSigns, switchActivePlayer };
+    return { render, toggleBoard, setSigns, switchActivePlayer, showWinner };
 })();
 
 var game = (function () {
@@ -168,17 +188,24 @@ var game = (function () {
     let activePlayer = player1;
 
     events.on("playerMoved", playerMoved);
+    events.on("restart", restartGame);
 
     start();
+
+    function restartGame() {
+        board.resetBoard();
+        dom.render();
+        activePlayer = player1;
+        start();
+    }
 
     function playerMoved(x, y) {
         if (board.checkIfEmpty(x, y)) {
             board.placeSign(activePlayer.getSign(), x, y);
-            board.displayBoard();
             dom.render();
 
             if (board.checkWin(player1.getSign().repeat(3), player2.getSign().repeat(3)) || !board.hasEmpty()) {
-                console.log(activePlayer.getSign() + " wins");
+                dom.showWinner(activePlayer.getSign() + " wins");
                 dom.toggleBoard();
                 return;
             }
@@ -191,9 +218,7 @@ var game = (function () {
     }
 
     function start() {
-        dom.setSigns(player1.getSign(), player2.getSign());
+        dom.setSigns(player1, player2);
         activePlayer.makeMove();
     }
-
-    return { playerMoved };
 })();
