@@ -8,9 +8,16 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     flex-flow: column nowrap;
+}
+
+.header {
+    border-bottom: 2px dashed black;
+    align-self: stretch;
+    text-align: center;
+    padding: 24px;
+    font-size: 36px;
 }
 
 .board {
@@ -28,6 +35,7 @@ body {
     border-radius: 8px;
     border: 2px solid black;
     background-color: white;
+    border-top-left-radius: 0px;
 }
 
 .board>button>span {
