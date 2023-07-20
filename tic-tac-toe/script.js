@@ -1,5 +1,6 @@
 var board = (function () {
     let _board = [];
+    let _winCells = [];
     resetBoard();
 
     function checkIfEmpty(x, y) {
@@ -22,19 +23,35 @@ var board = (function () {
         for (let i = 0; i < 3; i++) {
             if ([cond1, cond2].includes((_board[i][0] + _board[i][1] + _board[i][2]))) {
                 isWin = true;
+                _winCells = [[i, 0], [i, 1], [i, 2]];
                 break;
             }
             else if ([cond1, cond2].includes((_board[0][i] + _board[1][i] + _board[2][i]))) {
                 isWin = true;
+                _winCells = [[0, i], [1, i], [2, i]];
                 break;
             }
         }
         if ([cond1, cond2].includes((_board[0][0] + _board[1][1] + _board[2][2]))) {
+            _winCells = [[0, 0], [1, 1], [2, 2]];
             isWin = true;
         }
         else if ([cond1, cond2].includes((_board[0][2] + _board[1][1] + _board[2][0]))) {
+            _winCells = [[0, 2], [1, 1], [2, 0]];
             isWin = true;
         }
+
+        return isWin;
+    }
+
+    function isWinCell(x, y) {
+        let isWin = false;
+
+        _winCells.forEach(function (el) {
+            if (x == el[0] && y == el[1]) {
+                isWin = true;
+            }
+        });
 
         return isWin;
     }
@@ -56,6 +73,7 @@ var board = (function () {
 
     function resetBoard() {
         _board = [["", "", ""], ["", "", ""], ["", "", ""]];
+        _winCells = [];
     }
 
     function displayBoard() {
@@ -64,7 +82,7 @@ var board = (function () {
         }
     }
 
-    return { checkIfEmpty, placeSign, resetBoard, displayBoard, hasEmpty, checkWin, getSign };
+    return { checkIfEmpty, placeSign, resetBoard, displayBoard, hasEmpty, checkWin, getSign, isWinCell };
 
 })();
 
@@ -165,6 +183,8 @@ var dom = (function () {
         boardCells.forEach(function (el) {
             let span = el.querySelector("span");
             span.classList.remove("show");
+            span.classList.remove("win");
+            el.classList.remove("win");
         });
     }
 
@@ -210,7 +230,20 @@ var dom = (function () {
         });
     }
 
-    return { render, toggleBoard, setSigns, switchActivePlayer, showWinner, reset };
+    function showWinCells() {
+        boardCells.forEach(function (el) {
+            let x = (el.getAttribute("data-x"));
+            let y = (el.getAttribute("data-y"));
+            let span = el.querySelector("span");
+
+            if (board.isWinCell(x, y)) {
+                el.classList.add("win");
+                span.classList.add("win");
+            }
+        });
+    }
+
+    return { render, toggleBoard, setSigns, switchActivePlayer, showWinner, reset, showWinCells };
 })();
 
 var game = (function () {
@@ -232,6 +265,7 @@ var game = (function () {
             let isWin = board.checkWin(player1.getSign().repeat(3), player2.getSign().repeat(3));
 
             if (isWin || !board.hasEmpty()) {
+                dom.showWinCells();
                 dom.toggleBoard(true);
                 let text = isWin ? activePlayer.getSign() + " wins" : "it's a draw";
                 dom.showWinner(text);

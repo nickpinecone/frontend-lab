@@ -38,9 +38,18 @@ body {
     border-top-left-radius: 0px;
 }
 
+.board>button.win {
+    background-color: black;
+    color: white;
+}
+
 .board>button>span {
     opacity: 0;
     transition: opacity 400ms;
+}
+
+.board>button>span.win {
+    color: white;
 }
 
 .board>button>span.show {
