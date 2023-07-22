@@ -157,22 +157,20 @@ var dom = (function () {
                 event.clientY < dialogDimensions.top ||
                 event.clientY > dialogDimensions.bottom) {
 
-                let player1Type = showWinnerDialog.querySelector(".player1 .options input:checked").value;
-                let player2Type = showWinnerDialog.querySelector(".player2 .options input:checked").value;
-
                 showWinnerDialog.close();
-                events.emit("restart", [player1Type, player2Type]);
             }
         });
 
         restartButton.addEventListener("click", function (ev) {
+            showWinnerDialog.close();
+            ev.stopPropagation();
+        });
 
+        showWinnerDialog.addEventListener("close", function (ev) {
             let player1Type = showWinnerDialog.querySelector(".player1 .options input:checked").value;
             let player2Type = showWinnerDialog.querySelector(".player2 .options input:checked").value;
 
-            showWinnerDialog.close();
             events.emit("restart", [player1Type, player2Type]);
-            ev.stopPropagation();
         });
     }
 
