@@ -1,12 +1,14 @@
 
 let myLibrary = [{ index: -1 }];
 
-function Book(title, author, pages, read, index) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.index = index;
+class Book {
+    constructor(title, authro, pages, read, index) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.index = index;
+    }
 }
 
 let addBookButton = document.querySelector(".add-button");
