@@ -13,6 +13,10 @@ body {
     flex-flow: column nowrap;
     width: 100vw;
     height: 100vh;
+
+    background-image: url("./pie-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #header {
@@ -20,11 +24,9 @@ body {
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: flex-start;
-    font-size: 3rem;
 
-    background-image: url("./pie-background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: hsla(96, 10%, 10%, 0.7);
+
 }
 
 #header span {
@@ -43,7 +45,7 @@ body {
 }
 
 #header ul li {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: bold;
 }
 
@@ -51,16 +53,18 @@ body {
     font-size: inherit;
     text-shadow: 2px 2px black;
     font-weight: inherit;
-    background-color: steelblue;
+    background-color: hsla(0, 0%, 50%, 0.7);
     border: 0;
     color: white;
     padding: 18px;
-    transition: padding-bottom 300ms;
+
+    transition: padding-bottom 300ms, background-color 200ms;
 }
 
 #header ul button:hover {
-    background-color: darkblue;
+    background-color: hsla(0, 0%, 35%, 0.7);
     padding-bottom: 2rem;
+    cursor: pointer;
 }
 
 #content {
