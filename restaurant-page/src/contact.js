@@ -1,8 +1,8 @@
 export default function createContact() {
-    let wrapper = document.createElement("div");
-    wrapper.classList.add("contact-wrapper");
+    let panel = document.createElement("div");
+    panel.classList.add("panel");
 
-    wrapper.insertAdjacentHTML(
+    panel.insertAdjacentHTML(
         "afterbegin",
         `
         <iframe
@@ -10,17 +10,14 @@ export default function createContact() {
             width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-        <div class="panel">
-
-            <ul>
-                <li>Twitter: <span id="tag">@atmarcels</span></li>
-                <li>Instagram: <span id="tag">@atmarcelspies</span></li>
-                <li>Number: 9876954321</li>
-                <li>Address: Boston, Cool Street 4</li>
-            </ul>
-        </div>
+        <ul>
+            <li>Twitter: <span id="tag">@atmarcels</span></li>
+            <li>Instagram: <span id="tag">@atmarcelspies</span></li>
+            <li>Number: 9876954321</li>
+            <li>Address: Boston, Cool Street 4</li>
+        </ul>
         `
-    )
+    );
 
-    return wrapper;
+    return panel;
 };

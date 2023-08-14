@@ -23,19 +23,21 @@ body {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
 
     background-color: hsla(0, 10%, 10%, 0.7);
+    box-shadow: 0px 2px 4px black;
 
 }
 
 #header h1 {
-    align-self: center;
     font-size: 4rem;
     font-weight: bold;
-    color: white;
-    text-shadow: 3px 3px black;
     padding: 2.4rem;
+
+    background: linear-gradient(to right, crimson, hotpink);
+    background-clip: text;
+    color: transparent;
 }
 
 #header ul {
@@ -52,18 +54,19 @@ body {
 #header ul button {
     font-size: inherit;
     text-shadow: 2px 2px black;
-    font-weight: inherit;
-    background-color: hsla(0, 0%, 50%, 0.7);
+    background-color: transparent;
     border: 0;
     color: white;
     padding: 18px;
-
-    transition: padding-bottom 300ms, background-color 200ms;
+    position: relative;
+    top: 0px;
+    transition: top 300ms;
 }
 
 #header ul button:hover {
-    background-color: hsla(0, 0%, 35%, 0.7);
-    padding-bottom: 2rem;
+    top: -6px;
+    text-decoration: underline;
+    text-underline-offset: 6px;
     cursor: pointer;
 }
 
@@ -71,32 +74,30 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
-
-#content .contact-wrapper {
-    display: flex;
-    justify-content: space-between;
 }
 
 iframe {
-    margin-left: 4rem;
+    margin-right: 4rem;
     box-shadow: 2px 2px 4px black;
     border-radius: 12px;
 }
 
 .panel {
-    font-size: 2.2rem;
-    background-color: hsla(0, 0%, 96%, 1);
+    flex: 1;
+    font-size: 3rem;
+    background-color: hsla(0, 10%, 10%, 0.7);
     padding: 4rem 3rem;
-    border-radius: 12px;
-    box-shadow: 2px 2px 4px black;
     align-self: flex-end;
-    margin-right: 4rem;
+    margin-right: 5rem;
+    color: white;
+    font-weight: bold;
+    text-shadow: 3px 3px black;
+    display: flex;
+    align-items: center;
 }
 
 .panel ul {
-    list-style-type: circle;
+    list-style-type: none;
 }
 
 .panel ul li:not(:last-child) {

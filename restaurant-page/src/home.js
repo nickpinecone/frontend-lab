@@ -2,7 +2,7 @@ export default function createHome() {
     let panel = document.createElement("div");
     panel.classList.add("panel");
 
-    let items = ["Best Quality", "Fair Prices", "Huge Selection", "Blazingly Fast Delivery"];
+    let items = ["Best Quality", "Fair Prices", "Huge Selection", "Fast Delivery"];
     let ul = document.createElement("ul");
 
     for (let i = 0; i < items.length; i++) {
