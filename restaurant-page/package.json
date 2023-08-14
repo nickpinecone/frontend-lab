@@ -2,7 +2,7 @@
   "name": "restaurant-page",
   "version": "1.0.0",
   "description": "This restaurant offers the best pies in the entire universe",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch"

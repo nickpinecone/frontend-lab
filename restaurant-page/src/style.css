@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100vw;
+    height: 100vh;
+}
+
+#header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: cadetblue;
+    font-size: 2.4rem;
+    color: white;
+}
+
+#header span {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+#header ul {
+    display: flex;
+    list-style: none;
+    gap: 48px;
+}
+
+#header ul button {
+    font-size: inherit;
+    font-weight: bold;
+    background-color: steelblue;
+    border: 0;
+    padding: 18px;
+    color: white;
+}
+
+#header ul button:hover,
+#header ul button:focus {
+    background-color: darkblue;
+}
+
+#content {
+    flex: 1;
+}
