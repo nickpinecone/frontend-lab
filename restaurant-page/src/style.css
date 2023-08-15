@@ -14,7 +14,7 @@ body {
     width: 100vw;
     height: 100vh;
 
-    background-image: url("./pie-background.jpg");
+    background-image: url("./imgs/pie-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -87,13 +87,18 @@ iframe {
     font-size: 3rem;
     background-color: hsla(0, 10%, 10%, 0.7);
     padding: 4rem 3rem;
-    align-self: flex-end;
-    margin-right: 5rem;
+    align-self: center;
     color: white;
     font-weight: bold;
     text-shadow: 3px 3px black;
     display: flex;
     align-items: center;
+    backdrop-filter: blur(3px);
+}
+
+.panel.home {
+    margin-right: 5rem;
+    align-self: flex-end;
 }
 
 .panel ul {
@@ -112,4 +117,47 @@ iframe {
 .panel #tag:hover {
     color: darkblue;
     cursor: pointer;
+}
+
+.items-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    width: 70vw;
+    justify-items: center;
+}
+
+.items-list .item {
+    border-radius: 4px;
+    position: relative;
+    max-width: 320px;
+    max-height: 310px;
+    box-shadow: 2px 2px 4px black;
+}
+
+.items-list img {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+
+}
+
+.items-list .desc {
+    border-radius: inherit;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: hsla(0, 5%, 35%, 0.6);
+    font-size: 1.3rem;
+    text-align: center;
+    padding-top: 48%;
+    transition: top 300ms, padding-top 300ms;
+    text-shadow: 1px 1px black;
+}
+
+.items-list .item:hover .desc {
+    top: 86%;
+    padding-top: 3%;
 }

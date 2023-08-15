@@ -2,6 +2,7 @@ import './style.css';
 
 import createHome from './home';
 import createContact from './contact';
+import createMenu from './menu';
 
 
 let buttons = document.querySelectorAll(".tab");
@@ -23,6 +24,9 @@ function switchTab(el) {
     }
     else if (el.classList.contains("contact")) {
         content.appendChild(createContact());
+    }
+    else if (el.classList.contains("menu")) {
+        content.appendChild(createMenu());
     }
 }
 

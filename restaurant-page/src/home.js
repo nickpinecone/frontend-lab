@@ -1,6 +1,7 @@
 export default function createHome() {
     let panel = document.createElement("div");
     panel.classList.add("panel");
+    panel.classList.add("home");
 
     let items = ["Best Quality", "Fair Prices", "Huge Selection", "Fast Delivery"];
     let ul = document.createElement("ul");
