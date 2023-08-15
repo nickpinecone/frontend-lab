@@ -14,7 +14,7 @@ body {
     width: 100vw;
     height: 100vh;
 
-    background-image: url("./imgs/pie-background.jpg");
+    background-image: url("./imgs/background3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -35,7 +35,7 @@ body {
     font-weight: bold;
     padding: 2.4rem;
 
-    background: linear-gradient(to right, crimson, hotpink);
+    background: linear-gradient(to right, orangered, orange);
     background-clip: text;
     color: transparent;
 }
