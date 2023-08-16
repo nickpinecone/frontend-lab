@@ -33,10 +33,11 @@ body {
 #header h1 {
     font-size: 4rem;
     font-weight: bold;
-    padding: 2.4rem;
+    padding: 2rem;
 
     background: linear-gradient(to right, orangered, orange);
     background-clip: text;
+    -webkit-background-clip: text;
     color: transparent;
 }
 
@@ -70,6 +71,20 @@ body {
     cursor: pointer;
 }
 
+
+#footer {
+    background-color: hsla(0, 10%, 10%, 0.7);
+    color: white;
+    padding: 4px;
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-left: 2rem;
+    text-shadow: 1px 1px black;
+}
+
 #content {
     flex: 1;
     display: flex;
@@ -86,7 +101,7 @@ iframe {
     flex: 1;
     font-size: 3rem;
     background-color: hsla(0, 10%, 10%, 0.7);
-    padding: 4rem 3rem;
+    padding: 3rem 3rem;
     align-self: center;
     color: white;
     font-weight: bold;
@@ -109,12 +124,14 @@ iframe {
     margin-bottom: 2.8rem;
 }
 
-.panel #tag {
+.panel #tag,
+#footer a {
     color: steelblue;
     transition: color 100ms;
 }
 
-.panel #tag:hover {
+.panel #tag:hover,
+#footer a:hover {
     color: darkblue;
     cursor: pointer;
 }
