@@ -11,12 +11,13 @@
 body {
     display: flex;
     flex-flow: column nowrap;
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
 
     background-image: url("./imgs/background3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 #header {
@@ -77,10 +78,6 @@ body {
     color: white;
     padding: 4px;
     font-size: 1.2rem;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
     padding-left: 2rem;
     text-shadow: 1px 1px black;
 }
