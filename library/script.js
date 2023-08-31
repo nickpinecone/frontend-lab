@@ -2,7 +2,7 @@
 let myLibrary = [{ index: -1 }];
 
 class Book {
-    constructor(title, authro, pages, read, index) {
+    constructor(title, author, pages, read, index) {
         this.title = title;
         this.author = author;
         this.pages = pages;
@@ -33,6 +33,7 @@ submitDialog.addEventListener("click", (event) => {
 
         let data = Object.fromEntries(new FormData(form).entries());
         addBookToLibrary(data);
+        saveToStorage();
 
         form.reset();
     }
@@ -61,6 +62,22 @@ function addBookToLibrary(data) {
     inputs.forEach((el) => {
         el.style.height = (el.scrollHeight + 2) + "px";
     });
+}
+
+function saveToStorage() {
+    localStorage.library = "";
+    localStorage.library = JSON.stringify(myLibrary);
+}
+
+function readFromStorage() {
+    if (localStorage.library) {
+        let arr = JSON.parse(localStorage.library);
+        if (arr.length > 1) {
+            for (let i = 1; i < arr.length; i++) {
+                addBookToLibrary({ title: arr[i].title, author: arr[i].author, pages: arr[i].pages, read: arr[i].read ? "on" : "off" });
+            }
+        }
+    }
 }
 
 function createTextarea(prefix, name, data) {
@@ -143,6 +160,8 @@ function createBook(data) {
         }
 
         bookBackend.read = !bookBackend.read;
+
+        saveToStorage();
     });
 
     editButton.addEventListener("click", () => {
@@ -163,14 +182,19 @@ function createBook(data) {
         title[1].disabled = !title[1].disabled;
         author[1].disabled = !author[1].disabled;
         pages[1].disabled = !pages[1].disabled;
+
+        saveToStorage();
     });
 
     removeButton.addEventListener("click", () => {
         bookCards.removeChild(book);
         myLibrary = myLibrary.filter((el) => el.index != bookBackend.index);
+
+        saveToStorage();
     });
 
     return book;
 }
 
-addBookToLibrary({ title: "Gunslinger", author: "Stephen King", pages: 310, read: "on" });
+readFromStorage();
+saveToStorage();
