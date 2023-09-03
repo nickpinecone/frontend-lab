@@ -5,6 +5,16 @@ module.exports = {
     devtool: "inline-source-map",
     mode: "development",
 
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, "dist"),
+        },
+        open: true,
+        hot: true,
+        compress: true,
+        historyApiFallback: true,
+    },
+
     entry: {
         main: "./src/index.js",
     },
