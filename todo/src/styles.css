@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+header {
+    font-size: 2rem;
+    border-bottom: 1px solid black;
+    padding: 24px;
+    text-align: center;
+    background-color: steelblue;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.projects-sidebar {
+    background-color: lightblue;
+    padding: 16px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
+}
+
+.project {
+    background-color: gray;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    gap: 4px;
+}
+
+.project #title {
+    flex: 1;
+    font-size: 1.4rem;
+    padding: 8px;
+}
+
+.project #title:disabled {
+    color: white;
+    background-color: gray;
+    border: 0;
+}
+
+.project button {
+    padding: 8px;
+    font-size: inherit;
+}
+
+.todos-area {
+    flex: 1;
+    background-color: whitesmoke;
+    padding: 16px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.todo {
+    background-color: gray;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+    color: white;
+}
+
+.todo label[for="priority"] {
+    grid-area: 2 / 2 / 3 / 4;
+}
+
+.todo input,
+.todo textarea,
+.todo button {
+    font-size: inherit;
+}
+
+.todo input:disabled,
+.todo textarea {
+    background-color: gray;
+    color: white;
+    border: 0;
+    resize: none;
+}
+
+.todo label[for="priority"] {
+    position: relative;
+}
+
+.todo label[for="priority"]::after {
+    content: "";
+    background-color: gray;
+    padding: 16px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}

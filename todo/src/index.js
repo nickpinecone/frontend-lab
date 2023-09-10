@@ -1,4 +1,6 @@
 
+import './styles.css'
+
 const makeTodo = (function (_description, _dueDate, _priority, _id) {
     let description = _description;
     let dueDate = _dueDate;
