@@ -6,9 +6,10 @@
 
 :root {
     font-size: 16px;
-    --main-color: hsl(0, 0%, 65%);
-    --second-color: hsl(0, 0%, 75%);
-    --third-color: hsl(0, 0%, 85%);
+    --main-color: hsl(0, 0%, 75%);
+    --second-color: hsl(0, 0%, 80%);
+    --third-color: hsl(0, 0%, 90%);
+    --theme-color: hsl(205, 55%, 25%);
 }
 
 body {
@@ -24,34 +25,49 @@ header {
     padding: 24px;
     text-align: center;
     background-color: var(--main-color);
+    box-shadow: 0px 2px 6px gray;
+    z-index: 2;
+    color: var(--theme-color);
+    text-shadow: 1px 1px steelblue;
 }
 
 .main-content {
     flex: 1;
     display: flex;
     flex-flow: row nowrap;
+    overflow: hidden;
 }
 
 .projects-sidebar {
     background-color: var(--second-color);
-    padding: 16px;
+    padding: 24px 16px;
     display: flex;
     flex-flow: column nowrap;
     gap: 16px;
+    box-shadow: 2px 0px 6px gray;
+    z-index: 1;
+    overflow: scroll;
 }
 
 #sidebar-title {
+    color: var(--theme-color);
+    text-shadow: 1px 1px steelblue;
     text-align: center;
     font-size: 1.8rem;
 }
 
 .project {
     background-color: white;
-    padding: 8px;
+    padding: 12px;
     border-radius: 8px;
     display: flex;
     gap: 4px;
     font-size: 1.6rem;
+}
+
+.project,
+.todo {
+    box-shadow: 2px 2px 6px gray;
 }
 
 .project #title {
@@ -73,18 +89,20 @@ header {
 .todos-area {
     flex: 1;
     background-color: var(--third-color);
-    padding: 16px;
+    padding: 24px 16px;
     display: flex;
     flex-flow: column nowrap;
+    overflow: scroll;
+    gap: 24px;
 }
 
 .todo {
     background-color: white;
-    padding: 4px 16px;
+    padding: 0px 16px;
     border-radius: 8px;
     font-size: 1.4rem;
     display: flex;
-    gap: 12px;
+    gap: 8px;
     align-items: center;
     margin: 0px 16px;
 }
@@ -108,4 +126,20 @@ header {
 .todo input:disabled {
     color: black;
     border: 0;
+}
+
+.project button,
+.todo button,
+.project input:disabled,
+.todo input:disabled {
+    background-color: transparent;
+    border: 0;
+    border-radius: 4px;
+}
+
+.project button:hover,
+.todo button:hover,
+.project input:disabled:hover,
+.todo input:disabled:hover {
+    background-color: var(--third-color);
 }
