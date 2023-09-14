@@ -13,26 +13,28 @@
     <div class="main-content">
 
         <div class="projects-sidebar">
+            <h2 id="sidebar-title">Projects</h2>
             <div class="project">
                 <input type="text" value="Default" id="title" disabled>
-                <button class="edit">Edit</button>
-                <button class="remove">Remove</button>
+                <button class="edit">⚙️</button>
+                <button class="remove">🗑️</button>
             </div>
         </div>
 
         <div class="todos-area">
             <div class="todo">
-                <textarea name="description" id="description" cols="30" rows="1" disabled>Buy Milk</textarea>
-                <button class="edit">Edit</button>
-                <button class="remove">Remove</button>
+                <input type="checkbox" name="done-check" id="done-check">
+                <input name="description" id="description" value="Buy Milk" disabled>
                 <label for="due-date">
-                    Due:
+                    📅
                     <input type="date" name="due-date" id="due-date" value="2023-09-01" disabled>
                 </label>
                 <label for="priority">
-                    Priority:
-                    <input type="number" name="priority" id="priority" value="1" disabled>
+                    ⚠️
+                    <input type="number" name="priority" id="priority" value="1" min="1" max="255" size="4" disabled>
                 </label>
+                <button class="edit">⚙️</button>
+                <button class="remove">🗑️</button>
             </div>
         </div>
 

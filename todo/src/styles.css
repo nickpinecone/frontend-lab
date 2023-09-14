@@ -6,6 +6,9 @@
 
 :root {
     font-size: 16px;
+    --main-color: hsl(0, 0%, 65%);
+    --second-color: hsl(0, 0%, 75%);
+    --third-color: hsl(0, 0%, 85%);
 }
 
 body {
@@ -16,11 +19,11 @@ body {
 }
 
 header {
-    font-size: 2rem;
-    border-bottom: 1px solid black;
+    font-size: 2.2rem;
+    font-weight: bold;
     padding: 24px;
     text-align: center;
-    background-color: steelblue;
+    background-color: var(--main-color);
 }
 
 .main-content {
@@ -30,30 +33,35 @@ header {
 }
 
 .projects-sidebar {
-    background-color: lightblue;
+    background-color: var(--second-color);
     padding: 16px;
     display: flex;
     flex-flow: column nowrap;
     gap: 16px;
 }
 
+#sidebar-title {
+    text-align: center;
+    font-size: 1.8rem;
+}
+
 .project {
-    background-color: gray;
+    background-color: white;
     padding: 8px;
     border-radius: 8px;
     display: flex;
     gap: 4px;
+    font-size: 1.6rem;
 }
 
 .project #title {
     flex: 1;
-    font-size: 1.4rem;
+    font-size: inherit;
     padding: 8px;
 }
 
 .project #title:disabled {
-    color: white;
-    background-color: gray;
+    color: black;
     border: 0;
 }
 
@@ -64,53 +72,40 @@ header {
 
 .todos-area {
     flex: 1;
-    background-color: whitesmoke;
+    background-color: var(--third-color);
     padding: 16px;
     display: flex;
     flex-flow: column nowrap;
-    align-items: center;
 }
 
 .todo {
-    background-color: gray;
-    padding: 8px;
+    background-color: white;
+    padding: 4px 16px;
     border-radius: 8px;
-    font-size: 1.2rem;
-    display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 4px;
-    color: white;
+    font-size: 1.4rem;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 0px 16px;
 }
 
-.todo label[for="priority"] {
-    grid-area: 2 / 2 / 3 / 4;
+.todo #done-check {
+    transform: scale(2);
+    margin: 0px 4px;
+}
+
+.todo #description {
+    flex: 1;
 }
 
 .todo input,
-.todo textarea,
-.todo button {
+.todo button,
+.todo label {
     font-size: inherit;
+    padding: 12px;
 }
 
-.todo input:disabled,
-.todo textarea {
-    background-color: gray;
-    color: white;
+.todo input:disabled {
+    color: black;
     border: 0;
-    resize: none;
-}
-
-.todo label[for="priority"] {
-    position: relative;
-}
-
-.todo label[for="priority"]::after {
-    content: "";
-    background-color: gray;
-    padding: 16px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
 }
