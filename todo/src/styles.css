@@ -9,7 +9,7 @@
     --main-color: hsl(0, 0%, 75%);
     --second-color: hsl(0, 0%, 80%);
     --third-color: hsl(0, 0%, 90%);
-    --theme-color: hsl(205, 55%, 25%);
+    --theme-color: hsl(205, 55%, 20%);
 }
 
 body {
@@ -47,6 +47,13 @@ header {
     box-shadow: 2px 0px 6px gray;
     z-index: 1;
     overflow: scroll;
+    position: relative;
+}
+
+.project-container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
 }
 
 #sidebar-title {
@@ -93,7 +100,13 @@ header {
     display: flex;
     flex-flow: column nowrap;
     overflow: scroll;
-    gap: 24px;
+    position: relative;
+}
+
+.todo-container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
 }
 
 .todo {
@@ -109,7 +122,7 @@ header {
 
 .todo #done-check {
     transform: scale(2);
-    margin: 0px 4px;
+    margin: 0px 8px;
 }
 
 .todo #description {
@@ -131,7 +144,8 @@ header {
 .project button,
 .todo button,
 .project input:disabled,
-.todo input:disabled {
+.todo input:disabled,
+.project input:read-only {
     background-color: transparent;
     border: 0;
     border-radius: 4px;
@@ -140,6 +154,31 @@ header {
 .project button:hover,
 .todo button:hover,
 .project input:disabled:hover,
-.todo input:disabled:hover {
+.todo input:disabled:hover,
+.project input:read-only:hover {
     background-color: var(--third-color);
+}
+
+button.add {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 24px;
+    background-color: var(--theme-color);
+    border: 2px solid var(--theme-color);
+    color: white;
+}
+
+button.add:hover {
+    background-color: white;
+    color: var(--theme-color);
+}
+
+input:read-only {
+    border: 0;
+    cursor: default;
+}
+
+input:read-only:focus {
+    outline: 0;
 }

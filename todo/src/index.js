@@ -107,7 +107,6 @@ const makeProject = (function (_title, _id) {
     return { addTodo, getInformation, getTodo, changeInfo, removeTodo, getObject };
 });
 
-
 const app = (function () {
     let projects = [];
     let activeProject;
@@ -152,7 +151,7 @@ const app = (function () {
 
     function init() {
         addProject("Default Project");
-        activeProject.addTodo("Default Todo", "01/01/1970", 1);
+        activeProject.addTodo("Default Todo", "1970-01-01", 1);
     }
 
     function getInformation() {
@@ -193,12 +192,91 @@ const app = (function () {
     return { addProject, getInformation, getProject, removeProject, getActiveProject, getObject };
 })();
 
+const dom = (function () {
+    let projectContainer = document.querySelector(".project-container");
+    let todoContainer = document.querySelector(".todo-container");
+
+    function createProject(title, id) {
+        let project = document.createElement("div");
+        project.classList.add("project");
+        project.setAttribute("data-id", id);
+
+        project.insertAdjacentHTML(
+            "afterbegin",
+            `
+            <input type="text" value="${title}" id="title" readonly>
+            <button class="edit">⚙️</button>
+            <button class="remove">🗑️</button>
+            `
+        );
+
+        project.querySelector("input").addEventListener("click", () => {
+            console.log("Hello");
+            renderTodos(id);
+        });
+
+        return project;
+    }
+
+    function renderProjects() {
+        for (let project of app.getInformation().projects) {
+            let projectDiv = createProject(project.getInformation().title, project.getInformation().id);
+            projectContainer.appendChild(projectDiv);
+        }
+    }
+
+    function createTodo(description, dueDate, priority, id) {
+        let todo = document.createElement("div");
+        todo.classList.add("todo");
+        todo.setAttribute("data-id", id);
+
+        todo.insertAdjacentHTML(
+            "afterbegin",
+            `
+            <input type="checkbox" name="done-check" id="done-check">
+            <input name="description" id="description" value="${description}" maxlength="120" disabled>
+            <label>
+                📅
+                <input type="date" name="due-date" id="due-date" value="${dueDate}" disabled>
+            </label>
+            <label>
+                ⚠️
+                <input type="number" name="priority" id="priority" value="${priority}" min="1" max="255" size="4"
+                    disabled>
+            </label>
+            <button class="edit">⚙️</button>
+            <button class="remove">🗑️</button>
+            `
+        );
+
+        return todo;
+
+    }
+
+    function renderTodos(projectId) {
+        todoContainer.replaceChildren([]);
+
+        var todos = app.getProject(projectId).getInformation().todos;
+
+        for (let todo of todos) {
+            let todoDiv = createTodo(todo.getInformation().description, todo.getInformation().dueDate, todo.getInformation().priority, todo.getInformation().id);
+            todoContainer.appendChild(todoDiv);
+        }
+    }
 
 
-app.getActiveProject().addTodo("Buy Milk", "01/01/9", 2);
-app.getActiveProject().getTodo(0).changeInfo("Sell Bread", "20/20/20", 8);
-app.getInformation();
+    return { renderProjects, renderTodos };
+})();
+app.addProject("Important Stuff");
+app.getActiveProject().addTodo("Buy Milk", "1970-01-01", 2);
 
-let storage = (JSON.stringify(app.getObject()));
-let object = JSON.parse(storage);
-console.log(object);
+dom.renderProjects();
+dom.renderTodos(app.getActiveProject().getInformation().id);
+
+
+// app.getActiveProject().getTodo(0).changeInfo("Sell Bread", "20/20/20", 8);
+// app.getInformation();
+
+// let storage = (JSON.stringify(app.getObject()));
+// let object = JSON.parse(storage);
+// console.log(object);
