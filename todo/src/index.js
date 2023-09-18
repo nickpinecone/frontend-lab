@@ -167,6 +167,15 @@ const app = (function () {
         return activeProject;
     }
 
+    function setActiveProject(projectId) {
+        for (let project of projects) {
+            if (project.getInformation().id == projectId) {
+                activeProject = project;
+                break;
+            }
+        }
+    }
+
     // DEBUG
     function logProjects() {
         console.log("START LOG PROJECTS");
@@ -189,12 +198,29 @@ const app = (function () {
         }
     }
 
-    return { addProject, getInformation, getProject, removeProject, getActiveProject, getObject };
+    return { addProject, getInformation, getProject, removeProject, getActiveProject, getObject, setActiveProject };
 })();
 
 const dom = (function () {
     let projectContainer = document.querySelector(".project-container");
     let todoContainer = document.querySelector(".todo-container");
+    let addTodoButton = document.querySelector("button.add.todo");
+    let addProjectButton = document.querySelector("button.add.project");
+
+    bindButtons();
+
+    function bindButtons() {
+        addProjectButton.addEventListener("click", () => {
+            app.addProject("None");
+            renderProjects();
+            renderTodos(app.getActiveProject().getInformation().id);
+        });
+
+        addTodoButton.addEventListener("click", () => {
+            app.getActiveProject().addTodo("None", "1970-01-01", 1);
+            renderTodos(app.getActiveProject().getInformation().id);
+        });
+    }
 
     function createProject(title, id) {
         let project = document.createElement("div");
@@ -211,14 +237,16 @@ const dom = (function () {
         );
 
         project.querySelector("input").addEventListener("click", () => {
-            console.log("Hello");
             renderTodos(id);
+            app.setActiveProject(id);
         });
 
         return project;
     }
 
     function renderProjects() {
+        projectContainer.replaceChildren([]);
+
         for (let project of app.getInformation().projects) {
             let projectDiv = createProject(project.getInformation().title, project.getInformation().id);
             projectContainer.appendChild(projectDiv);
@@ -267,16 +295,8 @@ const dom = (function () {
 
     return { renderProjects, renderTodos };
 })();
-app.addProject("Important Stuff");
-app.getActiveProject().addTodo("Buy Milk", "1970-01-01", 2);
 
 dom.renderProjects();
 dom.renderTodos(app.getActiveProject().getInformation().id);
 
 
-// app.getActiveProject().getTodo(0).changeInfo("Sell Bread", "20/20/20", 8);
-// app.getInformation();
-
-// let storage = (JSON.stringify(app.getObject()));
-// let object = JSON.parse(storage);
-// console.log(object);
