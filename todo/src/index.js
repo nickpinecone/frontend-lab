@@ -137,7 +137,7 @@ const app = (function () {
 
         projects.push(project);
 
-        activeProject = project;
+        setActiveProject(id);
     }
 
     function removeProject(id) {
@@ -239,9 +239,21 @@ const dom = (function () {
         project.querySelector("input").addEventListener("click", () => {
             renderTodos(id);
             app.setActiveProject(id);
+            showActiveProject(id);
         });
 
         return project;
+    }
+
+    function showActiveProject(id) {
+        for (let project of projectContainer.children) {
+            project.classList.remove("active");
+
+            if (project.getAttribute("data-id") == id) {
+                project.classList.add("active");
+            }
+        }
+
     }
 
     function renderProjects() {
@@ -250,6 +262,10 @@ const dom = (function () {
         for (let project of app.getInformation().projects) {
             let projectDiv = createProject(project.getInformation().title, project.getInformation().id);
             projectContainer.appendChild(projectDiv);
+
+            if (project.getInformation().id == app.getActiveProject().getInformation().id) {
+                projectDiv.classList.add("active");
+            }
         }
     }
 
@@ -262,15 +278,15 @@ const dom = (function () {
             "afterbegin",
             `
             <input type="checkbox" name="done-check" id="done-check">
-            <input name="description" id="description" value="${description}" maxlength="120" disabled>
+            <input name="description" id="description" value="${description}" maxlength="120" readonly>
             <label>
                 📅
-                <input type="date" name="due-date" id="due-date" value="${dueDate}" disabled>
+                <input type="date" name="due-date" id="due-date" value="${dueDate}" readonly>
             </label>
             <label>
                 ⚠️
                 <input type="number" name="priority" id="priority" value="${priority}" min="1" max="255" size="4"
-                    disabled>
+                    readonly>
             </label>
             <button class="edit">⚙️</button>
             <button class="remove">🗑️</button>

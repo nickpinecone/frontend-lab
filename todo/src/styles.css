@@ -72,6 +72,14 @@ header {
     font-size: 1.6rem;
 }
 
+.project.active {
+    background-color: var(--theme-color);
+}
+
+.project.active input:read-only {
+    color: white;
+}
+
 
 .project,
 .todo {
@@ -82,11 +90,6 @@ header {
     flex: 1;
     font-size: inherit;
     padding: 8px;
-}
-
-.project #title:disabled {
-    color: black;
-    border: 0;
 }
 
 .project button {
@@ -137,15 +140,15 @@ header {
     padding: 12px;
 }
 
-.todo input:disabled {
+.todo input:read-only {
     color: black;
     border: 0;
 }
 
 .project button,
 .todo button,
-.project input:disabled,
-.todo input:disabled,
+.project input:read-only,
+.todo input:read-only,
 .project input:read-only {
     background-color: transparent;
     border: 0;
@@ -154,10 +157,10 @@ header {
 
 .project button:hover,
 .todo button:hover,
-.project input:disabled:hover,
-.todo input:disabled:hover,
-.project input:read-only:hover {
+.project input:read-only:hover,
+.todo input:read-only:hover {
     background-color: var(--third-color);
+    color: black;
 }
 
 button.add {
