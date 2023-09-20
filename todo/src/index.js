@@ -6,6 +6,7 @@ const makeTodo = (function (_description, _dueDate, _priority, _id) {
     let dueDate = _dueDate;
     let priority = _priority;
     let id = _id;
+    let done = false;
 
 
     function getInformation() {
@@ -14,6 +15,7 @@ const makeTodo = (function (_description, _dueDate, _priority, _id) {
             dueDate,
             priority,
             id,
+            done,
         };
     }
 
@@ -23,7 +25,11 @@ const makeTodo = (function (_description, _dueDate, _priority, _id) {
         priority = newPriority;
     }
 
-    return { getInformation, changeInfo };
+    function changeDone(value) {
+        done = value;
+    }
+
+    return { getInformation, changeInfo, changeDone };
 });
 
 
@@ -67,8 +73,6 @@ const makeProject = (function (_title, _id) {
     }
 
     function getInformation() {
-        logTodos();
-
         return {
             title,
             todos,
@@ -78,15 +82,6 @@ const makeProject = (function (_title, _id) {
 
     function changeInfo(newTitle) {
         title = newTitle;
-    }
-
-    // DEBUG
-    function logTodos() {
-        console.log("START LOG TODOS");
-        for (let todo of todos) {
-            console.log(todo.getInformation());
-        }
-        console.log("END LOG TODOS");
     }
 
     // For local storage
@@ -155,8 +150,6 @@ const app = (function () {
     }
 
     function getInformation() {
-        logProjects();
-
         return {
             projects,
             activeProject
@@ -174,15 +167,6 @@ const app = (function () {
                 break;
             }
         }
-    }
-
-    // DEBUG
-    function logProjects() {
-        console.log("START LOG PROJECTS");
-        for (let project of projects) {
-            console.log(project.getInformation());
-        }
-        console.log("END LOG PROJECTS");
     }
 
     // For local storage
@@ -269,7 +253,7 @@ const dom = (function () {
         }
     }
 
-    function createTodo(description, dueDate, priority, id) {
+    function createTodo(description, dueDate, priority, id, done) {
         let todo = document.createElement("div");
         todo.classList.add("todo");
         todo.setAttribute("data-id", id);
@@ -277,7 +261,7 @@ const dom = (function () {
         todo.insertAdjacentHTML(
             "afterbegin",
             `
-            <input type="checkbox" name="done-check" id="done-check">
+            <input type="checkbox" name="done-check" id="done-check" ${done ? "checked" : ""}>
             <input name="description" id="description" value="${description}" maxlength="120" readonly>
             <label>
                 📅
@@ -293,6 +277,10 @@ const dom = (function () {
             `
         );
 
+        todo.querySelector("#done-check").addEventListener("click", (event) => {
+            app.getActiveProject().getTodo(id).changeDone(event.target.checked);
+        });
+
         return todo;
 
     }
@@ -303,7 +291,7 @@ const dom = (function () {
         var todos = app.getProject(projectId).getInformation().todos;
 
         for (let todo of todos) {
-            let todoDiv = createTodo(todo.getInformation().description, todo.getInformation().dueDate, todo.getInformation().priority, todo.getInformation().id);
+            let todoDiv = createTodo(todo.getInformation().description, todo.getInformation().dueDate, todo.getInformation().priority, todo.getInformation().id, todo.getInformation().done);
             todoContainer.appendChild(todoDiv);
         }
     }
