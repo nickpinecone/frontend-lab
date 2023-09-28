@@ -204,8 +204,6 @@ const dom = (function () {
         if (window.localStorage.projects) {
             let data = JSON.parse(window.localStorage.projects);
 
-            console.log(data);
-
             for (let project of data.array) {
                 app.addProject(project.title);
                 for (let todo of project.array) {
