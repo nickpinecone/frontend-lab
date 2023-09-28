@@ -42,6 +42,7 @@ header {
     background-color: var(--second-color);
     padding: 24px 16px;
     display: flex;
+    width: 28%;
     flex-flow: column nowrap;
     gap: 16px;
     box-shadow: 2px 0px 6px gray;

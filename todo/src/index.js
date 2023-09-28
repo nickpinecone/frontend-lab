@@ -229,10 +229,16 @@ const dom = (function () {
         project.querySelector("button.remove").addEventListener("click", () => {
             app.removeProject(id);
             projectContainer.removeChild(project);
-            if (project.classList.contains("active")) {
-                renderTodos(0);
-                app.setActiveProject(0);
-                showActiveProject(0);
+
+            if (project.classList.contains("active") && projectContainer.childElementCount > 0) {
+                let firstId = projectContainer.children[0].getAttribute("data-id");
+
+                renderTodos(firstId);
+                app.setActiveProject(firstId);
+                showActiveProject(firstId);
+            }
+            else if (projectContainer.childElementCount <= 0) {
+                todoContainer.replaceChildren([]);
             }
         });
 
