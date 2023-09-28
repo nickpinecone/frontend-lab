@@ -125,6 +125,8 @@ header {
     gap: 8px;
     align-items: center;
     margin: 0px 16px;
+
+    border-left: 12px solid black;
 }
 
 .todo #done-check {

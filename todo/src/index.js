@@ -322,7 +322,7 @@ const dom = (function () {
             </label>
             <label>
                 ⚠️
-                <input type="number" name="priority" id="priority" value="${priority}" min="1" max="255" size="4"
+                <input type="number" name="priority" id="priority" value="${priority}" min="0" max="9" size="4"
                     readonly>
             </label>
             <button class="edit">⚙️</button>
@@ -353,6 +353,7 @@ const dom = (function () {
                 priorityInput.readOnly = true;
 
                 app.getActiveProject().getTodo(id).changeInfo(descriptionInput.value, dateInput.value, priorityInput.value);
+                todo.style.borderLeftColor = `hsl(0, 100%, ${100 - ((priorityInput.value) / 9 * 50)}%)`;
             }
             else {
                 editButton.classList.add("active");
@@ -379,6 +380,7 @@ const dom = (function () {
         for (let todo of todos) {
             let todoDiv = createTodo(todo.getInformation().description, todo.getInformation().dueDate, todo.getInformation().priority, todo.getInformation().id, todo.getInformation().done);
             todoContainer.appendChild(todoDiv);
+            todoDiv.style.borderLeftColor = `hsl(0, 100%, ${100 - ((todo.getInformation().priority) / 9 * 50)}%)`;
         }
     }
 
