@@ -212,6 +212,14 @@ const dom = (function () {
             if (projectContainer.childElementCount > 0) {
                 app.getActiveProject().addTodo("None", "1970-01-01", 1);
                 renderTodos(app.getActiveProject().getInformation().id);
+
+                let lastChild = todoContainer.children[todoContainer.children.length - 1];
+
+                let descriptionInput = lastChild.querySelector("input#description");
+                let editButton = lastChild.querySelector("button.edit");
+                editButton.click();
+                descriptionInput.focus();
+                descriptionInput.setSelectionRange(0, descriptionInput.value.length);
             }
         });
     }
@@ -269,8 +277,6 @@ const dom = (function () {
                 titleInput.focus();
                 titleInput.setSelectionRange(titleInput.value.length, titleInput.value.length);
             }
-
-
         });
 
         return project;
@@ -331,6 +337,34 @@ const dom = (function () {
         todo.querySelector("button.remove").addEventListener("click", () => {
             app.getActiveProject().removeTodo(id);
             todoContainer.removeChild(todo);
+        });
+
+        let descriptionInput = todo.querySelector("input#description");
+        let dateInput = todo.querySelector("input#due-date");
+        let priorityInput = todo.querySelector("input#priority");
+        let editButton = todo.querySelector("button.edit");
+        editButton.addEventListener("click", () => {
+            if (editButton.classList.contains("active")) {
+                editButton.classList.remove("active");
+                editButton.textContent = "⚙️";
+
+                descriptionInput.readOnly = true;
+                dateInput.readOnly = true;
+                priorityInput.readOnly = true;
+
+                app.getActiveProject().getTodo(id).changeInfo(descriptionInput.value, dateInput.value, priorityInput.value);
+            }
+            else {
+                editButton.classList.add("active");
+                editButton.textContent = "✅";
+
+                descriptionInput.readOnly = false;
+                dateInput.readOnly = false;
+                priorityInput.readOnly = false;
+
+                descriptionInput.focus();
+                descriptionInput.setSelectionRange(descriptionInput.value.length, descriptionInput.value.length);
+            }
         });
 
         return todo;
