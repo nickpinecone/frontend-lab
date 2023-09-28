@@ -226,6 +226,16 @@ const dom = (function () {
             showActiveProject(id);
         });
 
+        project.querySelector("button.remove").addEventListener("click", () => {
+            app.removeProject(id);
+            projectContainer.removeChild(project);
+            if (project.classList.contains("active")) {
+                renderTodos(0);
+                app.setActiveProject(0);
+                showActiveProject(0);
+            }
+        });
+
         return project;
     }
 
@@ -279,6 +289,11 @@ const dom = (function () {
 
         todo.querySelector("#done-check").addEventListener("click", (event) => {
             app.getActiveProject().getTodo(id).changeDone(event.target.checked);
+        });
+
+        todo.querySelector("button.remove").addEventListener("click", () => {
+            app.getActiveProject().removeTodo(id);
+            todoContainer.removeChild(todo);
         });
 
         return todo;
