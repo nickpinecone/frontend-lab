@@ -146,7 +146,7 @@ const app = (function () {
 
     function init() {
         addProject("Default Project");
-        activeProject.addTodo("Default Todo", "1970-01-01", 1);
+        activeProject.addTodo("Default Todo", "", 0);
     }
 
     function getInformation() {
@@ -210,7 +210,7 @@ const dom = (function () {
 
         addTodoButton.addEventListener("click", () => {
             if (projectContainer.childElementCount > 0) {
-                app.getActiveProject().addTodo("None", "1970-01-01", 1);
+                app.getActiveProject().addTodo("None", "", 0);
                 renderTodos(app.getActiveProject().getInformation().id);
 
                 let lastChild = todoContainer.children[todoContainer.children.length - 1];
