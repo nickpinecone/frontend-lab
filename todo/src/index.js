@@ -52,13 +52,14 @@ const makeProject = (function (_title, _id) {
         return null;
     }
 
-    function addTodo(description, dueDate, priority) {
+    function addTodo(description, dueDate, priority, done) {
         let id = 0;
         if (todos.length != 0) {
             id = getLastTodo().getInformation().id + 1;
         }
 
         let todo = makeTodo(description, dueDate, priority, id);
+        todo.changeDone(done);
 
         todos.push(todo);
     }
@@ -108,6 +109,10 @@ const app = (function () {
 
     init();
 
+    function saveToLocalStorage() {
+        window.localStorage.projects = JSON.stringify(getObject());
+    }
+
     function getLastProject() {
         return projects[projects.length - 1];
     }
@@ -145,8 +150,10 @@ const app = (function () {
     }
 
     function init() {
-        addProject("Default Project");
-        activeProject.addTodo("Default Todo", "", 0);
+        if (!(window.localStorage.projects)) {
+            addProject("Default Project");
+            activeProject.addTodo("Default Todo", "", 0);
+        }
     }
 
     function getInformation() {
@@ -182,7 +189,7 @@ const app = (function () {
         }
     }
 
-    return { addProject, getInformation, getProject, removeProject, getActiveProject, getObject, setActiveProject };
+    return { addProject, getInformation, getProject, removeProject, getActiveProject, getObject, setActiveProject, saveToLocalStorage };
 })();
 
 const dom = (function () {
@@ -192,6 +199,21 @@ const dom = (function () {
     let addProjectButton = document.querySelector("button.add.project");
 
     bindButtons();
+
+    function readFromLocalStorage() {
+        if (window.localStorage.projects) {
+            let data = JSON.parse(window.localStorage.projects);
+
+            console.log(data);
+
+            for (let project of data.array) {
+                app.addProject(project.title);
+                for (let todo of project.array) {
+                    app.getActiveProject().addTodo(todo.description, todo.dueDate, todo.priority, todo.done);
+                }
+            }
+        }
+    }
 
     function bindButtons() {
         addProjectButton.addEventListener("click", () => {
@@ -206,11 +228,13 @@ const dom = (function () {
             editButton.click();
             titleInput.focus();
             titleInput.setSelectionRange(0, titleInput.value.length);
+
+            app.saveToLocalStorage();
         });
 
         addTodoButton.addEventListener("click", () => {
             if (projectContainer.childElementCount > 0) {
-                app.getActiveProject().addTodo("None", "", 0);
+                app.getActiveProject().addTodo("None", "", 0, false);
                 renderTodos(app.getActiveProject().getInformation().id);
 
                 let lastChild = todoContainer.children[todoContainer.children.length - 1];
@@ -220,6 +244,8 @@ const dom = (function () {
                 editButton.click();
                 descriptionInput.focus();
                 descriptionInput.setSelectionRange(0, descriptionInput.value.length);
+
+                app.saveToLocalStorage();
             }
         });
     }
@@ -259,6 +285,8 @@ const dom = (function () {
             else if (projectContainer.childElementCount <= 0) {
                 todoContainer.replaceChildren([]);
             }
+
+            app.saveToLocalStorage();
         });
 
         let editButton = project.querySelector("button.edit");
@@ -277,6 +305,8 @@ const dom = (function () {
                 titleInput.focus();
                 titleInput.setSelectionRange(titleInput.value.length, titleInput.value.length);
             }
+
+            app.saveToLocalStorage();
         });
 
         return project;
@@ -332,11 +362,15 @@ const dom = (function () {
 
         todo.querySelector("#done-check").addEventListener("click", (event) => {
             app.getActiveProject().getTodo(id).changeDone(event.target.checked);
+
+            app.saveToLocalStorage();
         });
 
         todo.querySelector("button.remove").addEventListener("click", () => {
             app.getActiveProject().removeTodo(id);
             todoContainer.removeChild(todo);
+
+            app.saveToLocalStorage();
         });
 
         let descriptionInput = todo.querySelector("input#description");
@@ -366,6 +400,8 @@ const dom = (function () {
                 descriptionInput.focus();
                 descriptionInput.setSelectionRange(descriptionInput.value.length, descriptionInput.value.length);
             }
+
+            app.saveToLocalStorage();
         });
 
         return todo;
@@ -384,10 +420,10 @@ const dom = (function () {
         }
     }
 
-
-    return { renderProjects, renderTodos };
+    return { renderProjects, renderTodos, readFromLocalStorage };
 })();
 
+dom.readFromLocalStorage();
 dom.renderProjects();
 dom.renderTodos(app.getActiveProject().getInformation().id);
 
