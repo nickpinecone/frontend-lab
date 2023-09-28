@@ -49,6 +49,7 @@ header {
     z-index: 1;
     overflow: scroll;
     position: relative;
+    padding-bottom: 112px;
 }
 
 .project-container {
@@ -106,6 +107,7 @@ header {
     flex-flow: column nowrap;
     overflow: scroll;
     position: relative;
+    padding-bottom: 112px;
 }
 
 .todo-container {
@@ -165,7 +167,7 @@ header {
 }
 
 button.add {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     margin: 24px;
@@ -174,6 +176,10 @@ button.add {
     background-color: var(--theme-color);
     border: 2px solid var(--theme-color);
     color: white;
+}
+
+.project.add {
+    left: 16%;
 }
 
 button.add:hover {

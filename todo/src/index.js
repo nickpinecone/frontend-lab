@@ -198,11 +198,21 @@ const dom = (function () {
             app.addProject("None");
             renderProjects();
             renderTodos(app.getActiveProject().getInformation().id);
+
+            let lastChild = projectContainer.children[projectContainer.children.length - 1];
+
+            let titleInput = lastChild.querySelector("input");
+            let editButton = lastChild.querySelector("button.edit");
+            editButton.click();
+            titleInput.focus();
+            titleInput.setSelectionRange(0, titleInput.value.length);
         });
 
         addTodoButton.addEventListener("click", () => {
-            app.getActiveProject().addTodo("None", "1970-01-01", 1);
-            renderTodos(app.getActiveProject().getInformation().id);
+            if (projectContainer.childElementCount > 0) {
+                app.getActiveProject().addTodo("None", "1970-01-01", 1);
+                renderTodos(app.getActiveProject().getInformation().id);
+            }
         });
     }
 
@@ -220,7 +230,8 @@ const dom = (function () {
             `
         );
 
-        project.querySelector("input").addEventListener("click", () => {
+        let titleInput = project.querySelector("input");
+        titleInput.addEventListener("click", () => {
             renderTodos(id);
             app.setActiveProject(id);
             showActiveProject(id);
@@ -240,6 +251,26 @@ const dom = (function () {
             else if (projectContainer.childElementCount <= 0) {
                 todoContainer.replaceChildren([]);
             }
+        });
+
+        let editButton = project.querySelector("button.edit");
+        editButton.addEventListener("click", () => {
+            if (editButton.classList.contains("active")) {
+                editButton.classList.remove("active");
+                editButton.textContent = "⚙️";
+                titleInput.readOnly = true;
+
+                app.getProject(id).changeInfo(titleInput.value);
+            }
+            else {
+                editButton.classList.add("active");
+                editButton.textContent = "✅";
+                titleInput.readOnly = false;
+                titleInput.focus();
+                titleInput.setSelectionRange(titleInput.value.length, titleInput.value.length);
+            }
+
+
         });
 
         return project;
