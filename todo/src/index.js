@@ -1,13 +1,11 @@
+import "./styles.css";
 
-import './styles.css'
-
-const makeTodo = (function (_description, _dueDate, _priority, _id) {
+const makeTodo = function (_description, _dueDate, _priority, _id) {
     let description = _description;
     let dueDate = _dueDate;
     let priority = _priority;
     let id = _id;
     let done = false;
-
 
     function getInformation() {
         return {
@@ -30,10 +28,9 @@ const makeTodo = (function (_description, _dueDate, _priority, _id) {
     }
 
     return { getInformation, changeInfo, changeDone };
-});
+};
 
-
-const makeProject = (function (_title, _id) {
+const makeProject = function (_title, _id) {
     let title = _title;
     let todos = [];
     let id = _id;
@@ -78,7 +75,7 @@ const makeProject = (function (_title, _id) {
             title,
             todos,
             id,
-        }
+        };
     }
 
     function changeInfo(newTitle) {
@@ -87,7 +84,7 @@ const makeProject = (function (_title, _id) {
 
     // For local storage
     function getObject() {
-        let array = []
+        let array = [];
         for (let todo of todos) {
             array.push(todo.getInformation());
         }
@@ -96,12 +93,18 @@ const makeProject = (function (_title, _id) {
             title,
             array,
             id,
-        }
+        };
     }
 
-
-    return { addTodo, getInformation, getTodo, changeInfo, removeTodo, getObject };
-});
+    return {
+        addTodo,
+        getInformation,
+        getTodo,
+        changeInfo,
+        removeTodo,
+        getObject,
+    };
+};
 
 const app = (function () {
     let projects = [];
@@ -150,7 +153,7 @@ const app = (function () {
     }
 
     function init() {
-        if (!(window.localStorage.projects)) {
+        if (!window.localStorage.projects) {
             addProject("Default Project");
             activeProject.addTodo("Default Todo", "", 0);
         }
@@ -159,7 +162,7 @@ const app = (function () {
     function getInformation() {
         return {
             projects,
-            activeProject
+            activeProject,
         };
     }
 
@@ -186,10 +189,19 @@ const app = (function () {
 
         return {
             array,
-        }
+        };
     }
 
-    return { addProject, getInformation, getProject, removeProject, getActiveProject, getObject, setActiveProject, saveToLocalStorage };
+    return {
+        addProject,
+        getInformation,
+        getProject,
+        removeProject,
+        getActiveProject,
+        getObject,
+        setActiveProject,
+        saveToLocalStorage,
+    };
 })();
 
 const dom = (function () {
@@ -207,10 +219,29 @@ const dom = (function () {
             for (let project of data.array) {
                 app.addProject(project.title);
                 for (let todo of project.array) {
-                    app.getActiveProject().addTodo(todo.description, todo.dueDate, todo.priority, todo.done);
+                    app.getActiveProject().addTodo(
+                        todo.description,
+                        todo.dueDate,
+                        todo.priority,
+                        todo.done
+                    );
                 }
             }
         }
+    }
+
+    function focusItem(input, focusStart, focusEnd) {
+        input.focus();
+        focusStart = focusStart == -1 ? input.value.length : focusStart;
+        focusEnd = focusEnd == -1 ? input.value.length : focusEnd;
+        input.setSelectionRange(focusStart, focusEnd);
+    }
+
+    function editItem(element, inputQuery, editQuery, focusStart, focusEnd) {
+        let input = element.querySelector(inputQuery);
+        let editButton = element.querySelector(editQuery);
+        editButton.click();
+        focusItem(input, focusStart, focusEnd);
     }
 
     function bindButtons() {
@@ -219,13 +250,10 @@ const dom = (function () {
             renderProjects();
             renderTodos(app.getActiveProject().getInformation().id);
 
-            let lastChild = projectContainer.children[projectContainer.children.length - 1];
+            let lastChild =
+                projectContainer.children[projectContainer.children.length - 1];
 
-            let titleInput = lastChild.querySelector("input");
-            let editButton = lastChild.querySelector("button.edit");
-            editButton.click();
-            titleInput.focus();
-            titleInput.setSelectionRange(0, titleInput.value.length);
+            editItem(lastChild, "input", "button.edit", 0, -1);
 
             app.saveToLocalStorage();
         });
@@ -235,13 +263,10 @@ const dom = (function () {
                 app.getActiveProject().addTodo("None", "", 0, false);
                 renderTodos(app.getActiveProject().getInformation().id);
 
-                let lastChild = todoContainer.children[todoContainer.children.length - 1];
+                let lastChild =
+                    todoContainer.children[todoContainer.children.length - 1];
 
-                let descriptionInput = lastChild.querySelector("input#description");
-                let editButton = lastChild.querySelector("button.edit");
-                editButton.click();
-                descriptionInput.focus();
-                descriptionInput.setSelectionRange(0, descriptionInput.value.length);
+                editItem(lastChild, "input#description", "button.edit", 0, -1);
 
                 app.saveToLocalStorage();
             }
@@ -273,14 +298,17 @@ const dom = (function () {
             app.removeProject(id);
             projectContainer.removeChild(project);
 
-            if (project.classList.contains("active") && projectContainer.childElementCount > 0) {
-                let firstId = projectContainer.children[0].getAttribute("data-id");
+            if (
+                project.classList.contains("active") &&
+                projectContainer.childElementCount > 0
+            ) {
+                let firstId =
+                    projectContainer.children[0].getAttribute("data-id");
 
                 renderTodos(firstId);
                 app.setActiveProject(firstId);
                 showActiveProject(firstId);
-            }
-            else if (projectContainer.childElementCount <= 0) {
+            } else if (projectContainer.childElementCount <= 0) {
                 todoContainer.replaceChildren([]);
             }
 
@@ -295,13 +323,11 @@ const dom = (function () {
                 titleInput.readOnly = true;
 
                 app.getProject(id).changeInfo(titleInput.value);
-            }
-            else {
+            } else {
                 editButton.classList.add("active");
                 editButton.textContent = "✅";
                 titleInput.readOnly = false;
-                titleInput.focus();
-                titleInput.setSelectionRange(titleInput.value.length, titleInput.value.length);
+                focusItem(titleInput, -1, -1);
             }
 
             app.saveToLocalStorage();
@@ -318,17 +344,22 @@ const dom = (function () {
                 project.classList.add("active");
             }
         }
-
     }
 
     function renderProjects() {
         projectContainer.replaceChildren([]);
 
         for (let project of app.getInformation().projects) {
-            let projectDiv = createProject(project.getInformation().title, project.getInformation().id);
+            let projectDiv = createProject(
+                project.getInformation().title,
+                project.getInformation().id
+            );
             projectContainer.appendChild(projectDiv);
 
-            if (project.getInformation().id == app.getActiveProject().getInformation().id) {
+            if (
+                project.getInformation().id ==
+                app.getActiveProject().getInformation().id
+            ) {
                 projectDiv.classList.add("active");
             }
         }
@@ -342,7 +373,9 @@ const dom = (function () {
         todo.insertAdjacentHTML(
             "afterbegin",
             `
-            <input type="checkbox" name="done-check" id="done-check" ${done ? "checked" : ""}>
+            <input type="checkbox" name="done-check" id="done-check" ${
+                done ? "checked" : ""
+            }>
             <input name="description" id="description" value="${description}" maxlength="120" readonly>
             <label>
                 📅
@@ -384,10 +417,17 @@ const dom = (function () {
                 dateInput.readOnly = true;
                 priorityInput.readOnly = true;
 
-                app.getActiveProject().getTodo(id).changeInfo(descriptionInput.value, dateInput.value, priorityInput.value);
-                todo.style.borderLeftColor = `hsl(0, 100%, ${100 - ((priorityInput.value) / 9 * 50)}%)`;
-            }
-            else {
+                app.getActiveProject()
+                    .getTodo(id)
+                    .changeInfo(
+                        descriptionInput.value,
+                        dateInput.value,
+                        priorityInput.value
+                    );
+                todo.style.borderLeftColor = getPriorityColor(
+                    priorityInput.value
+                );
+            } else {
                 editButton.classList.add("active");
                 editButton.textContent = "✅";
 
@@ -395,15 +435,17 @@ const dom = (function () {
                 dateInput.readOnly = false;
                 priorityInput.readOnly = false;
 
-                descriptionInput.focus();
-                descriptionInput.setSelectionRange(descriptionInput.value.length, descriptionInput.value.length);
+                focusItem(descriptionInput, -1, -1);
             }
 
             app.saveToLocalStorage();
         });
 
         return todo;
+    }
 
+    function getPriorityColor(priorityLevel) {
+        return `hsl(0, 100%, ${100 - (priorityLevel / 9) * 50}%)`;
     }
 
     function renderTodos(projectId) {
@@ -412,9 +454,17 @@ const dom = (function () {
         var todos = app.getProject(projectId).getInformation().todos;
 
         for (let todo of todos) {
-            let todoDiv = createTodo(todo.getInformation().description, todo.getInformation().dueDate, todo.getInformation().priority, todo.getInformation().id, todo.getInformation().done);
+            let todoDiv = createTodo(
+                todo.getInformation().description,
+                todo.getInformation().dueDate,
+                todo.getInformation().priority,
+                todo.getInformation().id,
+                todo.getInformation().done
+            );
             todoContainer.appendChild(todoDiv);
-            todoDiv.style.borderLeftColor = `hsl(0, 100%, ${100 - ((todo.getInformation().priority) / 9 * 50)}%)`;
+            todoDiv.style.borderLeftColor = getPriorityColor(
+                todo.getInformation().priority
+            );
         }
     }
 
@@ -424,5 +474,3 @@ const dom = (function () {
 dom.readFromLocalStorage();
 dom.renderProjects();
 dom.renderTodos(app.getActiveProject().getInformation().id);
-
-
