@@ -1,0 +1,70 @@
+:root {
+    font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    padding: 8px;
+}
+
+.drop-down {
+    --trigger-size: 2rem;
+    --menu-size: 3rem;
+    --gap-size: 2rem;
+
+    position: relative;
+    font-size: var(--trigger-size);
+    padding-top: 8px;
+}
+
+.drop-down .trigger {
+    padding: 8px;
+    position: relative;
+    font-size: calc(var(--trigger-size) * 0.9);
+    background: 0;
+    border: 0;
+    color: black;
+}
+
+.drop-down .trigger:hover {
+    color: white;
+    background-color: black;
+    cursor: pointer;
+}
+
+.drop-down .menu {
+    padding: 16px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: var(--menu-size);
+    padding-top: calc(var(--trigger-size) * 2);
+    height: 100vh;
+}
+
+.drop-down .menu li:not(:last-child) {
+    margin-bottom: var(--gap-size);
+}
+
+.drop-down .menu li {
+    border-bottom: 3px solid black;
+    border-left: 3px solid black;
+    padding: 8px;
+}
+
+.drop-down .menu li:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
