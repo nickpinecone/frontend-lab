@@ -92,7 +92,7 @@ export default function (query) {
         });
     });
 
-    let ondone = function (value) {};
+    let ondone = function (item) {};
 
     function subscribe(func) {
         ondone = func;
