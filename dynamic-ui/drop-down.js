@@ -42,6 +42,18 @@ document.head.appendChild(styleSheet);
         const list = dropDown.querySelector("ul");
         let active = false;
 
+        function changeActive() {
+            if (active) {
+                list.classList.remove("active");
+                list.style.display = "none";
+            } else {
+                list.classList.add("active");
+                list.style.display = "initial";
+            }
+
+            active = !active;
+        }
+
         function determineWidth() {
             let maxElement = 0;
             const children = Array.from(list.children);
@@ -55,18 +67,6 @@ document.head.appendChild(styleSheet);
             list.style.minWidth = `${maxElement + 2}px`;
             list.style.position = "absolute";
             list.style.display = "none";
-        }
-
-        function changeActive() {
-            if (active) {
-                list.classList.remove("active");
-                list.style.display = "none";
-            } else {
-                list.classList.add("active");
-                list.style.display = "initial";
-            }
-
-            active = !active;
         }
 
         button.addEventListener("click", () => {
@@ -89,18 +89,19 @@ export default function (query) {
     if (!dropDown.classList.contains("drop-down")) {
         return null;
     }
+
+    let onselect = function (item) {};
+
     const list = dropDown.querySelector("ul");
     const children = Array.from(list.children);
     children.forEach((child) => {
         child.addEventListener("click", () => {
-            ondone(child);
+            onselect(child);
         });
     });
 
-    let ondone = function (item) {};
-
     function subscribe(func) {
-        ondone = func;
+        onselect = func;
     }
 
     return { subscribe };
