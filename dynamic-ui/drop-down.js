@@ -16,6 +16,7 @@ const styles = `
 
     .drop-down ul li {
         background-color: whitesmoke;
+        padding: 2px;
     }
 
     .drop-down ul li:hover {
@@ -46,6 +47,10 @@ document.head.appendChild(styleSheet);
             const children = Array.from(list.children);
             children.forEach((child) => {
                 maxElement = Math.max(maxElement, Number(child.offsetWidth));
+
+                child.addEventListener("click", () => {
+                    changeActive();
+                });
             });
             list.style.minWidth = `${maxElement + 2}px`;
             list.style.position = "absolute";
