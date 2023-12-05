@@ -14,6 +14,10 @@
             defer
         ></script>
         <script
+            src="tabs-navigation.js"
+            defer
+        ></script>
+        <script
             src="script.js"
             type="module"
             defer
@@ -23,8 +27,13 @@
     <body>
         <div class="tabs-navigation">
             <div class="tabs">
-                <button data-id="home.html">Home</button>
-                <button data-id="store.html">Store</button>
+                <button
+                    default
+                    data-html="tabs/home.html"
+                >
+                    Home
+                </button>
+                <button data-html="tabs/store.html">Store</button>
             </div>
             <div class="content"></div>
         </div>
