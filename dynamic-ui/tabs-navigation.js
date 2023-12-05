@@ -1,7 +1,11 @@
 // Setup tabs-navigation css
 const styles = `
-    .tabs-navigation button.active {
+    .tabs-navigation .tab.active {
         text-decoration: underline;
+    }
+
+    .tabs-navigation .tabs > * {
+        display: inline-block;
     }
 `;
 
@@ -14,7 +18,7 @@ document.head.appendChild(styleSheet);
     const tabsNavs = document.querySelectorAll(".tabs-navigation");
 
     tabsNavs.forEach((tabsNav) => {
-        const tabs = tabsNav.querySelectorAll(".tabs button");
+        const tabs = tabsNav.querySelectorAll(".tabs .tab");
         const content = tabsNav.querySelector(".content");
 
         async function loadContent(tab) {

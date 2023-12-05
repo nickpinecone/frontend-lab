@@ -30,21 +30,38 @@
                 <button
                     default
                     data-html="tabs/home.html"
+                    class="tab"
                 >
                     Home
                 </button>
-                <button data-html="tabs/store.html">Store</button>
+                <button
+                    data-html="tabs/store.html"
+                    class="tab"
+                >
+                    Store
+                </button>
+                <div class="drop-down">
+                    <button class="trigger">More</button>
+                    <div class="items">
+                        <button
+                            class="item tab"
+                            data-html="tabs/contacts.html"
+                        >
+                            Contacts
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="content"></div>
         </div>
 
-        <div class="drop-down">
-            <button>Menu</button>
-            <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-            </ul>
+        <div class="drop-down second">
+            <button class="trigger">Menu</button>
+            <div class="items">
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+            </div>
         </div>
     </body>
 </html>

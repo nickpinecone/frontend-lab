@@ -5,7 +5,7 @@ const styles = `
         width: fit-content;
     }
 
-    .drop-down ul {
+    .drop-down .items {
         margin: 0;
         padding: 0;
         list-style-type: none;
@@ -14,17 +14,17 @@ const styles = `
         border: 1px solid gray;
     }
 
-    .drop-down ul li {
+    .drop-down .items .item {
         background-color: whitesmoke;
         padding: 2px;
     }
 
-    .drop-down ul li:hover {
+    .drop-down .items .item:hover {
         cursor: pointer;
         filter: brightness(0.9);
     }
 
-    .drop-down ul li:active {
+    .drop-down .items .item:active {
         filter: brightness(0.7);
     }
 `;
@@ -38,8 +38,8 @@ document.head.appendChild(styleSheet);
     const dropDowns = document.querySelectorAll(".drop-down");
 
     dropDowns.forEach((dropDown) => {
-        const button = dropDown.querySelector("button");
-        const list = dropDown.querySelector("ul");
+        const button = dropDown.querySelector(".trigger");
+        const list = dropDown.querySelector(".items");
         let active = false;
 
         function changeActive() {
@@ -92,7 +92,7 @@ export default function (query) {
 
     let onselect = function (item) {};
 
-    const list = dropDown.querySelector("ul");
+    const list = dropDown.querySelector(".items");
     const children = Array.from(list.children);
     children.forEach((child) => {
         child.addEventListener("click", () => {
