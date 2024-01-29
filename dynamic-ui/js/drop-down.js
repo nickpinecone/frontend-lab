@@ -42,6 +42,7 @@ document.head.appendChild(styleSheet);
     dropDowns.forEach((dropDown) => {
         const button = dropDown.querySelector(".trigger");
         const list = dropDown.querySelector(".items");
+        const children = Array.from(list.children);
         let active = false;
 
         function changeActive() {
@@ -56,6 +57,12 @@ document.head.appendChild(styleSheet);
             active = !active;
         }
 
+        children.forEach((child) => {
+            child.addEventListener("click", () => {
+                changeActive();
+            });
+        });
+
         button.addEventListener("click", () => {
             changeActive();
         });
@@ -68,7 +75,7 @@ document.head.appendChild(styleSheet);
     });
 })();
 
-// Interact with drop-downs
+// Setup drop-down js
 export default function (query) {
     const dropDown = document.querySelector(query);
     if (!dropDown.classList.contains("drop-down")) {
@@ -91,3 +98,12 @@ export default function (query) {
 
     return { subscribe };
 }
+
+// Use drop-down
+// import dropdown from "./drop-down.js";
+
+// const dropDown = dropdown(".drop-down.second");
+
+// dropDown.subscribe((item) => {
+//     console.log(item.textContent);
+// });
