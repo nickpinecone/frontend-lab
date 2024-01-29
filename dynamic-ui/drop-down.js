@@ -2,7 +2,6 @@
 const styles = `
     .drop-down {
         position: relative;
-        width: fit-content;
     }
 
     .drop-down .items {
@@ -12,6 +11,9 @@ const styles = `
         left: 0;
         top: 100%;
         border: 1px solid gray;
+        display: none;
+        position: absolute;
+        width: max-content;
     }
 
     .drop-down .items .item {
@@ -54,21 +56,6 @@ document.head.appendChild(styleSheet);
             active = !active;
         }
 
-        function determineWidth() {
-            let maxElement = 0;
-            const children = Array.from(list.children);
-            children.forEach((child) => {
-                maxElement = Math.max(maxElement, Number(child.offsetWidth));
-
-                child.addEventListener("click", () => {
-                    changeActive();
-                });
-            });
-            list.style.minWidth = `${maxElement + 2}px`;
-            list.style.position = "absolute";
-            list.style.display = "none";
-        }
-
         button.addEventListener("click", () => {
             changeActive();
         });
@@ -78,8 +65,6 @@ document.head.appendChild(styleSheet);
                 changeActive();
             }
         });
-
-        determineWidth();
     });
 })();
 
