@@ -1,0 +1,13 @@
+.image-display {
+    width: 640px;
+    height: 427px;
+    /* overflow: hidden; */
+}
+
+.image-container {
+    position: relative;
+}
+
+.image-container img {
+    position: absolute;
+}
