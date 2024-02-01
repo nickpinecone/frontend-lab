@@ -3,7 +3,7 @@
 }
 
 .image-display {
-    /* overflow: hidden; */
+    overflow: hidden;
     width: 640px;
     height: 427px;
     position: relative;
@@ -11,6 +11,8 @@
 
 .image-container {
     position: absolute;
+    left: 0px;
+    transition: left 500ms;
 }
 
 .image-container img {
