@@ -1,13 +1,34 @@
+.image-slider {
+    width: max-content;
+}
+
 .image-display {
+    /* overflow: hidden; */
     width: 640px;
     height: 427px;
-    /* overflow: hidden; */
+    position: relative;
 }
 
 .image-container {
-    position: relative;
+    position: absolute;
 }
 
 .image-container img {
     position: absolute;
+}
+
+.image-display .back,
+.image-display .forward {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px;
+}
+
+.image-display .forward {
+    right: 0;
+}
+
+.image-slider .navigation {
+    text-align: center;
 }

@@ -2,6 +2,7 @@
 const styles = `
     .drop-down {
         position: relative;
+        display: inline;
     }
 
     .drop-down .items {
