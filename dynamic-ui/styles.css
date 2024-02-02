@@ -17,6 +17,7 @@
 
 .image-container img {
     position: absolute;
+    transition: left 500ms;
 }
 
 .image-display .back,

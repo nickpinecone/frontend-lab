@@ -18,50 +18,100 @@
             image.setAttribute("data-pos", count);
             image.style.left = `${640 * count}px`;
             count += 1;
+
+            image.addEventListener("transitionend", () => {
+                const pos = Number(image.getAttribute("data-pos"));
+                if (pos === 0) {
+                    interact = true;
+                }
+            });
         });
 
-        function moveContainer(direction, amount) {
-            if (direction === 1) {
-                let maxPos = 0;
-                let maxEl = null;
-
-                let minPos = Infinity;
-                let minEl = null;
-
-                images.forEach((image) => {
-                    const pos = Number(image.getAttribute("data-pos"));
-
-                    if (pos >= maxPos) {
-                        maxPos = pos;
-                        maxEl = image;
-                    }
-                    if (pos < minPos) {
-                        minPos = pos;
-                        minEl = image;
-                    }
-                });
-                if (maxPos === 0) {
-                    minEl.setAttribute("data-pos", 1);
-                    minEl.style.left = `${maxEl.offsetLeft + 640}px`;
-                }
-            }
-
-            imageContainer.style.left = `${
-                imageContainer.offsetLeft - amount * 640 * direction
-            }px`;
+        function moveImages(direction, amount) {
+            interact = false;
 
             images.forEach((image) => {
-                let pos =
+                const pos =
                     Number(image.getAttribute("data-pos")) - amount * direction;
                 image.setAttribute("data-pos", pos);
-            });
 
-            interact = false;
+                image.style.left = `${640 * pos}px`;
+            });
         }
 
-        imageContainer.addEventListener("transitionend", () => {
-            interact = true;
-        });
+        function getBoundingImages() {
+            let lastPosition = 0;
+            let lastElement = null;
+
+            let firstPosition = Infinity;
+            let firstElement = null;
+
+            images.forEach((image) => {
+                const pos = Number(image.getAttribute("data-pos"));
+
+                if (pos >= lastPosition) {
+                    lastPosition = pos;
+                    lastElement = image;
+                }
+                if (pos < firstPosition) {
+                    firstPosition = pos;
+                    firstElement = image;
+                }
+            });
+
+            return { lastPosition, lastElement, firstPosition, firstElement };
+        }
+
+        function moveContainer(direction, amount) {
+            const { lastPosition, lastElement, firstPosition, firstElement } =
+                getBoundingImages();
+
+            if (direction === Direction.Forward) {
+                if (lastPosition === 0) {
+                    firstElement.style.transitionDuration = "1ms";
+                    firstElement.setAttribute("data-pos", 1);
+                    firstElement.style.left = `${
+                        lastElement.offsetLeft + 640
+                    }px`;
+
+                    let lambda = function () {
+                        firstElement.style.transitionDuration = "500ms";
+                        moveImages(direction, amount);
+                        firstElement.removeEventListener(
+                            "transitionend",
+                            lambda
+                        );
+                    };
+
+                    firstElement.addEventListener("transitionend", lambda);
+
+                    return;
+                }
+            }
+            if (direction === Direction.Back) {
+                if (firstPosition === 0) {
+                    lastElement.style.transitionDuration = "1ms";
+                    lastElement.setAttribute("data-pos", -1);
+                    lastElement.style.left = `${
+                        firstElement.offsetLeft - 640
+                    }px`;
+
+                    let lambda = function () {
+                        lastElement.style.transitionDuration = "500ms";
+                        moveImages(direction, amount);
+                        lastElement.removeEventListener(
+                            "transitionend",
+                            lambda
+                        );
+                    };
+
+                    lastElement.addEventListener("transitionend", lambda);
+
+                    return;
+                }
+            }
+            moveImages(direction, amount);
+        }
 
         backButton.addEventListener("click", (event) => {
             if (interact) {
