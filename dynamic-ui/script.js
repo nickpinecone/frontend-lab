@@ -66,49 +66,36 @@
             const { lastPosition, lastElement, firstPosition, firstElement } =
                 getBoundingImages();
 
+            let rearElement = null;
+            let frontElement = null;
+            let frontPosition = 0;
+
             if (direction === Direction.Forward) {
-                if (lastPosition === 0) {
-                    firstElement.style.transitionDuration = "1ms";
-                    firstElement.setAttribute("data-pos", 1);
-                    firstElement.style.left = `${
-                        lastElement.offsetLeft + 640
-                    }px`;
-
-                    let lambda = function () {
-                        firstElement.style.transitionDuration = "500ms";
-                        moveImages(direction, amount);
-                        firstElement.removeEventListener(
-                            "transitionend",
-                            lambda
-                        );
-                    };
-
-                    firstElement.addEventListener("transitionend", lambda);
-
-                    return;
-                }
+                frontElement = lastElement;
+                frontPosition = lastPosition;
+                rearElement = firstElement;
+            } else if (direction === Direction.Back) {
+                frontElement = firstElement;
+                frontPosition = firstPosition;
+                rearElement = lastElement;
             }
-            if (direction === Direction.Back) {
-                if (firstPosition === 0) {
-                    lastElement.style.transitionDuration = "1ms";
-                    lastElement.setAttribute("data-pos", -1);
-                    lastElement.style.left = `${
-                        firstElement.offsetLeft - 640
-                    }px`;
 
-                    let lambda = function () {
-                        lastElement.style.transitionDuration = "500ms";
-                        moveImages(direction, amount);
-                        lastElement.removeEventListener(
-                            "transitionend",
-                            lambda
-                        );
-                    };
+            if (frontPosition === 0) {
+                rearElement.style.transitionDuration = "1ms";
+                rearElement.setAttribute("data-pos", direction);
+                rearElement.style.left = `${
+                    frontElement.offsetLeft + 640 * amount * direction
+                }px`;
 
-                    lastElement.addEventListener("transitionend", lambda);
+                const lambda = function () {
+                    rearElement.style.transitionDuration = "500ms";
+                    moveImages(direction, amount);
+                    rearElement.removeEventListener("transitionend", lambda);
+                };
 
-                    return;
-                }
+                rearElement.addEventListener("transitionend", lambda);
+
+                return;
             }
             moveImages(direction, amount);
         }
