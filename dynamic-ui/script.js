@@ -7,35 +7,50 @@
     const imageSliders = document.querySelectorAll(".image-slider");
 
     imageSliders.forEach((imageSlider) => {
+        const navigation = imageSlider.querySelector(".navigation");
         const imageContainer = imageSlider.querySelector(".image-container");
         const images = Array.from(imageContainer.querySelectorAll("img"));
         const backButton = imageSlider.querySelector(".back");
         const forwardButton = imageSlider.querySelector(".forward");
-        let interact = true;
+
+        let cycle = 0;
+
+        function addRadioNavigation(image, index) {
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = "index";
+            radio.id = index;
+            if (index === 0) {
+                radio.checked = true;
+            }
+
+            radio.addEventListener("click", () => {
+                const position = Number(image.getAttribute("data-position"));
+
+                moveImages(Math.sign(position), Math.abs(position));
+            });
+
+            navigation.appendChild(radio);
+        }
 
         let count = 0;
         images.forEach((image) => {
-            image.setAttribute("data-pos", count);
+            addRadioNavigation(image, count);
+
+            image.setAttribute("data-position", count);
+            image.setAttribute("data-index", count);
             image.style.left = `${640 * count}px`;
             count += 1;
-
-            image.addEventListener("transitionend", () => {
-                const pos = Number(image.getAttribute("data-pos"));
-                if (pos === 0) {
-                    interact = true;
-                }
-            });
         });
 
         function moveImages(direction, amount) {
-            interact = false;
-
             images.forEach((image) => {
-                const pos =
-                    Number(image.getAttribute("data-pos")) - amount * direction;
-                image.setAttribute("data-pos", pos);
+                const position =
+                    Number(image.getAttribute("data-position")) -
+                    amount * direction;
+                image.setAttribute("data-position", position);
 
-                image.style.left = `${640 * pos}px`;
+                image.style.left = `${640 * position}px`;
             });
         }
 
@@ -47,19 +62,24 @@
             let firstElement = null;
 
             images.forEach((image) => {
-                const pos = Number(image.getAttribute("data-pos"));
+                const position = Number(image.getAttribute("data-position"));
 
-                if (pos >= lastPosition) {
-                    lastPosition = pos;
+                if (position >= lastPosition) {
+                    lastPosition = position;
                     lastElement = image;
                 }
-                if (pos < firstPosition) {
-                    firstPosition = pos;
+                if (position < firstPosition) {
+                    firstPosition = position;
                     firstElement = image;
                 }
             });
 
             return { lastPosition, lastElement, firstPosition, firstElement };
+        }
+
+        function moveImageInstant(image, position) {
+            image.setAttribute("data-position", position);
+            image.style.left = `${position * 640}px`;
         }
 
         function moveContainer(direction, amount) {
@@ -81,19 +101,24 @@
             }
 
             if (frontPosition === 0) {
-                rearElement.style.transitionDuration = "1ms";
-                rearElement.setAttribute("data-pos", direction);
+                cycle = direction;
+
+                rearElement.setAttribute("data-position", direction);
                 rearElement.style.left = `${
                     frontElement.offsetLeft + 640 * amount * direction
                 }px`;
 
-                const lambda = function () {
-                    rearElement.style.transitionDuration = "500ms";
-                    moveImages(direction, amount);
-                    rearElement.removeEventListener("transitionend", lambda);
-                };
+                moveImages(direction, amount);
 
-                rearElement.addEventListener("transitionend", lambda);
+                images.forEach((image) => {
+                    const position = Number(
+                        image.getAttribute("data-position")
+                    );
+                    if (position !== 0) {
+                        const newPosition = position + images.length * cycle;
+                        moveImageInstant(image, newPosition);
+                    }
+                });
 
                 return;
             }
@@ -101,14 +126,10 @@
         }
 
         backButton.addEventListener("click", (event) => {
-            if (interact) {
-                moveContainer(Direction.Back, 1);
-            }
+            moveContainer(Direction.Back, 1);
         });
         forwardButton.addEventListener("click", (event) => {
-            if (interact) {
-                moveContainer(Direction.Forward, 1);
-            }
+            moveContainer(Direction.Forward, 1);
         });
     });
 })();
