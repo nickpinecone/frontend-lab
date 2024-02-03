@@ -18,6 +18,10 @@
     position: absolute;
 }
 
+.image-container img.transition {
+    transition: left 500ms;
+}
+
 .image-display .back,
 .image-display .forward {
     position: absolute;

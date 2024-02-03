@@ -19,7 +19,7 @@
             const radio = document.createElement("input");
             radio.type = "radio";
             radio.name = "index";
-            radio.id = index;
+            radio.setAttribute("data-index", index);
             if (index === 0) {
                 radio.checked = true;
             }
@@ -49,6 +49,14 @@
                     Number(image.getAttribute("data-position")) -
                     amount * direction;
                 image.setAttribute("data-position", position);
+
+                if (position === 0) {
+                    const radio = navigation.querySelector(
+                        `input[data-index="${image.getAttribute("data-index")}"`
+                    );
+
+                    radio.checked = true;
+                }
 
                 image.style.left = `${640 * position}px`;
             });
