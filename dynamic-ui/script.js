@@ -9,135 +9,97 @@
     imageSliders.forEach((imageSlider) => {
         const navigation = imageSlider.querySelector(".navigation");
         const imageContainer = imageSlider.querySelector(".image-container");
-        const images = Array.from(imageContainer.querySelectorAll("img"));
+        let images = Array.from(imageContainer.querySelectorAll("img"));
         const backButton = imageSlider.querySelector(".back");
         const forwardButton = imageSlider.querySelector(".forward");
 
-        let cycle = 0;
+        function setupImages() {
+            for (let i = 0; i < images.length; i++) {
+                const image = images[i];
+                const copyBack = image.cloneNode(true);
+                const copyFront = image.cloneNode(true);
 
-        function addRadioNavigation(image, index) {
-            const radio = document.createElement("input");
-            radio.type = "radio";
-            radio.name = "index";
-            radio.setAttribute("data-index", index);
-            if (index === 0) {
-                radio.checked = true;
+                imageContainer.appendChild(copyBack);
+                imageContainer.appendChild(copyFront);
+
+                image.setAttribute("data-position", i);
+                image.setAttribute("data-index", i);
+                image.style.zIndex = 0;
+
+                copyBack.setAttribute("data-position", -(4 - i));
+                copyFront.setAttribute("data-position", i + 4);
             }
 
-            radio.addEventListener("click", () => {
-                const position = Number(image.getAttribute("data-position"));
+            images = Array.from(imageContainer.querySelectorAll("img"));
 
-                moveImages(Math.sign(position), Math.abs(position));
-            });
-
-            navigation.appendChild(radio);
-        }
-
-        let count = 0;
-        images.forEach((image) => {
-            addRadioNavigation(image, count);
-
-            image.setAttribute("data-position", count);
-            image.setAttribute("data-index", count);
-            image.style.left = `${640 * count}px`;
-            count += 1;
-        });
-
-        function moveImages(direction, amount) {
             images.forEach((image) => {
-                const position =
-                    Number(image.getAttribute("data-position")) -
-                    amount * direction;
-                image.setAttribute("data-position", position);
-
-                if (position === 0) {
-                    const radio = navigation.querySelector(
-                        `input[data-index="${image.getAttribute("data-index")}"`
-                    );
-
-                    radio.checked = true;
-                }
-
+                const position = Number(image.getAttribute("data-position"));
                 image.style.left = `${640 * position}px`;
             });
         }
 
         function getBoundingImages() {
-            let lastPosition = 0;
-            let lastElement = null;
-
-            let firstPosition = Infinity;
-            let firstElement = null;
+            const last = { position: 0, element: null };
+            const first = { position: Infinity, element: null };
 
             images.forEach((image) => {
                 const position = Number(image.getAttribute("data-position"));
 
-                if (position >= lastPosition) {
-                    lastPosition = position;
-                    lastElement = image;
+                if (position >= last.position) {
+                    last.position = position;
+                    last.element = image;
                 }
-                if (position < firstPosition) {
-                    firstPosition = position;
-                    firstElement = image;
+                if (position < first.position) {
+                    first.position = position;
+                    first.element = image;
                 }
             });
 
-            return { lastPosition, lastElement, firstPosition, firstElement };
+            return { first, last };
         }
 
-        function moveImageInstant(image, position) {
-            image.setAttribute("data-position", position);
-            image.style.left = `${position * 640}px`;
-        }
+        function moveImages(direction, amount) {
+            const boundingInfo = getBoundingImages();
 
-        function moveContainer(direction, amount) {
-            const { lastPosition, lastElement, firstPosition, firstElement } =
-                getBoundingImages();
-
-            let rearElement = null;
-            let frontElement = null;
-            let frontPosition = 0;
+            let rear = { position: 0, element: null };
+            let front = { position: 0, element: null };
 
             if (direction === Direction.Forward) {
-                frontElement = lastElement;
-                frontPosition = lastPosition;
-                rearElement = firstElement;
-            } else if (direction === Direction.Back) {
-                frontElement = firstElement;
-                frontPosition = firstPosition;
-                rearElement = lastElement;
+                rear = boundingInfo.first;
+                front = boundingInfo.last;
+            } else {
+                rear = boundingInfo.last;
+                front = boundingInfo.first;
             }
 
-            if (frontPosition === 0) {
-                cycle = direction;
+            rear.element.setAttribute(
+                "data-position",
+                front.position + 1 * direction
+            );
+            rear.element.style.left = `${front.element.offsetLeft + 640}px`;
 
-                rearElement.setAttribute("data-position", direction);
-                rearElement.style.left = `${
-                    frontElement.offsetLeft + 640 * amount * direction
-                }px`;
+            images.forEach((image) => {
+                image.style.zIndex = -1;
 
-                moveImages(direction, amount);
+                let position = Number(image.getAttribute("data-position"));
+                position -= 1 * direction;
+                image.setAttribute("data-position", position);
 
-                images.forEach((image) => {
-                    const position = Number(
-                        image.getAttribute("data-position")
-                    );
-                    if (position !== 0) {
-                        const newPosition = position + images.length * cycle;
-                        moveImageInstant(image, newPosition);
-                    }
-                });
+                if (position >= -1 && position <= 1) {
+                    image.style.zIndex = 0;
+                }
 
-                return;
-            }
-            moveImages(direction, amount);
+                image.style.left = `${position * 640}px`;
+            });
         }
 
+        setupImages();
+
         backButton.addEventListener("click", (event) => {
-            moveContainer(Direction.Back, 1);
+            moveImages(Direction.Back, 1);
         });
         forwardButton.addEventListener("click", (event) => {
-            moveContainer(Direction.Forward, 1);
+            moveImages(Direction.Forward, 1);
         });
     });
 })();
