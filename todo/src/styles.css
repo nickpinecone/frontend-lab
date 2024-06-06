@@ -171,17 +171,12 @@ header {
 button.add {
     position: fixed;
     bottom: 0;
-    right: 0;
     margin: 24px;
     padding: 12px;
     font-size: 1.6rem;
     background-color: var(--theme-color);
     border: 2px solid var(--theme-color);
     color: white;
-}
-
-.project.add {
-    left: 16%;
 }
 
 button.add:hover {
