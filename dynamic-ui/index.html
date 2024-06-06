@@ -1,93 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" />
-        <title>Document</title>
-        <link
-            rel="stylesheet"
-            href="styles.css"
-        />
-        <script
-            src="js/drop-down.js"
-            type="module"
-            defer
-        ></script>
-        <script
-            src="js/tabs-navigation.js"
-            defer
-        ></script>
-        <script
-            src="script.js"
-            type="module"
-            defer
-        ></script>
-    </head>
 
-    <body>
-        <div class="tabs-navigation">
-            <div class="tabs">
-                <button
-                    default
-                    data-html="tabs/home.html"
-                    class="tab"
-                >
-                    Home
-                </button>
-                <button
-                    data-html="tabs/store.html"
-                    class="tab"
-                >
-                    Store
-                </button>
-                <div class="drop-down">
-                    <button class="trigger">More</button>
-                    <div class="items">
-                        <button
-                            class="item tab"
-                            data-html="tabs/contacts.html"
-                        >
-                            Contacts
-                        </button>
-                    </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="js/drop-down.js" type="module" defer></script>
+    <script src="js/tabs-navigation.js" defer></script>
+    <script src="script.js" type="module" defer></script>
+</head>
+
+<body>
+    <div class="tabs-navigation">
+        <div class="tabs">
+            <button default data-html="tabs/home.html" class="tab">
+                Home
+            </button>
+            <button data-html="tabs/store.html" class="tab">
+                Store
+            </button>
+            <div class="drop-down">
+                <button class="trigger">More</button>
+                <div class="items">
+                    <button class="item tab" data-html="tabs/contacts.html">
+                        Contacts
+                    </button>
                 </div>
             </div>
-            <div class="content"></div>
         </div>
+        <div class="content"></div>
+    </div>
 
-        <div class="drop-down second">
-            <button class="trigger">Menu</button>
-            <div class="items">
-                <div class="item">Item 1111</div>
-                <div class="item">Item 2</div>
-                <div class="item">Item 3</div>
-            </div>
+    <div class="drop-down second">
+        <button class="trigger">Menu</button>
+        <div class="items">
+            <div class="item">Item 1111</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
         </div>
+    </div>
 
-        <div class="image-slider">
-            <div class="image-display">
-                <div class="image-container">
-                    <img
-                        src="imgs/forest.jpg"
-                        alt="forest"
-                    />
-                    <img
-                        src="imgs/desert.jpg"
-                        alt="desert"
-                    />
-                    <img
-                        src="imgs/moutains.jpg"
-                        alt="mountains"
-                    />
-                    <img
-                        src="imgs/lake.jpg"
-                        alt="lake"
-                    />
-                </div>
-                <button class="back"><</button>
-                <button class="forward">></button>
+    <div class="image-slider">
+        <div class="image-display">
+            <div class="image-container">
+                <img src="imgs/forest.jpg" alt="forest" />
+                <img src="imgs/desert.jpg" alt="desert" />
+                <img src="imgs/moutains.jpg" alt="mountains" />
+                <img src="imgs/lake.jpg" alt="lake" />
             </div>
-            <div class="navigation"></div>
+            <button class="back">&gt;</button>
+            <button class="forward">&lt;</button>
         </div>
-    </body>
+        <div class="navigation"></div>
+    </div>
+</body>
+
 </html>

@@ -83,7 +83,9 @@ export default function (query) {
         return null;
     }
 
-    let onselect = function (item) {};
+    let onselect = function (item) {
+        return item;
+    };
 
     const list = dropDown.querySelector(".items");
     const children = Array.from(list.children);
