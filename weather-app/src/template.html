@@ -4,12 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
     <title>
         <%= htmlWebpackPlugin.options.title %>
     </title>
 </head>
 
 <body>
+
+    <header>
+        <label for="search" class="search-wrapper">
+            <span>🔎</span>
+            <input type="search" name="search" id="search">
+        </label>
+
+        <div class="degree-select">
+            <label for="celsius" class="celsius">
+                <span>℃</span>
+                <input type="radio" name="degree" id="celsius" checked>
+            </label>
+            <label for="fahrenheit" class="fahrenheit">
+                <span>℉</span>
+                <input type="radio" name="degree" id="fahrenheit">
+            </label>
+        </div>
+    </header>
 
 </body>
 

@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --text-color: #ffff;
+    --cold-color: #2392DB;
+    --warm-color: #C9B816;
+    --secondary-color: #A6AEB3;
+
+    font-size: 24px;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+/* #region header */
+
+header {
+    background-color: var(--cold-color);
+    color: var(--text-color);
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+
+    padding: 0.8rem 2rem;
+}
+
+header .search-wrapper {
+    grid-column: 2;
+    justify-self: center;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+header #search {
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+
+    font-size: 1rem;
+    padding: 0.2rem 0.8rem;
+}
+
+header #search:focus {
+    outline: 3px solid var(--text-color);
+    outline-offset: 0.1rem;
+}
+
+header .degree-select {
+    justify-self: flex-end;
+    display: flex;
+    gap: 1rem;
+}
+
+header .degree-select input[type="radio"] {
+    display: none;
+}
+
+header .degree-select>label {
+    background-color: var(--text-color);
+    color: var(--cold-color);
+
+    padding: 0.2rem 1rem;
+    border-radius: 1rem;
+}
+
+header .degree-select>label:hover {
+    filter: brightness(90%);
+    cursor: pointer;
+}
+
+header .degree-select>label:has(input[type="radio"]:checked) {
+    background-color: var(--cold-color);
+    color: var(--text-color);
+    outline: 3px solid var(--text-color);
+}
+
+/* #endregion header */

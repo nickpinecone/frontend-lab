@@ -14,16 +14,10 @@ export default {
     mode: "development",
     devtool: "inline-source-map",
     devServer: {
-        static: {
-            directory: path.resolve(__dirname, "dist"),
-        },
+        watchFiles: ["./src/**"],
+        port: 8080,
         open: true,
         hot: true,
-        compress: true,
-        historyApiFallback: true,
-        client: {
-            logging: "warn",
-        },
     },
 
     plugins: [
