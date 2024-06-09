@@ -6,26 +6,23 @@
 
 :root {
     font-family: "Roboto", monospace;
+    font-size: 24px;
 
     --text-color: #ffff;
-    --cold-color: #2392DB;
-    --cold-light-color: #23b6db;
-    --warm-color: #C9B816;
+    --primary-color: #2392DB;
+    --primary-light-color: #23b6db;
     --secondary-color: #A6AEB3;
-
-    font-size: 24px;
+    --secondary-light-color: #efefef;
 }
 
 body {
-    background: linear-gradient(to top, var(--cold-color), var(--cold-light-color));
+    background: linear-gradient(to top, var(--primary-color), var(--primary-light-color));
 
     width: 100vw;
     min-height: 100vh;
 }
 
 /* #region header */
-
-/* layout */
 
 header {
     color: var(--text-color);
@@ -65,13 +62,11 @@ header .degree-select input[type="radio"] {
 
 header .degree-select>label {
     background-color: var(--text-color);
-    color: var(--cold-color);
+    color: var(--primary-color);
 
     padding: 0.2rem 1rem;
     border-radius: 1rem;
 }
-
-/* interact */
 
 header #search:focus {
     outline: 3px solid var(--text-color);
@@ -84,7 +79,7 @@ header .degree-select>label:hover {
 }
 
 header .degree-select>label:has(input[type="radio"]:checked) {
-    background-color: var(--cold-color);
+    background-color: var(--primary-color);
     color: var(--text-color);
     outline: 3px solid var(--text-color);
 }
@@ -93,12 +88,7 @@ header .degree-select>label:has(input[type="radio"]:checked) {
 
 /* #region main */
 
-/* layout */
-
 main {
-    width: 100%;
-    min-height: 100%;
-
     display: flex;
     justify-content: center;
 }
@@ -106,6 +96,7 @@ main {
 main .container {
     display: flex;
     flex-flow: column;
+    gap: 1rem;
 }
 
 main .container .city,
@@ -115,26 +106,56 @@ main .today .date {
     color: var(--text-color);
 }
 
-main .card {
+main .container .date {
+    margin-bottom: 0.4rem;
+}
+
+main .container .card {
     display: flex;
     gap: 0.5rem;
 }
 
-main .brief {
+main .today .brief,
+main .container .hourly {
     background-color: var(--text-color);
     border-radius: 1rem;
     padding: 1rem;
 }
 
-main .hourly {
-    background-color: var(--text-color);
-    border-radius: 1rem;
-    padding: 1rem;
+main .container .brief {
+    align-self: center;
+}
+
+main .brief .degrees {
+    font-size: 5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+main .brief .info {
+    font-size: 1.4rem;
 }
 
 main .hourly .field {
-    padding: 0.2rem;
-    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+
+    padding: 0.5rem 0rem;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+main .hourly .field:last-of-type {
+    border-bottom: 0;
+    margin-bottom: 0;
+}
+
+main .field .hour {
+    margin-right: 4rem;
+}
+
+main .field .degrees {
+    margin-left: 0.4rem;
+    font-weight: bold;
 }
 
 main .tommorow .date {
