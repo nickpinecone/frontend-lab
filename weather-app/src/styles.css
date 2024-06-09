@@ -5,8 +5,11 @@
 }
 
 :root {
+    font-family: "Roboto", monospace;
+
     --text-color: #ffff;
     --cold-color: #2392DB;
+    --cold-light-color: #23b6db;
     --warm-color: #C9B816;
     --secondary-color: #A6AEB3;
 
@@ -14,20 +17,22 @@
 }
 
 body {
+    background: linear-gradient(to top, var(--cold-color), var(--cold-light-color));
+
     width: 100vw;
     min-height: 100vh;
 }
 
 /* #region header */
 
+/* layout */
+
 header {
-    background-color: var(--cold-color);
     color: var(--text-color);
 
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
-
     padding: 0.8rem 2rem;
 }
 
@@ -48,11 +53,6 @@ header #search {
     padding: 0.2rem 0.8rem;
 }
 
-header #search:focus {
-    outline: 3px solid var(--text-color);
-    outline-offset: 0.1rem;
-}
-
 header .degree-select {
     justify-self: flex-end;
     display: flex;
@@ -71,6 +71,13 @@ header .degree-select>label {
     border-radius: 1rem;
 }
 
+/* interact */
+
+header #search:focus {
+    outline: 3px solid var(--text-color);
+    outline-offset: 0.1rem;
+}
+
 header .degree-select>label:hover {
     filter: brightness(90%);
     cursor: pointer;
@@ -83,3 +90,55 @@ header .degree-select>label:has(input[type="radio"]:checked) {
 }
 
 /* #endregion header */
+
+/* #region main */
+
+/* layout */
+
+main {
+    width: 100%;
+    min-height: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+main .container {
+    display: flex;
+    flex-flow: column;
+}
+
+main .container .city,
+main .today .date {
+    align-self: center;
+    text-align: center;
+    color: var(--text-color);
+}
+
+main .card {
+    display: flex;
+    gap: 0.5rem;
+}
+
+main .brief {
+    background-color: var(--text-color);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+main .hourly {
+    background-color: var(--text-color);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+main .hourly .field {
+    padding: 0.2rem;
+    border-bottom: 1px solid black;
+}
+
+main .tommorow .date {
+    color: var(--text-color);
+}
+
+/* #endregion main */

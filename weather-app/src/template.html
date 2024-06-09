@@ -4,6 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="./styles.css">
     <title>
         <%= htmlWebpackPlugin.options.title %>
@@ -29,6 +36,48 @@
             </label>
         </div>
     </header>
+
+    <main>
+        <div class="container">
+            <h1 class="city">London</h1>
+
+            <section class="today">
+                <h2 class="date">9 June, Sunday</h2>
+
+                <div class="card">
+                    <div class="brief">
+                        <p class="degrees">26°</p>
+                        <p class="info">
+                            <span class="status">Clear</span>
+                            <span class="icon">☀️</span>
+                        </p>
+                    </div>
+                    <div class="hourly">
+                        <div class="field">
+                            <span class="hour">9:00</span>
+                            <span class="degrees">24°</span>
+                            <span class="status">Clear</span>
+                            <span class="icon">☀️</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="tommorow">
+                <h2 class="date">10 June, Sunday</h2>
+
+                <div class="hourly">
+                    <div class="field">
+                        <span class="hour">9:00</span>
+                        <span class="degrees">23°</span>
+                        <span class="status">Clear</span>
+                        <span class="icon">☀️</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
 
 </body>
 
