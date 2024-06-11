@@ -1,11 +1,10 @@
-
 body {
     display: flex;
     flex-flow: row nowrap;
     gap: 32px;
 }
 
-body > div {
+body>div {
     flex: 1;
 }
 
