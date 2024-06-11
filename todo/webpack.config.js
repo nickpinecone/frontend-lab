@@ -2,22 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    devtool: "inline-source-map",
-    mode: "development",
-
-    devServer: {
-        static: {
-            directory: path.resolve(__dirname, "dist"),
-        },
-        open: true,
-        hot: true,
-        compress: true,
-        historyApiFallback: true,
-        client: {
-            logging: "warn",
-        },
-    },
-
     entry: {
         main: "./src/index.js",
     },
@@ -25,6 +9,15 @@ module.exports = {
         filename: "[name].[contenthash].js",
         path: path.resolve(__dirname, "dist"),
         clean: true,
+    },
+
+    mode: "development",
+    devtool: "inline-source-map",
+    devServer: {
+        watchFiles: ["./src/**"],
+        port: 8080,
+        open: true,
+        hot: true,
     },
 
     plugins: [
