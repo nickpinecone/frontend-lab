@@ -1,0 +1,20 @@
+{
+  "name": "sign-up-form",
+  "version": "1.0.0",
+  "description": "Have you ever wanted to sign up for an imaginary service, well now you can",
+  "private": true,
+  "scripts": {
+    "dev": "live-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThreeDotsEllipsis/sign-up-form.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThreeDotsEllipsis/sign-up-form/issues"
+  },
+  "homepage": "https://github.com/ThreeDotsEllipsis/sign-up-form#readme"
+}
