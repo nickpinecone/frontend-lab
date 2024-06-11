@@ -1,9 +1,8 @@
-import './style.css';
+import './styles.css';
 
-import createHome from './home';
-import createContact from './contact';
-import createMenu from './menu';
-
+import createHome from './scripts/home';
+import createContact from './scripts/contact';
+import createMenu from './scripts/menu';
 
 let buttons = document.querySelectorAll(".tab");
 

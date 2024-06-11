@@ -1,11 +1,7 @@
 const path = require("path");
-
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    devtool: "inline-source-map",
-    mode: "development",
-
     entry: {
         main: "./src/index.js",
     },
@@ -14,6 +10,16 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         clean: true,
     },
+
+    devtool: "inline-source-map",
+    mode: "development",
+    devServer: {
+        watchFiles: ["./src/**"],
+        port: 8080,
+        open: true,
+        hot: true,
+    },
+
     plugins: [
         new HtmlWebpackPlugin({
             title: "Restaurant Page",
