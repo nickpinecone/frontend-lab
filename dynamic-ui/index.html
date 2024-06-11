@@ -5,25 +5,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" />
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="js/drop-down.js" type="module" defer></script>
-    <script src="js/tabs-navigation.js" defer></script>
-    <script src="script.js" type="module" defer></script>
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script src="./src/scripts/drop-down.js" type="module" defer></script>
+    <script src="./src/scripts/tabs-navigation.js" defer></script>
+    <script src="./src/script.js" type="module" defer></script>
 </head>
 
 <body>
     <div class="tabs-navigation">
         <div class="tabs">
-            <button default data-html="tabs/home.html" class="tab">
+            <button default data-html="./src/tabs/home.html" class="tab">
                 Home
             </button>
-            <button data-html="tabs/store.html" class="tab">
+            <button data-html="./src/tabs/store.html" class="tab">
                 Store
             </button>
             <div class="drop-down">
                 <button class="trigger">More</button>
                 <div class="items">
-                    <button class="item tab" data-html="tabs/contacts.html">
+                    <button class="item tab" data-html="./src/tabs/contacts.html">
                         Contacts
                     </button>
                 </div>
@@ -44,13 +44,13 @@
     <div class="image-slider">
         <div class="image-display">
             <div class="image-container">
-                <img src="imgs/forest.jpg" alt="forest" />
-                <img src="imgs/desert.jpg" alt="desert" />
-                <img src="imgs/moutains.jpg" alt="mountains" />
-                <img src="imgs/lake.jpg" alt="lake" />
+                <img src="./src/images/forest.jpg" alt="forest" />
+                <img src="./src/images/desert.jpg" alt="desert" />
+                <img src="./src/images/moutains.jpg" alt="mountains" />
+                <img src="./src/images/lake.jpg" alt="lake" />
             </div>
-            <button class="back">&gt;</button>
-            <button class="forward">&lt;</button>
+            <button class="back">&lt;</button>
+            <button class="forward">&gt;</button>
         </div>
         <div class="navigation"></div>
     </div>
