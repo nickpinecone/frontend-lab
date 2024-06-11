@@ -1,0 +1,20 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "Your personal library, throw those physical books in the trash bin, manage them online",
+  "private": true,
+  "scripts": {
+    "dev": "live-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThreeDotsEllipsis/library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThreeDotsEllipsis/library/issues"
+  },
+  "homepage": "https://github.com/ThreeDotsEllipsis/library#readme"
+}
