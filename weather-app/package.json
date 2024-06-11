@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "serve": "webpack serve"
+    "dev": "webpack serve"
   },
   "keywords": [],
   "author": "",
