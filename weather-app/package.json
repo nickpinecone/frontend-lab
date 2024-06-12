@@ -4,7 +4,7 @@
   "description": "Do you still use old superstitions to know tommorow's weather? Stop, this service will help you",
   "private": true,
   "scripts": {
-    "build": "webpack",
+    "prepublish": "webpack",
     "dev": "webpack serve"
   },
   "keywords": [],
