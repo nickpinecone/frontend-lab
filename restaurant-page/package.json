@@ -4,9 +4,9 @@
   "description": "This restaurant offers the best pies in the entire universe",
   "private": true,
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack serve",
-    "publish": "git subtree push --prefix dist origin gh-pages"
+    "prepublish": "webpack",
+    "publish": "gh-pages -d dist",
+    "dev": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/ThreeDotsEllipsis/restaurant-page#readme",
   "devDependencies": {
     "css-loader": "^6.8.1",
+    "gh-pages": "^6.1.1",
     "html-webpack-plugin": "^5.5.3",
     "style-loader": "^3.3.3",
     "webpack": "^5.88.2",
