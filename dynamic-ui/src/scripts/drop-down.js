@@ -20,6 +20,8 @@ const styles = `
     .drop-down .items .item {
         background-color: whitesmoke;
         padding: 2px;
+        z-index: 1;
+        position: relative;
     }
 
     .drop-down .items .item:hover {
@@ -101,12 +103,3 @@ export default function (query) {
 
     return { subscribe };
 }
-
-// Use drop-down
-// import dropdown from "./drop-down.js";
-
-// const dropDown = dropdown(".drop-down.second");
-
-// dropDown.subscribe((item) => {
-//     console.log(item.textContent);
-// });
