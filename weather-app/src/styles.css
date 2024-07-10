@@ -124,6 +124,11 @@ main .container .hourly {
 
 main .container .brief {
     align-self: center;
+    height: 300px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center
 }
 
 main .brief .degrees {

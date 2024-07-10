@@ -1,11 +1,20 @@
+import dateFormat from "dateformat";
+
 import "./styles.css"
 
 const API_KEY = "442fe83fbf324936aba162109241206";
 const BASE_URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&days=2`;
 
+let timeNow;
 const brief = document.querySelector(".brief");
 const todayHourly = document.querySelector(".today .hourly");
 const tomorrowHourly = document.querySelector(".tomorrow .hourly");
+
+const city = document.querySelector(".city");
+const search = document.querySelector("#search");
+
+const todayDate = document.querySelector(".today .date");
+const tomorrowDate = document.querySelector(".tomorrow .date");
 
 async function getWeather(query) {
     let url = BASE_URL + "&q=" + query;
@@ -21,7 +30,8 @@ function generateField(data) {
 
     let hour = document.createElement("span");
     hour.classList.add("hour");
-    hour.textContent = "00:00";
+    let time = data.time.split(" ")[1];
+    hour.textContent = time;
     field.appendChild(hour);
 
     let info = document.createElement("div");
@@ -52,13 +62,15 @@ function generateField(data) {
 function populateHourly(hourly, data) {
     hourly.textContent = "";
 
-    for (let day of data.hour) {
+    for (let day of data) {
         let field = generateField(day);
         hourly.appendChild(field);
     }
 }
 
 function populateBrief(current) {
+    timeNow = Date.now() / 1000;
+
     const degrees = brief.querySelector(".degrees");
     degrees.textContent = current.temp_c;
 
@@ -75,8 +87,24 @@ function populateData(data) {
     console.log(data);
 
     populateBrief(data.current);
-    populateHourly(todayHourly, data.forecast.forecastday[0]);
-    populateHourly(tomorrowHourly, data.forecast.forecastday[1]);
+
+    let todayFilter = [];
+
+    for (var day of data.forecast.forecastday[0].hour) {
+        if (day.time_epoch >= timeNow) {
+            todayFilter.push(day)
+        }
+    }
+
+    populateHourly(todayHourly, todayFilter);
+    populateHourly(tomorrowHourly, data.forecast.forecastday[1].hour);
+
+    let today = new Date(data.forecast.forecastday[0].date);
+    todayDate.textContent = dateFormat(today, "dd mmmm, dddd");
+
+    let tomorrow = new Date(data.forecast.forecastday[1].date);
+    tomorrowDate.textContent = dateFormat(tomorrow, "dd mmmm, dddd");
+    city.textContent = data.location.name;
 }
 
 function containsAny(text, arr) {
@@ -116,5 +144,11 @@ function getCondition(text) {
     }
 }
 
-let data = await getWeather("Moscow");
-populateData(data);
+search.addEventListener("keypress", async (event) => {
+    if (event.key == "Enter") {
+        let data = await getWeather(search.value);
+        if (!("error" in data)) {
+            populateData(data);
+        }
+    }
+});
