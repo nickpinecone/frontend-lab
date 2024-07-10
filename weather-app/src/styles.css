@@ -149,6 +149,11 @@ main .hourly .field:last-of-type {
     margin-bottom: 0;
 }
 
+main .today .hourly {
+    height: 300px;
+    overflow: scroll;
+}
+
 main .field .hour {
     margin-right: 4rem;
 }
@@ -158,8 +163,16 @@ main .field .degrees {
     font-weight: bold;
 }
 
-main .tommorow .date {
+main .field .status {
+    margin-right: 0.2rem;
+}
+
+main .tomorrow .date {
     color: var(--text-color);
+}
+
+main .degrees::after {
+    content: "°";
 }
 
 /* #endregion main */
