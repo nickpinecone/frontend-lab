@@ -6,6 +6,9 @@ const API_KEY = "442fe83fbf324936aba162109241206";
 const BASE_URL = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&days=2`;
 
 let timeNow;
+const celsius = document.querySelector("#celsius");
+const fahrenheit = document.querySelector("#fahrenheit");
+
 const brief = document.querySelector(".brief");
 const todayHourly = document.querySelector(".today .hourly");
 const tomorrowHourly = document.querySelector(".tomorrow .hourly");
@@ -52,9 +55,14 @@ function generateField(data) {
 
     let degrees = document.createElement("span");
     degrees.classList.add("degrees");
-    degrees.textContent = data.temp_c;
-    info.appendChild(degrees);
+    if (celsius.checked) {
+        degrees.textContent = data.temp_c;
+    }
+    else if (fahrenheit.checked) {
+        degrees.textContent = data.temp_f;
+    }
 
+    info.appendChild(degrees);
     return field;
 
 }
@@ -72,7 +80,13 @@ function populateBrief(current) {
     timeNow = Date.now() / 1000;
 
     const degrees = brief.querySelector(".degrees");
-    degrees.textContent = current.temp_c;
+
+    if (celsius.checked) {
+        degrees.textContent = current.temp_c;
+    }
+    else if (fahrenheit) {
+        degrees.textContent = current.temp_f;
+    }
 
     const status = brief.querySelector(".status");
     const icon = brief.querySelector(".icon");
