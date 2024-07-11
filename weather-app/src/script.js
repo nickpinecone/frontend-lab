@@ -5,7 +5,6 @@ import "./styles.css"
 const API_KEY = "442fe83fbf324936aba162109241206";
 const BASE_URL = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&days=2`;
 
-let timeNow;
 const celsius = document.querySelector("#celsius");
 const fahrenheit = document.querySelector("#fahrenheit");
 
@@ -77,8 +76,6 @@ function populateHourly(hourly, data) {
 }
 
 function populateBrief(current) {
-    timeNow = Date.now() / 1000;
-
     const degrees = brief.querySelector(".degrees");
 
     if (celsius.checked) {
@@ -97,28 +94,28 @@ function populateBrief(current) {
     icon.textContent = condition.icon;
 }
 
-function populateData(data) {
-    console.log(data);
+function populateDay(day, hourly, dateDisplay) {
+    let filter = [];
+    let timeNow = Date.now() / 1000;
 
-    populateBrief(data.current);
-
-    let todayFilter = [];
-
-    for (var day of data.forecast.forecastday[0].hour) {
-        if (day.time_epoch >= timeNow) {
-            todayFilter.push(day)
+    for (var hour of day.hour) {
+        if (hour.time_epoch >= timeNow) {
+            filter.push(hour)
         }
     }
 
-    populateHourly(todayHourly, todayFilter);
-    populateHourly(tomorrowHourly, data.forecast.forecastday[1].hour);
+    populateHourly(hourly, filter);
 
-    let today = new Date(data.forecast.forecastday[0].date);
-    todayDate.textContent = dateFormat(today, "dd mmmm, dddd");
+    let date = new Date(day.date);
+    dateDisplay.textContent = dateFormat(date, "dd mmmm, dddd");
+}
 
-    let tomorrow = new Date(data.forecast.forecastday[1].date);
-    tomorrowDate.textContent = dateFormat(tomorrow, "dd mmmm, dddd");
+function populateData(data) {
     city.textContent = data.location.name;
+
+    populateBrief(data.current);
+    populateDay(data.forecast.forecastday[0], todayHourly, todayDate)
+    populateDay(data.forecast.forecastday[1], tomorrowHourly, tomorrowDate);
 }
 
 function containsAny(text, arr) {
