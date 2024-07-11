@@ -3,7 +3,7 @@ import dateFormat from "dateformat";
 import "./styles.css"
 
 const API_KEY = "442fe83fbf324936aba162109241206";
-const BASE_URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&days=2`;
+const BASE_URL = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&days=2`;
 
 let timeNow;
 const brief = document.querySelector(".brief");
