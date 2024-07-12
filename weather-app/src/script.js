@@ -7,6 +7,7 @@ const BASE_URL = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&day
 
 const celsius = document.querySelector("#celsius");
 const fahrenheit = document.querySelector("#fahrenheit");
+const main = document.querySelector("main");
 
 const brief = document.querySelector(".brief");
 const todayHourly = document.querySelector(".today .hourly");
@@ -159,6 +160,7 @@ search.addEventListener("keypress", async (event) => {
     if (event.key == "Enter") {
         let data = await getWeather(search.value);
         if (!("error" in data)) {
+            main.style.display = "flex";
             populateData(data);
         }
     }

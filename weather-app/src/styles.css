@@ -91,6 +91,7 @@ header .degree-select>label:has(input[type="radio"]:checked) {
 main {
     display: flex;
     justify-content: center;
+    display: none;
 }
 
 main .container {
