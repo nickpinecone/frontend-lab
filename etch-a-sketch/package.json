@@ -1,0 +1,20 @@
+{
+  "name": "etch-a-sketch",
+  "version": "1.0.0",
+  "description": "A modern tool for professional artists",
+  "private": true,
+  "scripts": {
+    "dev": "live-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThreeDotsEllipsis/etch-a-sketch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThreeDotsEllipsis/etch-a-sketch/issues"
+  },
+  "homepage": "https://github.com/ThreeDotsEllipsis/etch-a-sketch#readme"
+}
