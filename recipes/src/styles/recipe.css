@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 32px;
+}
+
+body>div {
+    flex: 1;
+}
+
+img {
+    width: 600px;
+    height: auto;
+}
+
+.links .wrapper {
+    padding-left: 16px;
+    padding-top: 24px;
+    position: sticky;
+    top: 0;
+}
+
+.links h2 {
+    margin-top: 0px;
+}
+
+.links ul {
+    padding: 0px;
+    font-size: 24px;
+    list-style-type: none;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
+}
+
+.links a {
+    color: darkblue;
+}
+
+.content li {
+    margin-bottom: 4px;
+}
+
+@media screen and (max-width : 760px) {
+    body {
+        flex-flow: column nowrap;
+        gap: 0px;
+        padding: 16px;
+        padding-top: 0px;
+    }
+
+    .links ul,
+    .links h2 {
+        padding-left: 0px;
+    }
+}
