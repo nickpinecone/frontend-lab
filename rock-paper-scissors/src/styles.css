@@ -1,0 +1,100 @@
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0px;
+    height: 100vh;
+}
+
+.title,
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    background-color: rgb(185, 185, 185);
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+
+.container {
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    flex: 1;
+    max-width: 1000px;
+}
+
+.container>div {
+    flex: 4;
+}
+
+.container>#middle {
+    flex: 1;
+}
+
+#middle {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    font-size: 24px;
+}
+
+#middle>div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vs-sign {
+    padding: 17px 0px;
+    border-bottom: 1px solid rgb(155, 155, 155);
+}
+
+
+.left,
+.right {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    background-color: rgb(185, 185, 185);
+    border-radius: 8px;
+    font-size: 24px;
+}
+
+.left>div,
+.right>div {
+    flex: 1;
+    text-align: center;
+    padding: 32px;
+    border-bottom: 1px groove rgb(155, 155, 155);
+}
+
+.left>div:last-child,
+.right>div:last-child {
+    border-bottom: none;
+}
+
+.display-human,
+.display-computer {
+    font-size: 72px;
+}
+
+button {
+    font-size: 24px;
+    border: 0px;
+    border-radius: 4px;
+    background-color: white;
+    padding: 4px 12px;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}

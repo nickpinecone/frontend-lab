@@ -1,0 +1,20 @@
+{
+  "name": "rock-paper-scissors",
+  "version": "1.0.0",
+  "description": "An amazing original game",
+  "private": true,
+  "scripts": {
+    "dev": "live-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThreeDotsEllipsis/rock-paper-scissors.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThreeDotsEllipsis/rock-paper-scissors/issues"
+  },
+  "homepage": "https://github.com/ThreeDotsEllipsis/rock-paper-scissors#readme"
+}
