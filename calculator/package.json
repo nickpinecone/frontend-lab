@@ -1,0 +1,20 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "The calculator you have been waiting for, packed with new features and abilities",
+  "private": true,
+  "scripts": {
+    "dev": "live-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThreeDotsEllipsis/calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThreeDotsEllipsis/calculator/issues"
+  },
+  "homepage": "https://github.com/ThreeDotsEllipsis/calculator#readme"
+}
