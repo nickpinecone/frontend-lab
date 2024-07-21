@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+
+.header {
+    border-bottom: 2px dashed black;
+    align-self: stretch;
+    text-align: center;
+    padding: 24px;
+    font-size: 36px;
+}
+
+.board {
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    width: 500px;
+    height: 500px;
+    gap: 8px;
+}
+
+.board>button {
+    font-size: 80px;
+    font-weight: bold;
+    border-radius: 0;
+    border-radius: 8px;
+    border: 2px solid black;
+    background-color: white;
+    border-top-left-radius: 0px;
+}
+
+.board>button.win {
+    background-color: black;
+    color: white;
+}
+
+.board>button>span {
+    opacity: 0;
+    transition: opacity 400ms;
+}
+
+.board>button>span.win {
+    color: white;
+}
+
+.board>button>span.show {
+    opacity: 1;
+}
+
+
+.board>button:disabled {
+    color: black;
+}
+
+.show-turn {
+    font-size: 40px;
+    margin-bottom: 32px;
+    margin-top: 64px;
+    display: flex;
+    gap: 128px;
+}
+
+.show-turn>div {
+    padding: 16px;
+    border: 2px solid black;
+    border-radius: 8px;
+    transition: background-color 300ms, color 300ms;
+}
+
+.show-turn>div.active {
+    background-color: black;
+    color: white;
+}
+
+.show-winner {
+    position: fixed;
+    top: 98%;
+    left: 1%;
+
+    translate: -0% -100%;
+    border: 0;
+    border-radius: 8px;
+    padding: 32px;
+    font-size: 36px;
+    text-align: center;
+}
+
+.show-winner .wrapper {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.show-winner input {
+    display: none;
+}
+
+.show-winner .output-winner,
+.show-winner .player1 {
+    margin-bottom: 16px;
+}
+
+.show-winner button {
+    background-color: white;
+    color: black;
+    padding: 16px;
+    font-size: 28px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+.show-winner button:hover {
+    background-color: black;
+    color: white;
+}
+
+.modify-game {
+    border-left: 1px solid black;
+    padding-left: 16px;
+}
+
+.modify-game .sign {
+    margin-bottom: 16px;
+}
+
+.modify-game>div {
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.modify-game label {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.modify-game input:checked+label {
+    background-color: black;
+    color: white;
+}
