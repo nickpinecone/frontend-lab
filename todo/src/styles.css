@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+    --main-color: hsl(0, 0%, 75%);
+    --second-color: hsl(0, 0%, 80%);
+    --third-color: hsl(0, 0%, 90%);
+    --theme-color: hsl(205, 55%, 20%);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+header {
+    font-size: 2.2rem;
+    font-weight: bold;
+    padding: 24px;
+    text-align: center;
+    background-color: var(--main-color);
+    box-shadow: 0px 2px 6px gray;
+    z-index: 2;
+    color: var(--theme-color);
+    text-shadow: 1px 1px steelblue;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow: hidden;
+}
+
+.projects-sidebar {
+    background-color: var(--second-color);
+    padding: 24px 16px;
+    display: flex;
+    width: 28%;
+    flex-flow: column nowrap;
+    gap: 16px;
+    box-shadow: 2px 0px 6px gray;
+    z-index: 1;
+    overflow: scroll;
+    position: relative;
+    padding-bottom: 112px;
+}
+
+.project-container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
+}
+
+#sidebar-title {
+    color: var(--theme-color);
+    text-shadow: 1px 1px steelblue;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.project {
+    background-color: white;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    gap: 4px;
+    font-size: 1.6rem;
+}
+
+.project.active {
+    background-color: var(--theme-color);
+}
+
+.project.active input:read-only {
+    color: white;
+}
+
+
+.project,
+.todo {
+    box-shadow: 2px 2px 6px gray;
+}
+
+.project #title {
+    flex: 1;
+    font-size: inherit;
+    padding: 8px;
+}
+
+.project button {
+    padding: 8px;
+    font-size: inherit;
+}
+
+.todos-area {
+    flex: 1;
+    background-color: var(--third-color);
+    padding: 24px 16px;
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: scroll;
+    position: relative;
+    padding-bottom: 112px;
+}
+
+.todo-container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+}
+
+.todo {
+    background-color: white;
+    padding: 0px 16px;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0px 16px;
+
+    border-left: 12px solid black;
+}
+
+.todo #done-check {
+    transform: scale(2);
+    margin: 0px 8px;
+}
+
+.todo #description {
+    flex: 1;
+}
+
+.todo input,
+.todo button,
+.todo label {
+    font-size: inherit;
+    padding: 12px;
+}
+
+.todo input:read-only {
+    color: black;
+    border: 0;
+}
+
+.project button,
+.todo button,
+.project input:read-only,
+.todo input:read-only,
+.project input:read-only {
+    background-color: transparent;
+    border: 0;
+    border-radius: 4px;
+}
+
+.project button:hover,
+.todo button:hover,
+.project input:read-only:hover,
+.todo input:read-only:hover {
+    background-color: var(--third-color);
+    color: black;
+}
+
+button.add {
+    position: fixed;
+    bottom: 0;
+    margin: 24px;
+    padding: 12px;
+    font-size: 1.6rem;
+    background-color: var(--theme-color);
+    border: 2px solid var(--theme-color);
+    color: white;
+}
+
+button.add:hover {
+    background-color: white;
+    color: var(--theme-color);
+}
+
+input:read-only {
+    border: 0;
+    cursor: default;
+}
+
+input:read-only:focus {
+    outline: 0;
+}
