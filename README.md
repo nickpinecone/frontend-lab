@@ -1,2 +1,2 @@
-# odin-frontend
-Archive of frontend websites I made as part of The Odin Project
+# frontend-lab
+Collection of frontend websites made for experiments

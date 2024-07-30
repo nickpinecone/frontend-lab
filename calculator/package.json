@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThreeDotsEllipsis/calculator.git"
+    "url": "git+https://github.com/nickpinecone/calculator.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ThreeDotsEllipsis/calculator/issues"
+    "url": "https://github.com/nickpinecone/calculator/issues"
   },
-  "homepage": "https://github.com/ThreeDotsEllipsis/calculator#readme"
+  "homepage": "https://github.com/nickpinecone/calculator#readme"
 }

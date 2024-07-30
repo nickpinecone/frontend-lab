@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThreeDotsEllipsis/sign-up-form.git"
+    "url": "git+https://github.com/nickpinecone/sign-up-form.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ThreeDotsEllipsis/sign-up-form/issues"
+    "url": "https://github.com/nickpinecone/sign-up-form/issues"
   },
-  "homepage": "https://github.com/ThreeDotsEllipsis/sign-up-form#readme"
+  "homepage": "https://github.com/nickpinecone/sign-up-form#readme"
 }

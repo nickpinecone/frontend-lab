@@ -1,3 +1,5 @@
+const { playRound, capitalize, getEmoji, getComputerChoice } = require("./utils.js");
+
 let buttons = document.querySelectorAll(".buttons > button");
 let displayHuman = document.querySelector(".display-human");
 let displayComputer = document.querySelector(".display-computer");
@@ -6,47 +8,8 @@ let humanScore = document.querySelector(".human-score");
 let computerScore = document.querySelector(".computer-score");
 let restartButton = document.querySelector(".restart-button")
 
-let choices = ["rock", "paper", "scissors"];
 let humanScoreCount = 0
 let computerScoreCount = 0
-
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function getEmoji(word) {
-    if (word == "rock") {
-        return "✊";
-    }
-    else if (word == "paper") {
-        return "✋";
-    }
-    else {
-        return "🖖";
-    }
-}
-
-function getComputerChoice() {
-    let randomChoice = Math.floor(Math.random() * 3);
-
-    return choices[randomChoice];
-}
-
-function playRound(playerSelection, computerChoice) {
-    if (playerSelection == computerChoice) {
-        return "draw";
-    }
-    else if (
-        (playerSelection == "rock" && computerChoice == "scissors") ||
-        (playerSelection == "paper" && computerChoice == "rock") ||
-        (playerSelection == "scissors" && computerChoice == "paper")
-    ) {
-        return "win";
-    }
-    else {
-        return "lose";
-    }
-}
 
 function updateScore(newHumanScore, newComputerScore) {
     humanScoreCount = newHumanScore;
@@ -86,4 +49,3 @@ buttons.forEach((button) => {
 });
 
 restartButton.addEventListener("click", resetGame);
-

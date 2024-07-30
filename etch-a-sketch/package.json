@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThreeDotsEllipsis/etch-a-sketch.git"
+    "url": "git+https://github.com/nickpinecone/etch-a-sketch.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ThreeDotsEllipsis/etch-a-sketch/issues"
+    "url": "https://github.com/nickpinecone/etch-a-sketch/issues"
   },
-  "homepage": "https://github.com/ThreeDotsEllipsis/etch-a-sketch#readme"
+  "homepage": "https://github.com/nickpinecone/etch-a-sketch#readme"
 }

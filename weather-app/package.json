@@ -4,13 +4,20 @@
   "description": "Do you still use old superstitions to know tommorow's weather? Stop, this service will help you",
   "private": true,
   "scripts": {
-    "prepublish": "webpack",
-    "publish": "gh-pages -d dist",
+    "build": "webpack",
     "dev": "webpack serve"
   },
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickpinecone/weather-app.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickpinecone/weather-app/issues"
+  },
+  "homepage": "https://github.com/nickpinecone/weather-app#readme",
   "devDependencies": {
     "@eslint/js": "^9.4.0",
     "css-loader": "^7.1.2",

@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThreeDotsEllipsis/library.git"
+    "url": "git+https://github.com/nickpinecone/library.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ThreeDotsEllipsis/library/issues"
+    "url": "https://github.com/nickpinecone/library/issues"
   },
-  "homepage": "https://github.com/ThreeDotsEllipsis/library#readme"
+  "homepage": "https://github.com/nickpinecone/library#readme"
 }

@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThreeDotsEllipsis/odin-recipes.git"
+    "url": "git+https://github.com/nickpinecone/odin-recipes.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ThreeDotsEllipsis/odin-recipes/issues"
+    "url": "https://github.com/nickpinecone/odin-recipes/issues"
   },
-  "homepage": "https://github.com/ThreeDotsEllipsis/odin-recipes#readme"
+  "homepage": "https://github.com/nickpinecone/odin-recipes#readme"
 }

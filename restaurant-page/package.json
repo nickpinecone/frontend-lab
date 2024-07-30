@@ -4,20 +4,19 @@
   "description": "This restaurant offers the best pies in the entire universe",
   "private": true,
   "scripts": {
-    "prepublish": "webpack",
-    "publish": "gh-pages -d dist",
+    "build": "webpack",
     "dev": "webpack serve"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThreeDotsEllipsis/restaurant-page.git"
+    "url": "git+https://github.com/nickpinecone/restaurant-page.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ThreeDotsEllipsis/restaurant-page/issues"
+    "url": "https://github.com/nickpinecone/restaurant-page/issues"
   },
-  "homepage": "https://github.com/ThreeDotsEllipsis/restaurant-page#readme",
+  "homepage": "https://github.com/nickpinecone/restaurant-page#readme",
   "devDependencies": {
     "css-loader": "^6.8.1",
     "gh-pages": "^6.1.1",
