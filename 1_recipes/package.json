@@ -1,0 +1,13 @@
+{
+  "name": "recipes",
+  "version": "1.0.0",
+  "description": "The best recipe site in the world",
+  "scripts": {
+    "dev": "npx live-server ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
