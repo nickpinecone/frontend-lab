@@ -3,7 +3,6 @@ The best recipe site in the world
 
 ## Stack
 - Html
-- Css
 - Pico
 
 ## View
