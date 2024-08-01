@@ -1,0 +1,13 @@
+{
+  "name": "landing-page",
+  "version": "1.0.0",
+  "description": "Yet again, impressing you with an astounding landing page",
+  "scripts": {
+    "dev": "npx live-server ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
