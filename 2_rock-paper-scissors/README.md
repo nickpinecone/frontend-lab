@@ -2,8 +2,8 @@
 An amazing original game
 
 ## Stack
+- Vite
 - Svelte
-- Pico
 
 ## View
 ```

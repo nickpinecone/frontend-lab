@@ -2,8 +2,9 @@
 Yet again, impressing you with an astounding landing page
 
 ## Stack
+- Vite
 - Html
-- Pico
+- Css
 
 ## View
 ```
