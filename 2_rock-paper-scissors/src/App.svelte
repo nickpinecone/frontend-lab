@@ -5,69 +5,49 @@
     import paper from "./assets/paper.svg";
     import rock from "./assets/rock.svg";
     import scissors from "./assets/scissors.svg";
+    import utils from "./utils.js";
 
-    let player = paper;
-    let computer = paper;
+    let player = utils.type.paper;
+    let computer = utils.type.paper;
 
     let message = "";
-    let messageColor = "var(--pico-color)";
+    let color = "var(--pico-color)";
     let wins = 0;
     let loses = 0;
 
-    function isPlayerWin(player, computer) {
-        if (
-            (player == rock && computer == scissors) ||
-            (player == scissors && computer == paper) ||
-            (player == paper && computer == rock)
-        ) {
-            return "win";
-        } else if (player == computer) {
-            return "draw";
+    function getSvg(type) {
+        if (type == utils.type.rock) {
+            return rock;
+        } else if (type == utils.type.paper) {
+            return paper;
         } else {
-            return "lose";
+            return scissors;
         }
-    }
-
-    function getAlt(current) {
-        if (current == paper) {
-            return "Paper hand symbol";
-        } else if (current == rock) {
-            return "Rock hand symbol";
-        } else {
-            return "Scissors hand symbol";
-        }
-    }
-
-    function getRandomChoice() {
-        var choices = [rock, paper, scissors];
-        var index = Math.floor(Math.random() * choices.length);
-
-        return choices[index];
     }
 
     function handleChoice(choice) {
         player = choice;
-        computer = getRandomChoice();
+        computer = utils.getRandomChoice();
 
-        let result = isPlayerWin(player, computer);
+        let result = utils.isPlayerWin(player, computer);
 
-        if (result == "win") {
+        if (result == utils.result.win) {
             wins += 1;
             message = "You Win";
-            messageColor = "var(--pico-color-jade-500)";
-        } else if (result == "lose") {
+            color = "var(--pico-color-jade-500)";
+        } else if (result == utils.result.lose) {
             loses += 1;
             message = "You Lose";
-            messageColor = "var(--pico-color-pink-500)";
+            color = "var(--pico-color-pink-500)";
         } else {
             message = "Draw";
-            messageColor = "var(--pico-color)";
+            color = "var(--pico-color)";
         }
     }
 
     function restart() {
-        player = paper;
-        computer = paper;
+        player = utils.type.paper;
+        computer = utils.type.paper;
 
         message = "";
         wins = 0;
@@ -84,13 +64,17 @@
         <article>
             <header><h2>Player</h2></header>
 
-            <img src={player} alt={getAlt(player)} />
+            <img src={getSvg(player)} alt={utils.getAltText(player)} />
 
             <footer>
                 <div class="grid">
-                    <button on:click={() => handleChoice(rock)}>Rock</button>
-                    <button on:click={() => handleChoice(paper)}>Paper</button>
-                    <button on:click={() => handleChoice(scissors)}
+                    <button on:click={() => handleChoice(utils.type.rock)}
+                        >Rock</button
+                    >
+                    <button on:click={() => handleChoice(utils.type.paper)}
+                        >Paper</button
+                    >
+                    <button on:click={() => handleChoice(utils.type.scissors)}
                         >Scissors</button
                     >
                 </div>
@@ -100,7 +84,7 @@
         <article>
             <header><h2>Computer</h2></header>
 
-            <img src={computer} alt={getAlt(computer)} />
+            <img src={getSvg(computer)} alt={utils.getAltText(computer)} />
 
             <footer>
                 <div class="grid">
@@ -112,7 +96,7 @@
         </article>
     </div>
 
-    <h3 style="color: {messageColor}">{message}</h3>
+    <h3 style="color: {color}">{message}</h3>
 </main>
 
 <style>
