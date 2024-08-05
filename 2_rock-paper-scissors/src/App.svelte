@@ -55,16 +55,20 @@
     }
 </script>
 
-<header>
-    <h1>Rock Paper Scissors</h1>
+<header class="p-1r">
+    <h1 class="text-center">Rock Paper Scissors</h1>
 </header>
 
 <main class="container">
     <div class="grid">
-        <article>
-            <header><h2>Player</h2></header>
+        <article class="text-center">
+            <header><h2 class="mb-0">Player</h2></header>
 
-            <img src={getSvg(player)} alt={utils.getAltText(player)} />
+            <img
+                class="w-8r"
+                src={getSvg(player)}
+                alt={utils.getAltText(player)}
+            />
 
             <footer>
                 <div class="grid">
@@ -81,10 +85,14 @@
             </footer>
         </article>
 
-        <article>
-            <header><h2>Computer</h2></header>
+        <article class="text-center">
+            <header><h2 class="text-center mb-0">Computer</h2></header>
 
-            <img src={getSvg(computer)} alt={utils.getAltText(computer)} />
+            <img
+                class="w-8r"
+                src={getSvg(computer)}
+                alt={utils.getAltText(computer)}
+            />
 
             <footer>
                 <div class="grid">
@@ -96,34 +104,5 @@
         </article>
     </div>
 
-    <h3 style="color: {color}">{message}</h3>
+    <h3 class="text-center" style="color: {color}">{message}</h3>
 </main>
-
-<style>
-    header {
-        text-align: center;
-        padding: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    h1,
-    h2 {
-        margin: 0;
-    }
-
-    h3 {
-        text-align: center;
-    }
-
-    article {
-        text-align: center;
-    }
-
-    img {
-        width: 8rem;
-    }
-
-    button {
-        text-wrap: nowrap;
-    }
-</style>
