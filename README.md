@@ -1,2 +1,2 @@
-# Frontend Lab
-Collection of frontend websites made for experiments
+# Backend Lab
+Collection of backends made for experiments
