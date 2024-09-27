@@ -1,19 +1,19 @@
 <script>
     import { onMount } from "svelte";
 
-    let students = 0;
-    let courses = 0;
+    let students = "";
+    let courses = "";
 
     onMount(async () => {
         let result = await fetch("http://localhost:5096/students");
         let text = await result.text();
 
-        students = Number(text);
+        students = text;
 
         result = await fetch("http://localhost:5096/courses");
         text = await result.text();
 
-        courses = Number(text);
+        courses = text;
     });
 </script>
 

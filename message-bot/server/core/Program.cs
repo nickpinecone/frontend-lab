@@ -1,3 +1,5 @@
+using System;
+using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,17 +14,39 @@ public static class Program
 
         builder.Services.AddCors(options =>
                                  {
-                                     options.AddDefaultPolicy(
-                                         policy =>
-                                         { policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
+                                     options.AddDefaultPolicy(policy =>
+                                                              { policy.AllowAnyOrigin(); });
                                  });
 
         var app = builder.Build();
 
         app.UseCors();
 
-        app.MapGet("/students", () => Results.Ok(1));
-        app.MapGet("/courses", () => Results.Ok(1));
+        HttpClient studentsHttp = new()
+        {
+            BaseAddress = new Uri("http://localhost:5155/"),
+        };
+
+        HttpClient coursesHttp = new()
+        {
+            BaseAddress = new Uri("http://localhost:5000/"),
+        };
+
+        app.MapGet("/students", async () =>
+                                {
+                                    var response = await studentsHttp.GetAsync("students");
+                                    var result = await response.Content.ReadAsStringAsync();
+
+                                    return result;
+                                });
+
+        app.MapGet("/courses", async () =>
+                               {
+                                   var response = await studentsHttp.GetAsync("courses");
+                                   var result = await response.Content.ReadAsStringAsync();
+
+                                   return result;
+                               });
 
         app.Run();
     }
