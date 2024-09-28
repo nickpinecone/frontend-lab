@@ -5,12 +5,12 @@
     let courses = "";
 
     onMount(async () => {
-        let result = await fetch("http://localhost:5096/students");
+        let result = await fetch("http://localhost:5001/students");
         let text = await result.text();
 
         students = text;
 
-        result = await fetch("http://localhost:5096/courses");
+        result = await fetch("http://localhost:5001/courses");
         text = await result.text();
 
         courses = text;
