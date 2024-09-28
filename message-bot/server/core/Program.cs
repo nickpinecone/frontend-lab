@@ -15,11 +15,16 @@ public static class Program
         builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
         builder.Services.AddOcelot(builder.Configuration);
 
-        builder.Services.AddCors(options =>
-                                 {
-                                     options.AddDefaultPolicy(policy =>
-                                                              { policy.AllowAnyOrigin(); });
-                                 });
+        builder.Services.AddCors(
+            options =>
+            {
+                options.AddDefaultPolicy(
+                    policy =>
+                    {
+                        policy.WithOrigins(new string[] { "http://localhost:5173" }).AllowAnyMethod().AllowAnyHeader();
+                    });
+                // { policy.AllowAnyOrigin(); });
+            });
 
         var app = builder.Build();
 

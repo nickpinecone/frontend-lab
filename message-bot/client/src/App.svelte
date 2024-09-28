@@ -1,19 +1,33 @@
 <script>
     import { onMount } from "svelte";
+    import * as signalR from "@microsoft/signalr";
 
-    let students = "";
+    let students = 0;
     let courses = "";
 
     onMount(async () => {
         let result = await fetch("http://localhost:5001/students");
         let text = await result.text();
 
-        students = text;
+        students = Number(text);
 
         result = await fetch("http://localhost:5001/courses");
         text = await result.text();
 
         courses = text;
+
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5002/hub", {
+                transport: signalR.HttpTransportType.ServerSentEvents,
+                withCredentials: false,
+            })
+            .build();
+
+        connection.on("ReceiveMessage", function (count) {
+            students = count;
+        });
+
+        connection.start();
     });
 </script>
 
