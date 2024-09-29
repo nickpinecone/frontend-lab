@@ -1,57 +1,44 @@
+using System.IO;
 using System.Threading.Tasks;
+using Messages;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Connections;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.DependencyInjection;
+using NServiceBus;
 
 namespace Students;
 
 public static class Program
 {
-    public static void Main(string[] args)
+    private static int _students = 0;
+
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddSignalR();
-        builder.Services.AddCors(
-            options =>
-            {
-                options.AddDefaultPolicy(
-                    policy =>
-                    {
-                        policy.WithOrigins(new string[] { "http://localhost:5173", "http://localhost:5001" })
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
-            });
-
         var app = builder.Build();
 
-        app.UseCors();
-        app.MapHub<ChatHub>("/hub");
+        var endpointConfiguration = new EndpointConfiguration("Students");
+        endpointConfiguration.UseSerialization<SystemJsonSerializer>();
 
-        int students = 0;
+        var transport = endpointConfiguration.UseTransport<LearningTransport>();
+        transport.StorageDirectory("/home/nick/Development/backend-lab/message-bot/server/messages");
 
-        app.MapGet("/students", () => students);
-        app.MapGet("/addStudent", async (IHubContext<ChatHub> hub) =>
+        var routing = transport.Routing();
+        routing.RouteToEndpoint(typeof(UpdateStudents), "Signal");
+
+        var endpointInstance = await NServiceBus.Endpoint.Start(endpointConfiguration);
+
+        app.MapGet("/students", () => _students);
+        app.MapGet("/addStudent", async () =>
                                   {
-                                      students++;
+                                      _students++;
 
-                                      await hub.Clients.All.SendAsync("ReceiveMessage", students);
+                                      await endpointInstance.Send(new UpdateStudents() { StudentCount = students });
 
-                                      return students;
+                                      return _students;
                                   });
 
         app.Run();
-    }
 
-    public class ChatHub : Hub
-    {
-        public async Task SendMessage(int students)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", students);
-        }
+        await endpointInstance.Stop();
     }
 }

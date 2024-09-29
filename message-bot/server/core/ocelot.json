@@ -1,6 +1,6 @@
 {
     "GlobalConfiguration": {
-        "BaseUrl": "http://localhost:5001"
+        "BaseUrl": "http://localhost:5000"
     },
     "Routes": [
         {
@@ -13,21 +13,21 @@
             "DownstreamHostAndPorts": [
                 {
                     "Host": "localhost",
-                    "Port": 5002
+                    "Port": 5001
                 }
             ]
         },
         {
-            "UpstreamPathTemplate": "/courses",
+            "UpstreamPathTemplate": "/addStudent",
             "UpstreamHttpMethod": [
                 "Get"
             ],
-            "DownstreamPathTemplate": "/courses",
+            "DownstreamPathTemplate": "/addStudent",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
                     "Host": "localhost",
-                    "Port": 5000
+                    "Port": 5001
                 }
             ]
         }

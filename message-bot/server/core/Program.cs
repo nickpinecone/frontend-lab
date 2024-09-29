@@ -23,7 +23,6 @@ public static class Program
                     {
                         policy.WithOrigins(new string[] { "http://localhost:5173" }).AllowAnyMethod().AllowAnyHeader();
                     });
-                // { policy.AllowAnyOrigin(); });
             });
 
         var app = builder.Build();
