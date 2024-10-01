@@ -6,6 +6,7 @@ using NServiceBus;
 using System.IO;
 using Messages;
 using System;
+using NServiceBus.Installation;
 
 namespace Signal;
 
@@ -32,8 +33,10 @@ public static class Program
 
         var endpointConfiguration = new EndpointConfiguration("Signal");
         endpointConfiguration.UseSerialization<SystemJsonSerializer>();
-        var transport = endpointConfiguration.UseTransport<LearningTransport>();
-        transport.StorageDirectory("/home/nick/Development/backend-lab/message-bot/server/messages");
+
+        var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
+        transport.UseConventionalRoutingTopology(QueueType.Quorum);
+        transport.ConnectionString("host=localhost");
 
         var endpointInstance = await NServiceBus.Endpoint.Start(endpointConfiguration);
 

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Messages;
 using Microsoft.AspNetCore.Builder;
 using NServiceBus;
+using NServiceBus.Installation;
 
 namespace Students;
 
@@ -19,8 +20,9 @@ public static class Program
         var endpointConfiguration = new EndpointConfiguration("Students");
         endpointConfiguration.UseSerialization<SystemJsonSerializer>();
 
-        var transport = endpointConfiguration.UseTransport<LearningTransport>();
-        transport.StorageDirectory("/home/nick/Development/backend-lab/message-bot/server/messages");
+        var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
+        transport.UseConventionalRoutingTopology(QueueType.Quorum);
+        transport.ConnectionString("host=localhost");
 
         var routing = transport.Routing();
         routing.RouteToEndpoint(typeof(UpdateStudents), "Signal");
@@ -32,7 +34,7 @@ public static class Program
                                   {
                                       _students++;
 
-                                      await endpointInstance.Send(new UpdateStudents() { StudentCount = students });
+                                      await endpointInstance.Send(new UpdateStudents() { StudentCount = _students });
 
                                       return _students;
                                   });
