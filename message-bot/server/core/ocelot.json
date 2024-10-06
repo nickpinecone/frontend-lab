@@ -12,7 +12,7 @@
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "localhost",
+                    "Host": "students",
                     "Port": 5001
                 }
             ]
@@ -26,7 +26,7 @@
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "localhost",
+                    "Host": "students",
                     "Port": 5001
                 }
             ]

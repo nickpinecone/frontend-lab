@@ -16,9 +16,8 @@ public static class Program
 
     public static async Task Main(string[] args)
     {
-        _http = new HttpClient()
-        {
-            BaseAddress = new Uri("http://localhost:5000"),
+        _http = new HttpClient() {
+            BaseAddress = new Uri("http://core:5000"),
         };
 
         using var cts = new CancellationTokenSource();
@@ -32,7 +31,9 @@ public static class Program
         bot.OnMessage += OnMessage;
 
         Console.WriteLine($"@{me.Username} is running... Press Enter to terminate");
-        Console.ReadKey();
+        while (true)
+        {
+        }
 
         cts.Cancel();
     }

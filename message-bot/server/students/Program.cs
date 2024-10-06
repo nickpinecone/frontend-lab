@@ -32,11 +32,12 @@ public static class Program
         }
 
         var endpointConfiguration = new EndpointConfiguration("Students");
+        endpointConfiguration.EnableInstallers();
         endpointConfiguration.UseSerialization<SystemJsonSerializer>();
 
         var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
         transport.UseConventionalRoutingTopology(QueueType.Quorum);
-        transport.ConnectionString("host=localhost");
+        transport.ConnectionString("host=mq");
 
         var routing = transport.Routing();
         routing.RouteToEndpoint(typeof(UpdateStudents), "Signal");

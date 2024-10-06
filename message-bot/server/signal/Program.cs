@@ -32,11 +32,12 @@ public static class Program
         var app = builder.Build();
 
         var endpointConfiguration = new EndpointConfiguration("Signal");
+        endpointConfiguration.EnableInstallers();
         endpointConfiguration.UseSerialization<SystemJsonSerializer>();
 
         var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
         transport.UseConventionalRoutingTopology(QueueType.Quorum);
-        transport.ConnectionString("host=localhost");
+        transport.ConnectionString("host=mq");
 
         var endpointInstance = await NServiceBus.Endpoint.Start(endpointConfiguration);
 
