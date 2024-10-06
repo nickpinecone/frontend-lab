@@ -23,7 +23,7 @@ public static class Program
 
         using var cts = new CancellationTokenSource();
 
-        var bot = new TelegramBotClient("", cancellationToken: cts.Token);
+        var bot = new TelegramBotClient("6414959440:AAFj-6QdyQx30CF1ArxqMdd2nRVblO4Jex4", cancellationToken: cts.Token);
         _bot = bot;
 
         var me = await bot.GetMeAsync();
