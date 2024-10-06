@@ -1,0 +1,8 @@
+services:
+  client:
+    build: ./client
+    command: npm run dev
+    ports:
+      - 5005:5005
+    volumes:
+      - ./client:/opt/client

@@ -24,7 +24,7 @@ public static class Program
                 options.AddDefaultPolicy(
                     policy =>
                     {
-                        policy.WithOrigins(new string[] { "http://localhost:5173" }).AllowAnyHeader().AllowAnyMethod();
+                        policy.WithOrigins(new string[] { "http://localhost:5005" }).AllowAnyHeader().AllowAnyMethod();
                     });
             });
         builder.Services.AddSignalR();

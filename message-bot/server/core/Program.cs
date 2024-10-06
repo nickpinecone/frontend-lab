@@ -21,7 +21,7 @@ public static class Program
                 options.AddDefaultPolicy(
                     policy =>
                     {
-                        policy.WithOrigins(new string[] { "http://localhost:5173" }).AllowAnyMethod().AllowAnyHeader();
+                        policy.WithOrigins(new string[] { "http://localhost:5005" }).AllowAnyMethod().AllowAnyHeader();
                     });
             });
 
